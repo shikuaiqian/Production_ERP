@@ -7,7 +7,9 @@
     <Context:component-scan base-package="com.cskaoyan"/>
     <mvc:annotation-driven/>
 
-
+    <mvc:resources location="/WEB-INF/css/" mapping="/css/**"/>
+    <mvc:resources location="/WEB-INF/image/" mapping="/image/**"/>
+    <mvc:resources location="/WEB-INF/js/" mapping="/js/**"/>
 
     <bean id="viewResolver"	class="org.springframework.web.servlet.view.UrlBasedViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
@@ -38,7 +40,7 @@
     <bean id="datasource" class="org.apache.commons.dbcp2.BasicDataSource">
         <property name="username" value="root"/>
         <property name="password" value="1234"/>
-        <property name="url" value="jdbc:mysql://localhost:3306/wangdao_db?serverTimezone=GMT%2B8"></property>
+        <property name="url" value="jdbc:mysql://192.168.4.21:3306/erp-ssm?serverTimezone=GMT%2B8"></property>
         <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
     </bean>
 
