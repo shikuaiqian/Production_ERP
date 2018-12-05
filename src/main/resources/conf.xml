@@ -7,11 +7,8 @@
     <typeAliases >
 
         <package name="com.cskaoyan.domain"/>
-
     </typeAliases>
-
     <mappers>
-
-        <package name="com.cskaoyan.dao"/>
+        <package name="com.cskaoyan.mapper"/>
     </mappers>
 </configuration>
