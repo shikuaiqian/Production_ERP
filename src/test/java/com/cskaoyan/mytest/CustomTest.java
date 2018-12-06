@@ -1,25 +1,23 @@
-import com.cskaoyan.service.qualifyMonitor.UnqualifyService;
+package com.cskaoyan.mytest;
+
+import com.cskaoyan.domain.Custom;
+import com.cskaoyan.dao.designSchedule.CustomMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.Map;
+import java.util.List;
 
-/**
- * Created by LZH on 2018/12/5
- */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:spring/applicationContext.xml")
-public class test {
-
+public class CustomTest {
     @Autowired
-    UnqualifyService unqualifyService;
+    CustomMapper customMapper;
     @Test
-    public void test1(){
-        Map<Object, Object> page = unqualifyService.findPage(1, 10);
-        System.out.println(page);
+    public void findAllTest() {
+        List<Custom> findall = customMapper.findall();
+        System.out.println(findall);
     }
-
 }

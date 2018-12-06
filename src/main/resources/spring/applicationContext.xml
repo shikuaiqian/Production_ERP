@@ -48,4 +48,5 @@
     <bean class="org.springframework.jdbc.datasource.DataSourceTransactionManager" id="transactionManager">
         <property name="dataSource" ref="datasource"/>
     </bean>
+    <mvc:resources mapping="/**" location="/WEB-INF/"/>
 </beans>
