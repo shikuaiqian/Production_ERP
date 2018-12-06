@@ -1,8 +1,8 @@
-package com.cskaoyan.service.imp;
+package com.cskaoyan.service.designSchedule.imp;
 
 import com.cskaoyan.domain.Custom;
 import com.cskaoyan.dao.designSchedule.CustomMapper;
-import com.cskaoyan.service.CustomService;
+import com.cskaoyan.service.designSchedule.CustomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Service
+@Service("custom")
 public class CustomServiecimp  implements CustomService{
     @Autowired
     CustomMapper customMapper;

@@ -1,4 +1,4 @@
-package com.cskaoyan.service;
+package com.cskaoyan.service.designSchedule;
 
 import com.cskaoyan.domain.Order;
 

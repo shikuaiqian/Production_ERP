@@ -1,8 +1,8 @@
-package com.cskaoyan.service.imp;
+package com.cskaoyan.service.designSchedule.imp;
 
 import com.cskaoyan.domain.Order;
 import com.cskaoyan.dao.designSchedule.OrderMapper;
-import com.cskaoyan.service.OrderService;
+import com.cskaoyan.service.designSchedule.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
