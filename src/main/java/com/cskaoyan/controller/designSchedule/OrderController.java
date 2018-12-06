@@ -1,7 +1,7 @@
-package com.cskaoyan.controller;
+package com.cskaoyan.controller.designSchedule;
 
 import com.cskaoyan.domain.Order;
-import com.cskaoyan.service.OrderService;
+import com.cskaoyan.service.designSchedule.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Controller
-@RequestMapping("order")
+@RequestMapping("/order")
 public class OrderController {
     @Autowired
     OrderService orderService;
@@ -20,7 +20,7 @@ public class OrderController {
     public String  find(HttpSession session){
         String[]  Orderop=new String[]{"order:add","order:edit","order:delete"};
         session.setAttribute("sysPermissionList",Orderop);
-        return   "/order_list";
+        return   "/desginSchedule/order_list";
     }
 
     @ResponseBody
@@ -44,7 +44,7 @@ public class OrderController {
     }
     @RequestMapping("add")
     public String add(){
-        return "order_add";
+        return "/desginSchedule/order_add";
     }
     @ResponseBody
     @RequestMapping("insert")
@@ -93,7 +93,7 @@ public class OrderController {
     @RequestMapping("edit")
     public String edit()
     {
-        return "Order_edit";
+        return "/desginSchedule/order_edit";
     }
     @ResponseBody
     @RequestMapping("update_all")

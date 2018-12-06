@@ -1,12 +1,10 @@
-package com.cskaoyan.controller;
+package com.cskaoyan.controller.designSchedule;
 
 import com.cskaoyan.domain.Custom;
-import com.cskaoyan.mapper.CustomMapper;
-import com.cskaoyan.service.CustomService;
-import com.sun.javafx.collections.IntegerArraySyncer;
+
+import com.cskaoyan.service.designSchedule.CustomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -15,16 +13,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@RequestMapping("custom")
+@RequestMapping("/custom")
 @Controller
 public class CustomController {
     @Autowired
-    CustomService customService;
+    CustomService   customService;
     @RequestMapping("find")
     public String  find(HttpSession session){
         String[]  customerop=new String[]{"custom:add","custom:edit","custom:delete"};
         session.setAttribute("sysPermissionList",customerop);
-        return   "/custom_list";
+        return   "/desginSchedule/custom_list";
     }
 
     @ResponseBody
@@ -41,6 +39,8 @@ public class CustomController {
         Map<String ,Object> customers=customService.selectByIdandPage(searchValue,page,rows);
         return customers;
     }
+
+
     @ResponseBody
     @RequestMapping("add_judge")
     public String addJudge(){
@@ -48,7 +48,7 @@ public class CustomController {
     }
     @RequestMapping("add")
     public String add(){
-        return "custom_add";
+        return "/desginSchedule/custom_add";
     }
     @ResponseBody
     @RequestMapping("insert")
@@ -97,7 +97,7 @@ public class CustomController {
     @RequestMapping("edit")
     public String edit()
     {
-        return "custom_edit";
+        return "/desginSchedule/custom_edit";
     }
     @ResponseBody
     @RequestMapping("update_all")

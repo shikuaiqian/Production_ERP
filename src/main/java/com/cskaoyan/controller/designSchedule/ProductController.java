@@ -1,7 +1,7 @@
-package com.cskaoyan.controller;
+package com.cskaoyan.controller.designSchedule;
 
 import com.cskaoyan.domain.Product;
-import com.cskaoyan.service.ProductService;
+import com.cskaoyan.service.designSchedule.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 @Controller
-@RequestMapping("product")
+@RequestMapping("/product")
 public class ProductController {
     @Autowired
     ProductService productService;
@@ -20,7 +20,7 @@ public class ProductController {
     public String  find(HttpSession session){
         String[]  producterop=new String[]{"product:add","product:edit","product:delete"};
         session.setAttribute("sysPermissionList",producterop);
-        return   "/product_list";
+        return   "/desginSchedule/product_list";
     }
 
     @ResponseBody
@@ -44,7 +44,7 @@ public class ProductController {
     }
     @RequestMapping("add")
     public String add(){
-        return "product_add";
+        return "/desginSchedule/product_add";
     }
     @ResponseBody
     @RequestMapping("insert")
@@ -93,7 +93,7 @@ public class ProductController {
     @RequestMapping("edit")
     public String edit()
     {
-        return "product_edit";
+        return "/desginSchedule/product_edit";
     }
     @ResponseBody
     @RequestMapping("update_all")
