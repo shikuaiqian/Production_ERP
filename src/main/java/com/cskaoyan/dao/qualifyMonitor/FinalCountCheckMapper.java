@@ -2,6 +2,7 @@ package com.cskaoyan.dao.qualifyMonitor;
 
 import com.cskaoyan.domain.qualifyMonitor.FinalCountCheck;
 
+
 public interface FinalCountCheckMapper {
     int deleteByPrimaryKey(String fCountCheckId);
 
@@ -14,4 +15,5 @@ public interface FinalCountCheckMapper {
     int updateByPrimaryKeySelective(FinalCountCheck record);
 
     int updateByPrimaryKey(FinalCountCheck record);
+
 }

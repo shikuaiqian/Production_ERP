@@ -82,4 +82,18 @@ public class FinalMeasuretCheck {
     public void setNote(String note) {
         this.note = note == null ? null : note.trim();
     }
+
+    @Override
+    public String toString() {
+        return "FinalMeasuretCheck{" +
+                "fMeasureCheckId='" + fMeasureCheckId + '\'' +
+                ", orderId='" + orderId + '\'' +
+                ", checkItem='" + checkItem + '\'' +
+                ", cdate=" + cdate +
+                ", measureData='" + measureData + '\'' +
+                ", empId='" + empId + '\'' +
+                ", result='" + result + '\'' +
+                ", note='" + note + '\'' +
+                '}';
+    }
 }

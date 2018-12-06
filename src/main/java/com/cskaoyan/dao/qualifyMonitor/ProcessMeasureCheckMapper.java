@@ -2,6 +2,7 @@ package com.cskaoyan.dao.qualifyMonitor;
 
 import com.cskaoyan.domain.qualifyMonitor.ProcessMeasureCheck;
 
+
 public interface ProcessMeasureCheckMapper {
     int deleteByPrimaryKey(String pMeasureCheckId);
 
@@ -14,4 +15,5 @@ public interface ProcessMeasureCheckMapper {
     int updateByPrimaryKeySelective(ProcessMeasureCheck record);
 
     int updateByPrimaryKey(ProcessMeasureCheck record);
+
 }
