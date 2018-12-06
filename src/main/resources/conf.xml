@@ -6,12 +6,12 @@
 
     <typeAliases >
 
-        <package name="com.cskaoyan.domain.person"/>
+        <package name="com.cskaoyan.domain"/>
 
     </typeAliases>
 
     <mappers>
 
-        <package name="com.cskaoyan.dao.person"/>
+        <package name="com.cskaoyan.dao"/>
     </mappers>
 </configuration>

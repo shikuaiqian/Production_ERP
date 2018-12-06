@@ -85,5 +85,5 @@
 
   <select id="count" resultType="string">
     SELECT COUNT(*) FROM department
-  </select>
+  </select> 
 </mapper>

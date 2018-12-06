@@ -27,7 +27,7 @@
 
     <bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactory">
         <property name="dataSource" ref="datasource"/>
-        <!--<property name="configLocation" value="classpath:conf.xml"/>-->
+        <property name="configLocation" value="classpath:conf.xml"/>
     </bean>
 
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer" id="mapperScannerConfigurer">
@@ -46,6 +46,5 @@
     <bean class="org.springframework.jdbc.datasource.DataSourceTransactionManager" id="transactionManager">
         <property name="dataSource" ref="datasource"/>
     </bean>
-    
-    <mvc:resources mapping="/**" location="/WEB-INF/"></mvc:resources>
+    <mvc:resources mapping="/**" location="/WEB-INF/"/>
 </beans>
