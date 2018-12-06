@@ -27,7 +27,7 @@
 
     <bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactory">
         <property name="dataSource" ref="datasource"/>
-        <property name="configLocation" value="classpath:conf.xml"/>
+        <!--<property name="configLocation" value="classpath:conf.xml"/>-->
     </bean>
 
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer" id="mapperScannerConfigurer">
@@ -38,7 +38,7 @@
     <bean id="datasource" class="org.apache.commons.dbcp2.BasicDataSource">
         <property name="username" value="root"/>
         <property name="password" value="1234"/>
-        <property name="url" value="jdbc:mysql://localhost:3306/wangdao_db?serverTimezone=GMT%2B8"></property>
+        <property name="url" value="jdbc:mysql://192.168.4.21:3306/erp-ssm?serverTimezone=GMT%2B8"></property>
         <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
     </bean>
 
@@ -46,4 +46,6 @@
     <bean class="org.springframework.jdbc.datasource.DataSourceTransactionManager" id="transactionManager">
         <property name="dataSource" ref="datasource"/>
     </bean>
+    
+    <mvc:resources mapping="/**" location="/WEB-INF/"></mvc:resources>
 </beans>
