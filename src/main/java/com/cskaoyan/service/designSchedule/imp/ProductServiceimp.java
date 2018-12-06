@@ -3,7 +3,7 @@ package com.cskaoyan.service.designSchedule.imp;
 
 
 import com.cskaoyan.dao.designSchedule.ProductMapper;
-import com.cskaoyan.domain.Product;
+import com.cskaoyan.domain.designScheduleDomain.Product;
 
 import com.cskaoyan.service.designSchedule.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;

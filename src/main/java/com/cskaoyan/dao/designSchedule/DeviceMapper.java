@@ -1,6 +1,6 @@
 package com.cskaoyan.dao.designSchedule;
 
-import com.cskaoyan.domain.Device;
+import com.cskaoyan.domain.designScheduleDomain.Device;
 
 public interface DeviceMapper {
     int deleteByPrimaryKey(String deviceId);

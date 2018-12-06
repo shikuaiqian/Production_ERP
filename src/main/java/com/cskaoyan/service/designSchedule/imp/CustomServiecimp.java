@@ -1,6 +1,6 @@
 package com.cskaoyan.service.designSchedule.imp;
 
-import com.cskaoyan.domain.Custom;
+import com.cskaoyan.domain.designScheduleDomain.Custom;
 import com.cskaoyan.dao.designSchedule.CustomMapper;
 import com.cskaoyan.service.designSchedule.CustomService;
 import org.springframework.beans.factory.annotation.Autowired;

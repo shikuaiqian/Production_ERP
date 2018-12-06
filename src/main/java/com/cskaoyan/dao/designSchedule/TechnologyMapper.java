@@ -1,6 +1,6 @@
 package com.cskaoyan.dao.designSchedule;
 
-import com.cskaoyan.domain.Technology;
+import com.cskaoyan.domain.designScheduleDomain.Technology;
 
 public interface TechnologyMapper {
     int deleteByPrimaryKey(String technologyId);

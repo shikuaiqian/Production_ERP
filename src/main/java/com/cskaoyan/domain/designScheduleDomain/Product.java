@@ -1,10 +1,13 @@
-package com.cskaoyan.domain;
+package com.cskaoyan.domain.designScheduleDomain;
+
+import javax.validation.constraints.NotNull;
 
 public class Product {
+    @NotNull
     private String productId;
-
+    @NotNull
     private String productName;
-
+    @NotNull
     private String productType;
 
     private String image;

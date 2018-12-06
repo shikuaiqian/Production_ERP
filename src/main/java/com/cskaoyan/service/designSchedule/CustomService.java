@@ -1,7 +1,7 @@
 package com.cskaoyan.service.designSchedule;
 
 
-import com.cskaoyan.domain.Custom;
+import com.cskaoyan.domain.designScheduleDomain.Custom;
 
 import java.util.List;
 import java.util.Map;

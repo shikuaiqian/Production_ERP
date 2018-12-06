@@ -1,6 +1,6 @@
 package com.cskaoyan.dao.designSchedule;
 
-import com.cskaoyan.domain.Work;
+import com.cskaoyan.domain.designScheduleDomain.Work;
 
 public interface WorkMapper {
     int deleteByPrimaryKey(String workId);

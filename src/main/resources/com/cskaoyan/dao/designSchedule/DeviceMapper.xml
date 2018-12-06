@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cskaoyan.dao.designSchedule.DeviceMapper">
-  <resultMap id="BaseResultMap" type="com.cskaoyan.domain.Device">
+  <resultMap id="BaseResultMap" type="com.cskaoyan.domain.designScheduleDomain.Device">
     <id column="device_id" jdbcType="VARCHAR" property="deviceId" />
     <result column="device_name" jdbcType="VARCHAR" property="deviceName" />
     <result column="device_type_id" jdbcType="VARCHAR" property="deviceTypeId" />
@@ -29,7 +29,7 @@
     delete from device
     where device_id = #{deviceId,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.cskaoyan.domain.Device">
+  <insert id="insert" parameterType="com.cskaoyan.domain.designScheduleDomain.Device">
     insert into device (device_id, device_name, device_type_id, 
       device_status_id, device_status, device_purchase_date, 
       device_purchase_price, device_manufacture_date, 
@@ -41,7 +41,7 @@
       #{deviceServiceLife,jdbcType=TIMESTAMP}, #{deviceKeeperId,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.cskaoyan.domain.Device">
+  <insert id="insertSelective" parameterType="com.cskaoyan.domain.designScheduleDomain.Device">
     insert into device
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="deviceId != null">
@@ -114,7 +114,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.cskaoyan.domain.Device">
+  <update id="updateByPrimaryKeySelective" parameterType="com.cskaoyan.domain.designScheduleDomain.Device">
     update device
     <set>
       <if test="deviceName != null">
@@ -150,7 +150,7 @@
     </set>
     where device_id = #{deviceId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.cskaoyan.domain.Device">
+  <update id="updateByPrimaryKey" parameterType="com.cskaoyan.domain.designScheduleDomain.Device">
     update device
     set device_name = #{deviceName,jdbcType=VARCHAR},
       device_type_id = #{deviceTypeId,jdbcType=VARCHAR},

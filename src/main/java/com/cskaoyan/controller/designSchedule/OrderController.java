@@ -1,6 +1,6 @@
 package com.cskaoyan.controller.designSchedule;
 
-import com.cskaoyan.domain.Order;
+import com.cskaoyan.domain.designScheduleDomain.Order;
 import com.cskaoyan.service.designSchedule.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,7 +21,7 @@ public class OrderController {
     public String  find(HttpSession session){
         String[]  Orderop=new String[]{"order:add","order:edit","order:delete"};
         session.setAttribute("sysPermissionList",Orderop);
-        return   "/desginSchedule/order_list";
+        return   "/designSchedule/order/order_list";
     }
 
     @ResponseBody
@@ -44,11 +45,11 @@ public class OrderController {
     }
     @RequestMapping("add")
     public String add(){
-        return "/desginSchedule/order_add";
+        return "/designSchedule/order/order_add";
     }
     @ResponseBody
     @RequestMapping("insert")
-    public Map insert(Order order){
+    public Map insert( Order order){
         HashMap<String ,Object> map=new HashMap<>();
         map.put("msg","ok");
         map.put("status",200);
@@ -93,11 +94,11 @@ public class OrderController {
     @RequestMapping("edit")
     public String edit()
     {
-        return "/desginSchedule/order_edit";
+        return "/designSchedule/order/order_edit";
     }
     @ResponseBody
     @RequestMapping("update_all")
-    public Map updateAll(Order Order)
+    public Map updateAll(@Valid Order Order)
     {
         HashMap<String ,Object> map=new HashMap<>();
         map.put("msg","ok");

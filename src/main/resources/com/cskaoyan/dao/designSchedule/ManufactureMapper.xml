@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cskaoyan.dao.designSchedule.ManufactureMapper">
-  <resultMap id="BaseResultMap" type="com.cskaoyan.domain.Manufacture">
+  <resultMap id="BaseResultMap" type="com.cskaoyan.domain.designScheduleDomain.Manufacture">
     <id column="manufacture_sn" jdbcType="VARCHAR" property="manufactureSn" />
     <result column="order_id" jdbcType="VARCHAR" property="orderId" />
     <result column="technology_id" jdbcType="VARCHAR" property="technologyId" />
@@ -22,7 +22,7 @@
     delete from manufacture
     where manufacture_sn = #{manufactureSn,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.cskaoyan.domain.Manufacture">
+  <insert id="insert" parameterType="com.cskaoyan.domain.designScheduleDomain.Manufacture">
     insert into manufacture (manufacture_sn, order_id, technology_id, 
       launch_quantity, begin_date, end_date
       )
@@ -30,7 +30,7 @@
       #{launchQuantity,jdbcType=INTEGER}, #{beginDate,jdbcType=TIMESTAMP}, #{endDate,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.cskaoyan.domain.Manufacture">
+  <insert id="insertSelective" parameterType="com.cskaoyan.domain.designScheduleDomain.Manufacture">
     insert into manufacture
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="manufactureSn != null">
@@ -73,7 +73,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.cskaoyan.domain.Manufacture">
+  <update id="updateByPrimaryKeySelective" parameterType="com.cskaoyan.domain.designScheduleDomain.Manufacture">
     update manufacture
     <set>
       <if test="orderId != null">
@@ -94,7 +94,7 @@
     </set>
     where manufacture_sn = #{manufactureSn,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.cskaoyan.domain.Manufacture">
+  <update id="updateByPrimaryKey" parameterType="com.cskaoyan.domain.designScheduleDomain.Manufacture">
     update manufacture
     set order_id = #{orderId,jdbcType=VARCHAR},
       technology_id = #{technologyId,jdbcType=VARCHAR},

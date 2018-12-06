@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cskaoyan.dao.designSchedule.TaskMapper">
-  <resultMap id="BaseResultMap" type="com.cskaoyan.domain.Task">
+  <resultMap id="BaseResultMap" type="com.cskaoyan.domain.designScheduleDomain.Task">
     <id column="task_id" jdbcType="VARCHAR" property="taskId" />
     <result column="manufacture_sn" jdbcType="VARCHAR" property="manufactureSn" />
     <result column="work_id" jdbcType="VARCHAR" property="workId" />
@@ -21,13 +21,13 @@
     delete from task
     where task_id = #{taskId,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.cskaoyan.domain.Task">
+  <insert id="insert" parameterType="com.cskaoyan.domain.designScheduleDomain.Task">
     insert into task (task_id, manufacture_sn, work_id, 
       task_quantity, working_hours)
     values (#{taskId,jdbcType=VARCHAR}, #{manufactureSn,jdbcType=VARCHAR}, #{workId,jdbcType=VARCHAR}, 
       #{taskQuantity,jdbcType=INTEGER}, #{workingHours,jdbcType=DECIMAL})
   </insert>
-  <insert id="insertSelective" parameterType="com.cskaoyan.domain.Task">
+  <insert id="insertSelective" parameterType="com.cskaoyan.domain.designScheduleDomain.Task">
     insert into task
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="taskId != null">
@@ -64,7 +64,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.cskaoyan.domain.Task">
+  <update id="updateByPrimaryKeySelective" parameterType="com.cskaoyan.domain.designScheduleDomain.Task">
     update task
     <set>
       <if test="manufactureSn != null">
@@ -82,7 +82,7 @@
     </set>
     where task_id = #{taskId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.cskaoyan.domain.Task">
+  <update id="updateByPrimaryKey" parameterType="com.cskaoyan.domain.designScheduleDomain.Task">
     update task
     set manufacture_sn = #{manufactureSn,jdbcType=VARCHAR},
       work_id = #{workId,jdbcType=VARCHAR},

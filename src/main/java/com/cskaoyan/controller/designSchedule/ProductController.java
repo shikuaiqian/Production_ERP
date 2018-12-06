@@ -1,13 +1,15 @@
 package com.cskaoyan.controller.designSchedule;
 
-import com.cskaoyan.domain.Product;
+import com.cskaoyan.domain.designScheduleDomain.Product;
 import com.cskaoyan.service.designSchedule.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,7 +22,7 @@ public class ProductController {
     public String  find(HttpSession session){
         String[]  producterop=new String[]{"product:add","product:edit","product:delete"};
         session.setAttribute("sysPermissionList",producterop);
-        return   "/desginSchedule/product_list";
+        return   "/designSchedule/product/product_list";
     }
 
     @ResponseBody
@@ -44,14 +46,19 @@ public class ProductController {
     }
     @RequestMapping("add")
     public String add(){
-        return "/desginSchedule/product_add";
+        return "/designSchedule/product/product_add";
     }
     @ResponseBody
     @RequestMapping("insert")
-    public Map insert(Product product){
+    public Map insert(@Valid Product product,BindingResult bindingResult){
+
         HashMap<String ,Object> map=new HashMap<>();
         map.put("msg","ok");
         map.put("status",200);
+        if(bindingResult.hasFieldErrors()) {
+            map.put("msg","必选项不允许空");
+            map.put("status",0);
+        }
         try {
             productService.insert(product);
         }catch (Exception e)
@@ -93,7 +100,7 @@ public class ProductController {
     @RequestMapping("edit")
     public String edit()
     {
-        return "/desginSchedule/product_edit";
+        return "/designSchedule/product/product_edit";
     }
     @ResponseBody
     @RequestMapping("update_all")

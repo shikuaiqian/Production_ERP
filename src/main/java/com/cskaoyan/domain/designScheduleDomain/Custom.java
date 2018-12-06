@@ -1,4 +1,4 @@
-package com.cskaoyan.domain;
+package com.cskaoyan.domain.designScheduleDomain;
 
 public class Custom {
     private String customId;

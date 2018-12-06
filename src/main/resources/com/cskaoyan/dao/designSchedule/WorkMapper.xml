@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cskaoyan.dao.designSchedule.WorkMapper">
-  <resultMap id="BaseResultMap" type="com.cskaoyan.domain.Work">
+  <resultMap id="BaseResultMap" type="com.cskaoyan.domain.designScheduleDomain.Work">
     <id column="work_id" jdbcType="VARCHAR" property="workId" />
     <result column="process_number" jdbcType="VARCHAR" property="processNumber" />
     <result column="product_id" jdbcType="VARCHAR" property="productId" />
@@ -22,7 +22,7 @@
     delete from work
     where work_id = #{workId,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.cskaoyan.domain.Work">
+  <insert id="insert" parameterType="com.cskaoyan.domain.designScheduleDomain.Work">
     insert into work (work_id, process_number, product_id, 
       process_id, device_id, rating
       )
@@ -30,7 +30,7 @@
       #{processId,jdbcType=VARCHAR}, #{deviceId,jdbcType=VARCHAR}, #{rating,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.cskaoyan.domain.Work">
+  <insert id="insertSelective" parameterType="com.cskaoyan.domain.designScheduleDomain.Work">
     insert into work
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="workId != null">
@@ -73,7 +73,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.cskaoyan.domain.Work">
+  <update id="updateByPrimaryKeySelective" parameterType="com.cskaoyan.domain.designScheduleDomain.Work">
     update work
     <set>
       <if test="processNumber != null">
@@ -94,7 +94,7 @@
     </set>
     where work_id = #{workId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.cskaoyan.domain.Work">
+  <update id="updateByPrimaryKey" parameterType="com.cskaoyan.domain.designScheduleDomain.Work">
     update work
     set process_number = #{processNumber,jdbcType=VARCHAR},
       product_id = #{productId,jdbcType=VARCHAR},

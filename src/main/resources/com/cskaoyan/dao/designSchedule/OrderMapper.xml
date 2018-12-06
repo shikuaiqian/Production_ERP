@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cskaoyan.dao.designSchedule.OrderMapper">
-  <resultMap id="BaseResultMap" type="com.cskaoyan.domain.Order">
+  <resultMap id="BaseResultMap" type="com.cskaoyan.domain.designScheduleDomain.Order">
     <id column="order_id" jdbcType="VARCHAR" property="orderId" />
     <result column="custom_id" jdbcType="VARCHAR" property="customId" />
     <result column="product_id" jdbcType="VARCHAR" property="productId" />
@@ -15,9 +15,27 @@
     <result column="file" jdbcType="VARCHAR" property="file" />
     <result column="status" jdbcType="INTEGER" property="status" />
   </resultMap>
+
+  <resultMap id="VoMap" type="com.cskaoyan.domain.designScheduleDomain.OrderVo">
+    <id column="order_id" jdbcType="VARCHAR" property="orderId" />
+    <result column="custom_id" jdbcType="VARCHAR" property="customId" />
+    <result column="product_id" jdbcType="VARCHAR" property="productId" />
+    <result column="order_date" jdbcType="TIMESTAMP" property="orderDate" />
+    <result column="request_date" jdbcType="TIMESTAMP" property="requestDate" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+    <result column="quantity" jdbcType="INTEGER" property="quantity" />
+    <result column="unit_price" jdbcType="DECIMAL" property="unitPrice" />
+    <result column="unit" jdbcType="VARCHAR" property="unit" />
+    <result column="image" jdbcType="VARCHAR" property="image" />
+    <result column="file" jdbcType="VARCHAR" property="file" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+  <association property="custom" column="custom_id" select="com.cskaoyan.dao.designSchedule.CustomMapper.selectByPrimaryKey"/>
+    <association property="product" column="product_id" select="com.cskaoyan.dao.designSchedule.ProductMapper.selectByPrimaryKey"/>
+  </resultMap>
   <sql id="Base_Column_List">
-    order_id, custom_id, product_id, order_date, request_date, note, quantity, unit_price, 
-    unit, image, file, status
+    order_id, c_order.custom_id, c_order.product_id, order_date, request_date, c_order.note, c_order.quantity,
+     c_order.unit_price,
+    c_order.unit,c_order.image, c_order.file, c_order. status
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -29,7 +47,7 @@
     delete from c_order
     where order_id = #{orderId,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.cskaoyan.domain.Order">
+  <insert id="insert" parameterType="com.cskaoyan.domain.designScheduleDomain.Order">
     insert into c_order (order_id, custom_id, product_id, 
       order_date, request_date, note, 
       quantity, unit_price, unit, 
@@ -41,7 +59,7 @@
       #{image,jdbcType=VARCHAR}, #{file,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.cskaoyan.domain.Order">
+  <insert id="insertSelective" parameterType="com.cskaoyan.domain.designScheduleDomain.Order">
     insert into c_order
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="orderId != null">
@@ -120,7 +138,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.cskaoyan.domain.Order">
+  <update id="updateByPrimaryKeySelective" parameterType="com.cskaoyan.domain.designScheduleDomain.Order">
     update c_order
     <set>
       <if test="customId != null">
@@ -159,7 +177,7 @@
     </set>
     where order_id = #{orderId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.cskaoyan.domain.Order">
+  <update id="updateByPrimaryKey" parameterType="com.cskaoyan.domain.designScheduleDomain.Order">
     update c_order
     set custom_id = #{customId,jdbcType=VARCHAR},
       product_id = #{productId,jdbcType=VARCHAR},
@@ -174,7 +192,7 @@
       status = #{status,jdbcType=INTEGER}
     where order_id = #{orderId,jdbcType=VARCHAR}
   </update>
-  <select id="selectByPage" resultMap="BaseResultMap">
+  <select id="selectByPage" resultMap="VoMap">
     SELECT  <include refid="Base_Column_List"/>  from c_order
     <if test="param3!=null">
       where order_id=#{param3}

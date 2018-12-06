@@ -1,6 +1,6 @@
 package com.cskaoyan.dao.designSchedule;
 
-import com.cskaoyan.domain.Product;
+import com.cskaoyan.domain.designScheduleDomain.Product;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

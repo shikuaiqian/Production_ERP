@@ -1,6 +1,6 @@
 package com.cskaoyan.controller.designSchedule;
 
-import com.cskaoyan.domain.Custom;
+import com.cskaoyan.domain.designScheduleDomain.Custom;
 
 import com.cskaoyan.service.designSchedule.CustomService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ public class CustomController {
     public String  find(HttpSession session){
         String[]  customerop=new String[]{"custom:add","custom:edit","custom:delete"};
         session.setAttribute("sysPermissionList",customerop);
-        return   "/desginSchedule/custom_list";
+        return   "/designSchedule/custom/custom_list";
     }
 
     @ResponseBody
@@ -48,7 +48,7 @@ public class CustomController {
     }
     @RequestMapping("add")
     public String add(){
-        return "/desginSchedule/custom_add";
+        return "/designSchedule/custom/custom_add";
     }
     @ResponseBody
     @RequestMapping("insert")
@@ -97,10 +97,10 @@ public class CustomController {
     @RequestMapping("edit")
     public String edit()
     {
-        return "/desginSchedule/custom_edit";
+        return "/designSchedule/custom/custom_edit";
     }
     @ResponseBody
-    @RequestMapping("update_all")
+    @RequestMapping("update_all ")
     public Map updateAll(Custom custom)
     {
         HashMap<String ,Object> map=new HashMap<>();

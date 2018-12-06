@@ -5,7 +5,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <Context:component-scan base-package="com.cskaoyan"/>
-    <mvc:annotation-driven/>
+    <mvc:annotation-driven conversion-service="service"/>
 
     <mvc:resources location="/WEB-INF/css/" mapping="/css/**"/>
     <mvc:resources location="/WEB-INF/image/" mapping="/image/**"/>
@@ -24,7 +24,7 @@
     </mvc:interceptors>-->
 
     <bean  id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-        <property name="maxUploadSize" value="1024000"/>
+        <property name="maxUploadSize" value="10240000"/>
     </bean>
 
     <bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactory">
@@ -33,7 +33,7 @@
     </bean>
 
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer" id="mapperScannerConfigurer">
-        <property name="basePackage" value="com.cskaoyan.mapper"/>
+        <property name="basePackage" value="com.cskaoyan.dao.designSchedule"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
 
@@ -49,4 +49,11 @@
         <property name="dataSource" ref="datasource"/>
     </bean>
     <mvc:resources mapping="/**" location="/WEB-INF/"/>
+    <bean id="service" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+        <property name="converters">
+            <set>
+                <bean  class="com.cskaoyan.controller.Convert"/>
+            </set>
+        </property>
+    </bean>
 </beans>
