@@ -1,14 +1,13 @@
 package com.cskaoyan.mytest;
 
 import com.cskaoyan.domain.Custom;
-import com.cskaoyan.mapper.CustomMapper;
+import com.cskaoyan.dao.designSchedule.CustomMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.Arrays;
 import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)

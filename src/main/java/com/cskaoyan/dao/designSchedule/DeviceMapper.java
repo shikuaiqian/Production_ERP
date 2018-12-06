@@ -1,4 +1,4 @@
-package com.cskaoyan.mapper;
+package com.cskaoyan.dao.designSchedule;
 
 import com.cskaoyan.domain.Device;
 
