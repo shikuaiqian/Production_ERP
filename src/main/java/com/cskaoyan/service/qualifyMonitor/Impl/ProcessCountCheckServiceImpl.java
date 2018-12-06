@@ -1,8 +1,9 @@
 package com.cskaoyan.service.qualifyMonitor.Impl;
 
-import com.cskaoyan.dao.qualifyMonitor.UnqualifyApplyMapper;
-import com.cskaoyan.domain.qualifyMonitor.UnqualifyApply;
-import com.cskaoyan.service.qualifyMonitor.UnqualifyService;
+import com.cskaoyan.dao.qualifyMonitor.ProcessCountCheckMapper;
+
+import com.cskaoyan.domain.qualifyMonitor.ProcessCountCheck;
+import com.cskaoyan.service.qualifyMonitor.ProcessCountCheckService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,11 +16,9 @@ import java.util.Map;
  * Created by LZH on 2018/12/6
  */
 @Service
-public class UnqualifyServiceImpl implements UnqualifyService {
-
+public class ProcessCountCheckServiceImpl implements ProcessCountCheckService {
     @Autowired
-    UnqualifyApplyMapper unqualifyApplyMapper;
-
+    ProcessCountCheckMapper processCountCheckMapper;
     @Transactional(readOnly = true)
     @Override
     public Map findPage(int page, int rows) {
@@ -30,17 +29,16 @@ public class UnqualifyServiceImpl implements UnqualifyService {
         int offset = limit*(page-1);
         map.put("limit",limit);
         map.put("offset",offset);
-        int count = unqualifyApplyMapper.count();
-        List<UnqualifyApply> unqualifyApplies = unqualifyApplyMapper.selectByPage(map);
+        int count = processCountCheckMapper.count();
+        List<ProcessCountCheck> processCountChecks = processCountCheckMapper.selectByPage(map);
         map2.put("total",count);
-        map2.put("rows",unqualifyApplies);
+        map2.put("rows",processCountChecks);
         return map2;
     }
 
     @Override
-    public void add(UnqualifyApply unqualifyApply) throws Exception {
-        if(unqualifyApplyMapper.insert(unqualifyApply)!=1){
+    public void add(ProcessCountCheck processCountCheck) throws Exception{
+        if (processCountCheckMapper.insert(processCountCheck)!=1)
             throw new Exception("添加失败");
-        }
     }
 }

@@ -174,4 +174,11 @@
       note = #{note,jdbcType=VARCHAR}
     where p_count_check_id = #{pCountCheckId,jdbcType=VARCHAR}
   </update>
+  <select id="count" resultType="_int">
+    select count(*) from process_count_check
+  </select>
+
+  <select id="selectByPage" resultMap="BaseResultMap">
+    select * from process_count_check limit #{params.limit} offset #{params.offset}
+  </select>
 </mapper>

@@ -35,4 +35,10 @@ public class FinishmeasureServiceImpl implements FinishmeasureService {
         map2.put("rows",finalMeasuretChecks);
         return map2;
     }
+
+    @Override
+    public void add(FinalMeasuretCheck finalMeasuretCheck) throws Exception{
+        if (finalMeasuretCheckMapper.insert(finalMeasuretCheck)!=1)
+            throw new Exception("添加失败");
+    }
 }

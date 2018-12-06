@@ -1,8 +1,10 @@
 package com.cskaoyan.service.qualifyMonitor.Impl;
 
-import com.cskaoyan.dao.qualifyMonitor.UnqualifyApplyMapper;
-import com.cskaoyan.domain.qualifyMonitor.UnqualifyApply;
-import com.cskaoyan.service.qualifyMonitor.UnqualifyService;
+import com.cskaoyan.dao.qualifyMonitor.FinalCountCheckMapper;
+
+import com.cskaoyan.domain.qualifyMonitor.FinalCountCheck;
+
+import com.cskaoyan.service.qualifyMonitor.FinalCountCheckService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,11 +17,9 @@ import java.util.Map;
  * Created by LZH on 2018/12/6
  */
 @Service
-public class UnqualifyServiceImpl implements UnqualifyService {
-
+public class FinalCountCheckServiceImpl implements FinalCountCheckService {
     @Autowired
-    UnqualifyApplyMapper unqualifyApplyMapper;
-
+    FinalCountCheckMapper finalCountCheckMapper;
     @Transactional(readOnly = true)
     @Override
     public Map findPage(int page, int rows) {
@@ -30,17 +30,16 @@ public class UnqualifyServiceImpl implements UnqualifyService {
         int offset = limit*(page-1);
         map.put("limit",limit);
         map.put("offset",offset);
-        int count = unqualifyApplyMapper.count();
-        List<UnqualifyApply> unqualifyApplies = unqualifyApplyMapper.selectByPage(map);
+        int count = finalCountCheckMapper.count();
+        List<FinalCountCheck> finalCountChecks = finalCountCheckMapper.selectByPage(map);
         map2.put("total",count);
-        map2.put("rows",unqualifyApplies);
+        map2.put("rows",finalCountChecks);
         return map2;
     }
 
     @Override
-    public void add(UnqualifyApply unqualifyApply) throws Exception {
-        if(unqualifyApplyMapper.insert(unqualifyApply)!=1){
+    public void add(FinalCountCheck finalCountCheck) throws Exception{
+        if (finalCountCheckMapper.insert(finalCountCheck)!=1)
             throw new Exception("添加失败");
-        }
     }
 }

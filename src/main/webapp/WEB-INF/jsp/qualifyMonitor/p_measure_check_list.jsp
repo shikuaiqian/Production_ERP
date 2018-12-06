@@ -431,7 +431,7 @@ function doSearch_pMeasureCheck(value,name){ //用户输入用户名,点击搜�
     //////////////////////////////////////////////////////////////////////////
     
     function pMeasureCheck_add(){
-    	$.get("pMeasureCheck/add_judge",'',function(data){
+    	$.get("p_measure_check/add_judge",'',function(data){
        		if(data.msg != null){
        			$.messager.alert('提示', data.msg);
        		}else{

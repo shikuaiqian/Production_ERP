@@ -1,8 +1,10 @@
 package com.cskaoyan.service.qualifyMonitor.Impl;
 
-import com.cskaoyan.dao.qualifyMonitor.UnqualifyApplyMapper;
-import com.cskaoyan.domain.qualifyMonitor.UnqualifyApply;
-import com.cskaoyan.service.qualifyMonitor.UnqualifyService;
+import com.cskaoyan.dao.qualifyMonitor.ProcessMeasureCheckMapper;
+
+import com.cskaoyan.domain.qualifyMonitor.ProcessMeasureCheck;
+
+import com.cskaoyan.service.qualifyMonitor.ProcessMeasureCheckService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,11 +17,9 @@ import java.util.Map;
  * Created by LZH on 2018/12/6
  */
 @Service
-public class UnqualifyServiceImpl implements UnqualifyService {
-
+public class ProcessMeasureCheckServiceImpl implements ProcessMeasureCheckService {
     @Autowired
-    UnqualifyApplyMapper unqualifyApplyMapper;
-
+    ProcessMeasureCheckMapper processMeasureCheckMapper;
     @Transactional(readOnly = true)
     @Override
     public Map findPage(int page, int rows) {
@@ -30,16 +30,18 @@ public class UnqualifyServiceImpl implements UnqualifyService {
         int offset = limit*(page-1);
         map.put("limit",limit);
         map.put("offset",offset);
-        int count = unqualifyApplyMapper.count();
-        List<UnqualifyApply> unqualifyApplies = unqualifyApplyMapper.selectByPage(map);
+        int count = processMeasureCheckMapper.count();
+        List<ProcessMeasureCheck> processMeasureChecks = processMeasureCheckMapper.selectByPage(map);
         map2.put("total",count);
-        map2.put("rows",unqualifyApplies);
+        map2.put("rows",processMeasureChecks);
         return map2;
     }
 
+
+
     @Override
-    public void add(UnqualifyApply unqualifyApply) throws Exception {
-        if(unqualifyApplyMapper.insert(unqualifyApply)!=1){
+    public void add(ProcessMeasureCheck processMeasureCheck) throws Exception{
+        if(processMeasureCheckMapper.insert(processMeasureCheck)!=1){
             throw new Exception("添加失败");
         }
     }
