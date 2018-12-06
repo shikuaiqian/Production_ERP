@@ -27,14 +27,14 @@ public class ProductController {
 
     @ResponseBody
     @RequestMapping("list")
-    public Map list(Integer page , Integer rows)
+    public Map list(String page , String rows)
     {
         Map<String ,Object> producters=productService.selectByPage(page,rows);
         return producters;
     }
     @ResponseBody
     @RequestMapping("search_product_by_productId")
-    public Map search_product_by_productId(Integer searchValue,Integer page ,Integer rows)
+    public Map search_product_by_productId(String searchValue,String page ,String rows)
     {
         Map<String ,Object> producters=productService.selectByIdandPage(searchValue,page,rows);
         return producters;
@@ -76,7 +76,7 @@ public class ProductController {
     }
     @ResponseBody
     @RequestMapping("delete_batch")
-    public Map delete(Integer[] ids)
+    public Map delete(String[] ids)
     {
         HashMap<String ,Object> map=new HashMap<>();
         map.put("msg","ok");

@@ -27,19 +27,30 @@ public class CustomController {
 
     @ResponseBody
     @RequestMapping("list")
-    public Map  list(Integer page ,Integer rows)
+    public Map  list(String page ,String rows)
     {
       Map<String ,Object> customers=customService.selectByPage(page,rows);
       return customers;
     }
     @ResponseBody
     @RequestMapping("search_custom_by_customId")
-    public Map search_custom_by_customId(Integer searchValue,Integer page ,Integer rows)
+    public Map search_custom_by_customId(String searchValue,String page ,String rows)
     {
-        Map<String ,Object> customers=customService.selectByIdandPage(searchValue,page,rows);
+        HashMap<String,String> ret=new HashMap<>();
+        ret.put("customId",searchValue);
+        Map<String ,Object> customers=customService.selectByIdandPage(ret,page,rows);
         return customers;
     }
+    @ResponseBody
+    @RequestMapping("search_custom_by_customName")
+    public Map search_custom_by_customName(String searchValue,String page ,String rows)
+    {
+        HashMap<String,String> ret=new HashMap<>();
+        ret.put("customName",searchValue);
+        Map<String ,Object> customers=customService.selectBySearchValueandPage(ret,page,rows);
 
+        return customers;
+    }
 
     @ResponseBody
     @RequestMapping("add_judge")
@@ -71,9 +82,13 @@ public class CustomController {
     public  String deleteJudge (){
     return null;
     }
+
+
+
+
     @ResponseBody
     @RequestMapping("delete_batch")
-    public Map delete(Integer[] ids)
+    public Map delete(String[] ids)
     {
         HashMap<String ,Object> map=new HashMap<>();
         map.put("msg","ok");

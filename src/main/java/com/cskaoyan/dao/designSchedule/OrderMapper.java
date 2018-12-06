@@ -19,21 +19,9 @@ public interface OrderMapper {
 
     int updateByPrimaryKey(Order record);
 
-    List<OrderVo> selectByPage(int offset, Integer rows, Integer searchValue);
+    List<OrderVo> selectByPage(int offset, Integer rows, String searchValue);
 
-    int count(@Param("searchid") Integer searchid);
+    int count(@Param("searchid") String searchid);
 
-    interface TaskMapper {
-        int deleteByPrimaryKey(String taskId);
 
-        int insert(Task record);
-
-        int insertSelective(Task record);
-
-        Task selectByPrimaryKey(String taskId);
-
-        int updateByPrimaryKeySelective(Task record);
-
-        int updateByPrimaryKey(Task record);
-    }
 }

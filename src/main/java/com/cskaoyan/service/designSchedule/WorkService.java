@@ -1,20 +1,17 @@
 package com.cskaoyan.service.designSchedule;
 
-import com.cskaoyan.domain.designScheduleDomain.Product;
+import com.cskaoyan.domain.designScheduleDomain.Work;
 
-import java.util.List;
 import java.util.Map;
 
-public interface ProductService {
+public interface WorkService  {
     Map<String,Object> selectByPage(String page, String rows);
 
     Map<String,Object> selectByIdandPage(String searchValue, String page, String rows);
 
-    void insert(Product product);
+    void insert(Work work);
 
     void delete(String[] ids);
 
-    void update(Product product);
-
-    List<Product> findAll();
+    void update(Work work);
 }

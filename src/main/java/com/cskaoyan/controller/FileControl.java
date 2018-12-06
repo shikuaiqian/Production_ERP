@@ -1,4 +1,4 @@
-package com.cskaoyan.controller.designSchedule;
+package com.cskaoyan.controller;
 
 import org.apache.shiro.crypto.hash.Hash;
 import org.springframework.stereotype.Controller;

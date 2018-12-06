@@ -1,23 +1,26 @@
 package com.cskaoyan.mytest;
 
-import com.cskaoyan.domain.designScheduleDomain.Custom;
-import com.cskaoyan.dao.designSchedule.CustomMapper;
+import com.cskaoyan.dao.designSchedule.OrderMapper;
+import com.cskaoyan.domain.designScheduleDomain.Order;
+import com.cskaoyan.domain.designScheduleDomain.OrderVo;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:spring/applicationContext.xml")
-public class CustomTest {
+@WebAppConfiguration
+public class OrderTest {
     @Autowired
-    CustomMapper customMapper;
+    OrderMapper orderMapper;
     @Test
     public void findAllTest() {
-        List<Custom> findall = customMapper.findall();
-        System.out.println(findall);
+        List<OrderVo> orders = orderMapper.selectByPage(0, 30, null);
+        System.out.println(orders);
     }
 }

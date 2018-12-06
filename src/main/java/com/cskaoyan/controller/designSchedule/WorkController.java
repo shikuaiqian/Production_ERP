@@ -1,43 +1,44 @@
 package com.cskaoyan.controller.designSchedule;
 
-import com.cskaoyan.domain.designScheduleDomain.Order;
-import com.cskaoyan.service.designSchedule.OrderService;
+import com.cskaoyan.domain.designScheduleDomain.Work;
+import com.cskaoyan.service.designSchedule.WorkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-
 @Controller
-@RequestMapping("/order")
-public class OrderController {
+@RequestMapping("work")
+public class WorkController {
     @Autowired
-    OrderService orderService;
+    WorkService workService;
     @RequestMapping("find")
     public String  find(HttpSession session){
-        String[]  Orderop=new String[]{"order:add","order:edit","order:delete"};
-        session.setAttribute("sysPermissionList",Orderop);
-        return   "/designSchedule/order/order_list";
+        String[]  workerop=new String[]{"work:add","work:edit","work:delete"};
+        session.setAttribute("sysPermissionList",workerop);
+        return   "/designSchedule/work/work_list";
     }
 
     @ResponseBody
     @RequestMapping("list")
-    public Map  list(String page ,String rows)
+    public Map list(String page , String rows)
     {
-        Map<String ,Object> orders=orderService.selectByPage(page,rows);
-        return orders;
+        Map<String ,Object> workers=workService.selectByPage(page,rows);
+        return workers;
     }
     @ResponseBody
-    @RequestMapping("search_order_by_orderId")
-    public Map search_Order_by_OrderId(String searchValue,String page ,String rows)
+    @RequestMapping("search_work_by_workId")
+    public Map search_work_by_workId(String searchValue,String page ,String rows)
     {
-        Map<String ,Object> Orders=orderService.selectByIdandPage(searchValue,page,rows);
-        return Orders;
+        Map<String ,Object> workers=workService.selectByIdandPage(searchValue,page,rows);
+        return workers;
     }
+
+
     @ResponseBody
     @RequestMapping("add_judge")
     public String addJudge(){
@@ -45,16 +46,16 @@ public class OrderController {
     }
     @RequestMapping("add")
     public String add(){
-        return "/designSchedule/order/order_add";
+        return "/designSchedule/work/work_add";
     }
     @ResponseBody
     @RequestMapping("insert")
-    public Map insert( Order order){
+    public Map insert(Work work){
         HashMap<String ,Object> map=new HashMap<>();
         map.put("msg","ok");
         map.put("status",200);
         try {
-            orderService.insert(order);
+            workService.insert(work);
         }catch (Exception e)
         {
             e.printStackTrace();
@@ -76,7 +77,7 @@ public class OrderController {
         map.put("msg","ok");
         map.put("status",200);
         try{
-            orderService.delete(ids);
+            workService.delete(ids);
         }catch (Exception e)
         {
             e.printStackTrace();
@@ -94,17 +95,17 @@ public class OrderController {
     @RequestMapping("edit")
     public String edit()
     {
-        return "/designSchedule/order/order_edit";
+        return "/designSchedule/work/work_edit";
     }
     @ResponseBody
-    @RequestMapping("update_all")
-    public Map updateAll(@Valid Order Order)
+    @RequestMapping("update_all ")
+    public Map updateAll(Work work)
     {
         HashMap<String ,Object> map=new HashMap<>();
         map.put("msg","ok");
         map.put("status",200);
         try{
-            orderService.update(Order);
+            workService.update(work);
         }catch (Exception e)
         {
             e.printStackTrace();

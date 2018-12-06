@@ -19,6 +19,6 @@ public interface ProductMapper {
     int updateByPrimaryKey(Product record);
 
     List<Product>  findall();
-    int count(@Param("searchid") Integer searchid);
-    List<Product> selectByPage(Integer page, Integer rows, Integer i);
+    int count(@Param("searchid") String searchid);
+    List<Product> selectByPage(Integer page, Integer rows, String i);
 }

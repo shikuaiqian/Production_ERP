@@ -16,7 +16,9 @@ public class OrderServiceimp  implements OrderService{
     @Autowired
     OrderMapper orderMapper;
     @Override
-    public Map<String, Object> selectByPage(Integer page, Integer rows) {
+    public Map<String, Object> selectByPage(String page1, String rows1) {
+        int page = Integer.parseInt(page1);
+        int rows = Integer.parseInt(rows1);
         int i = (page - 1) * rows;
         int offset=i>0?i:0;
         List<OrderVo> orders = orderMapper.selectByPage(offset, rows, null);
@@ -28,7 +30,9 @@ public class OrderServiceimp  implements OrderService{
     }
 
     @Override
-    public Map<String, Object> selectByIdandPage(Integer searchValue, Integer page, Integer rows) {
+    public Map<String, Object> selectByIdandPage(String searchValue, String page1, String rows1) {
+        int page = Integer.parseInt(page1);
+        int rows = Integer.parseInt(rows1);
         int i = (page - 1) * rows;
         int offset=i>0?i:0;
         List<OrderVo> orders = orderMapper.selectByPage(offset, rows, searchValue);
@@ -45,7 +49,7 @@ public class OrderServiceimp  implements OrderService{
     }
 
     @Override
-    public void delete(Integer[] ids) {
+    public void delete(String[] ids) {
         for (int i = 0; i <ids.length ; i++) {
             orderMapper.deleteByPrimaryKey(ids[i]+"") ;
         }

@@ -157,18 +157,26 @@
   <select id="selectByPage" resultMap="BaseResultMap">
     SELECT  <include refid="Base_Column_List"/>  from custom
     <if test="param3!=null">
-      where custom_id=#{param3}
+      <if test="param3.customId!=null">
+        where custom_id=#{param3.customId}
+      </if>
+      <if test="param3.customName!=null">
+        where custom_name=#{param3.customName}
+      </if>
     </if>
-
-  limit
+    limit
     #{param2} offset  #{param1}
   </select>
   <select id="count" resultType="_int">
     select count(*)
     from custom
-    <if test="searchid!=null">
-      where custom_id=#{searchid}
+    <if test="param1!=null">
+    <if test="param1.customId!=null">
+      where custom_id=#{param1.customId}
     </if>
-
+    <if test="param1.customName!=null">
+      where custom_name=#{param1.customName}
+    </if>
+    </if>
   </select>
 </mapper>

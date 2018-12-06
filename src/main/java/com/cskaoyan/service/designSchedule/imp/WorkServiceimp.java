@@ -1,11 +1,8 @@
 package com.cskaoyan.service.designSchedule.imp;
 
-
-
-import com.cskaoyan.dao.designSchedule.ProductMapper;
-import com.cskaoyan.domain.designScheduleDomain.Product;
-
-import com.cskaoyan.service.designSchedule.ProductService;
+import com.cskaoyan.dao.designSchedule.WorkMapper;
+import com.cskaoyan.domain.designScheduleDomain.Work;
+import com.cskaoyan.service.designSchedule.WorkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,20 +11,21 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class ProductServiceimp implements ProductService {
+public class WorkServiceimp implements WorkService{
+
     @Autowired
-    ProductMapper productMapper;
+    WorkMapper workMapper;
     @Override
     public Map<String, Object> selectByPage(String page1, String rows1) {
         int page = Integer.parseInt(page1);
         int rows = Integer.parseInt(rows1);
         int i = (page - 1) * rows;
         int offset=i>0?i:0;
-        List<Product> products = productMapper.selectByPage(offset, rows,null);
-        int count = productMapper.count(null);
+        List<Work> works = workMapper.selectByPage(offset, rows,null);
+        int count = workMapper.count(null);
         HashMap<String, Object> map = new HashMap<>();
         map.put("total" ,count);
-        map.put("rows",products);
+        map.put("rows",works);
         return map;
     }
 
@@ -37,33 +35,29 @@ public class ProductServiceimp implements ProductService {
         int rows = Integer.parseInt(rows1);
         int i = (page - 1) * rows;
         int offset=i>0?i:0;
-        List<Product> products = productMapper.selectByPage(offset,rows,searchValue);
-        int count = productMapper.count(searchValue);
+        List<Work> works = workMapper.selectByPage(offset,rows,searchValue);
+        int count = workMapper.count(searchValue);
         HashMap<String, Object> map = new HashMap<>();
         map.put("total" ,count);
-        map.put("rows",products);
+        map.put("rows",works);
         return map;
     }
 
     @Override
-    public void insert(Product product) {
-        productMapper.insertSelective(product);
+    public void insert(Work work) {
+        workMapper.insertSelective(work);
     }
 
     @Override
     public void delete(String[] ids) {
         for (int i = 0; i <ids.length ; i++) {
-            productMapper.deleteByPrimaryKey(ids[i]+"") ;
+            workMapper.deleteByPrimaryKey(ids[i]+"") ;
         }
     }
 
     @Override
-    public void update(Product product) {
-        productMapper.updateByPrimaryKey(product);
+    public void update(Work work) {
+        workMapper.updateByPrimaryKey(work);
     }
 
-    @Override
-    public List<Product> findAll() {
-        return productMapper.findall();
-    }
 }

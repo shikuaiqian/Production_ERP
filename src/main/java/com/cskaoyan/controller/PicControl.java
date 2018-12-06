@@ -1,4 +1,4 @@
-package com.cskaoyan.controller.designSchedule;
+package com.cskaoyan.controller;
 
 
 

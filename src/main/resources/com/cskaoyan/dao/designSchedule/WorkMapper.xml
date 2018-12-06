@@ -9,6 +9,19 @@
     <result column="device_id" jdbcType="VARCHAR" property="deviceId" />
     <result column="rating" jdbcType="INTEGER" property="rating" />
   </resultMap>
+  <resultMap id="WorkV0Map" type="com.cskaoyan.domain.designScheduleDomain.WorkVo">
+    <id column="work_id" jdbcType="VARCHAR" property="workId" />
+    <result column="process_number" jdbcType="VARCHAR" property="processNumber" />
+    <result column="product_id" jdbcType="VARCHAR" property="productId" />
+    <result column="process_id" jdbcType="VARCHAR" property="processId" />
+    <result column="device_id" jdbcType="VARCHAR" property="deviceId" />
+    <result column="rating" jdbcType="INTEGER" property="rating" />
+    <association property="product" column="product_id" select="com.cskaoyan.dao.designSchedule.ProductMapper.selectByPrimaryKey"/>
+<!--
+    <association property="device" column="device_id" select="com.cskaoyan.dao.deviceManagement.DeviceMapper.selectByPrimaryKey"/>
+-->
+    <association property="process" column="process_id" select="com.cskaoyan.dao.designSchedule.ProcessMapper.selectByPrimaryKey"/>
+  </resultMap>
   <sql id="Base_Column_List">
     work_id, process_number, product_id, process_id, device_id, rating
   </sql>
@@ -103,4 +116,19 @@
       rating = #{rating,jdbcType=INTEGER}
     where work_id = #{workId,jdbcType=VARCHAR}
   </update>
+  <select id="selectByPage" resultMap="WorkV0Map">
+    SELECT  <include refid="Base_Column_List"/>  from work
+    <if test="param3!=null">
+      where work_id=#{param3}
+    </if>
+    limit
+    #{param2} offset  #{param1}
+  </select>
+  <select id="count" resultType="_int">
+    select count(*)
+    from work
+    <if test="searchid!=null">
+      where work_id=#{searchid}
+    </if>
+  </select>
 </mapper>
