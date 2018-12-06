@@ -1,4 +1,10 @@
-package com.cskaoyan.service.deviceManagement;
+package com.cskaoyan.service.deviceManagement.interfaces;
 
-public interface DeviceService {
+import com.cskaoyan.domain.deviceManagement.Device;
+
+import java.util.List;
+
+public interface DeviceListService {
+
+    List<Device> tableInfo(String page, String rows);
 }

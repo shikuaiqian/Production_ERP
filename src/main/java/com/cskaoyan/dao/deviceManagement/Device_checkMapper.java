@@ -1,6 +1,9 @@
-package com.cskaoyan.dao.device;
+package com.cskaoyan.dao.deviceManagement;
 
-import com.cskaoyan.domain.device.Device_check;
+import com.cskaoyan.domain.deviceManagement.Device_check;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface Device_checkMapper {
     int deleteByPrimaryKey(String deviceCheckId);
@@ -14,4 +17,6 @@ public interface Device_checkMapper {
     int updateByPrimaryKeySelective(Device_check record);
 
     int updateByPrimaryKey(Device_check record);
+
+    List<Device_check> selectByLimitOffset(@Param("limit") int limit, @Param("offset") int offset);
 }

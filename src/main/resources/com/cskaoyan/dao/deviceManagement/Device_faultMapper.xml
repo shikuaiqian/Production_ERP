@@ -104,4 +104,11 @@
       device_fault_maintenance = #{deviceFaultMaintenance,jdbcType=VARCHAR}
     where device_fault_id = #{deviceFaultId,jdbcType=VARCHAR}
   </update>
+
+  <select id="selectByLimitOffset" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from device_fault
+    limit #{limit,jdbcType=NUMERIC} offset #{offset,jdbcType=NUMERIC}
+  </select>
 </mapper>

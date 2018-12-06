@@ -1,6 +1,9 @@
-package com.cskaoyan.dao.device;
+package com.cskaoyan.dao.deviceManagement;
 
-import com.cskaoyan.domain.device.Device_type;
+import com.cskaoyan.domain.deviceManagement.Device_type;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface Device_typeMapper {
     int deleteByPrimaryKey(String deviceTypeId);
@@ -14,4 +17,6 @@ public interface Device_typeMapper {
     int updateByPrimaryKeySelective(Device_type record);
 
     int updateByPrimaryKey(Device_type record);
+
+    List<Device_type> selectByLimitOffset(@Param("limit") int limit, @Param("offset") int offset);
 }

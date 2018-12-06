@@ -4,14 +4,4 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 
-    <typeAliases >
-
-        <package name="com.cskaoyan.domain"/>
-
-    </typeAliases>
-
-    <mappers>
-
-        <package name="com.cskaoyan.dao"/>
-    </mappers>
 </configuration>

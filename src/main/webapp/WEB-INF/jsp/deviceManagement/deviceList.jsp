@@ -46,17 +46,17 @@
 <div  id="toolbar_device" style=" height: 22px; padding: 3px 11px; background: #fafafa;">  
 	
 	<c:forEach items="${sessionScope.sysPermissionList}" var="per" > 
-		<c:if test="${per=='device:add'}">
+		<c:if test="${per=='deviceManagement111:add'}">
 		    <div style="float: left;">  
 		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-add" onclick="device_add()">新增</a>  
 		    </div>  
 		</c:if>
-		<c:if test="${per=='device:edit'}">
+		<c:if test="${per=='deviceManagement111:edit'}">
 		    <div style="float: left;">  
 		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-edit" onclick="device_edit()">编辑</a>  
 		    </div>  
 		</c:if>
-		<c:if test="${per=='device:delete'}">
+		<c:if test="${per=='deviceManagement111:delete'}">
 		    <div style="float: left;">  
 		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-cancel" onclick="device_delete()">删除</a>  
 		    </div>  

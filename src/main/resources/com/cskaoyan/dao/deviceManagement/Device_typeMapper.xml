@@ -128,4 +128,11 @@
       device_type_warranty = #{deviceTypeWarranty,jdbcType=TIMESTAMP}
     where device_type_id = #{deviceTypeId,jdbcType=VARCHAR}
   </update>
+
+  <select id="selectByLimitOffset" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from device_type
+    limit #{limit,jdbcType=NUMERIC} offset #{offset,jdbcType=NUMERIC}
+  </select>
 </mapper>

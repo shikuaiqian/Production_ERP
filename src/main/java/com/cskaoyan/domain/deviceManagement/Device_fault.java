@@ -1,4 +1,4 @@
-package com.cskaoyan.domain.device;
+package com.cskaoyan.domain.deviceManagement;
 
 import java.util.Date;
 

@@ -1,6 +1,9 @@
-package com.cskaoyan.dao.device;
+package com.cskaoyan.dao.deviceManagement;
 
-import com.cskaoyan.domain.device.Device_maintain;
+import com.cskaoyan.domain.deviceManagement.Device_maintain;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface Device_maintainMapper {
     int deleteByPrimaryKey(String deviceMaintainId);
@@ -14,4 +17,6 @@ public interface Device_maintainMapper {
     int updateByPrimaryKeySelective(Device_maintain record);
 
     int updateByPrimaryKey(Device_maintain record);
+
+    List<Device_maintain> selectByLimitOffset(@Param("limit") int limit, @Param("offset") int offset);
 }
