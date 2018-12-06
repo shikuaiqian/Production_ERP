@@ -6,8 +6,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="ERP" />
         <module name="Production_ERP" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="ERP" target="1.7" />
+    </bytecodeTargetLevel>
   </component>
 </project>
