@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 @Controller
-@RequestMapping("/product")
+@RequestMapping("product")
 public class ProductController {
     @Autowired
     ProductService productService;
@@ -20,7 +20,7 @@ public class ProductController {
     public String  find(HttpSession session){
         String[]  producterop=new String[]{"product:add","product:edit","product:delete"};
         session.setAttribute("sysPermissionList",producterop);
-        return   "/desginSchedule/product_list";
+        return   "/designSchedule/product/product_list";
     }
 
     @ResponseBody
@@ -44,7 +44,7 @@ public class ProductController {
     }
     @RequestMapping("add")
     public String add(){
-        return "/desginSchedule/product_add";
+        return "/designSchedule/product/product_add";
     }
     @ResponseBody
     @RequestMapping("insert")
@@ -93,7 +93,7 @@ public class ProductController {
     @RequestMapping("edit")
     public String edit()
     {
-        return "/desginSchedule/product_edit";
+        return "/designSchedule/product/product_edit";
     }
     @ResponseBody
     @RequestMapping("update_all")

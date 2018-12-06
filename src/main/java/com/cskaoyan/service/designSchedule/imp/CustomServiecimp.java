@@ -13,7 +13,7 @@ import java.util.Map;
 @Service("custom")
 public class CustomServiecimp  implements CustomService{
     @Autowired
-    CustomMapper customMapper;
+    CustomMapper  customMapper;
     @Override
     public Map<String, Object> selectByPage(Integer page, Integer rows) {
         int i = (page - 1) * rows;
