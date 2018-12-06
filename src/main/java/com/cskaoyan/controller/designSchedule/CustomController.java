@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@RequestMapping("/custom")
+@RequestMapping("custom")
 @Controller
 public class CustomController {
     @Autowired
@@ -22,7 +22,7 @@ public class CustomController {
     public String  find(HttpSession session){
         String[]  customerop=new String[]{"custom:add","custom:edit","custom:delete"};
         session.setAttribute("sysPermissionList",customerop);
-        return   "/desginSchedule/custom_list";
+        return   "/designSchedule/custom/custom_list";
     }
 
     @ResponseBody
@@ -48,7 +48,7 @@ public class CustomController {
     }
     @RequestMapping("add")
     public String add(){
-        return "/desginSchedule/custom_add";
+        return "/designSchedule/custom/custom_add";
     }
     @ResponseBody
     @RequestMapping("insert")
@@ -97,7 +97,7 @@ public class CustomController {
     @RequestMapping("edit")
     public String edit()
     {
-        return "/desginSchedule/custom_edit";
+        return "/designSchedule/custom_edit";
     }
     @ResponseBody
     @RequestMapping("update_all")

@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/order")
+@RequestMapping("order")
 public class OrderController {
     @Autowired
     OrderService orderService;
@@ -20,7 +20,7 @@ public class OrderController {
     public String  find(HttpSession session){
         String[]  Orderop=new String[]{"order:add","order:edit","order:delete"};
         session.setAttribute("sysPermissionList",Orderop);
-        return   "/desginSchedule/order_list";
+        return   "/designSchedule/order/order_list";
     }
 
     @ResponseBody
@@ -44,7 +44,7 @@ public class OrderController {
     }
     @RequestMapping("add")
     public String add(){
-        return "/desginSchedule/order_add";
+        return "/designSchedule/order/order_add";
     }
     @ResponseBody
     @RequestMapping("insert")
@@ -93,7 +93,7 @@ public class OrderController {
     @RequestMapping("edit")
     public String edit()
     {
-        return "/desginSchedule/order_edit";
+        return "/designSchedule/order/order_edit";
     }
     @ResponseBody
     @RequestMapping("update_all")
