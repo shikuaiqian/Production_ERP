@@ -1,6 +1,7 @@
 package com.cskaoyan.dao.deviceManagement;
 
 import com.cskaoyan.domain.deviceManagement.Device_fault;
+import com.cskaoyan.domain.deviceManagement.vo.Device_faultVo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -18,5 +19,7 @@ public interface Device_faultMapper {
 
     int updateByPrimaryKey(Device_fault record);
 
-    List<Device_fault> selectByLimitOffset(@Param("limit") int limit, @Param("offset") int offset);
+    String selectTableAmount();
+
+    List<Device_faultVo> selectByLimitOffset(@Param("limit") int limit, @Param("offset") int offset);
 }

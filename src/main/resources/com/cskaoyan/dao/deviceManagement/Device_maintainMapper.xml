@@ -118,7 +118,27 @@
     where device_maintain_id = #{deviceMaintainId,jdbcType=VARCHAR}
   </update>
 
-  <select id="selectByLimitOffset" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <!--逆向工程分割线.......................................................-->
+
+  <select id="selectTableAmount"  resultType="string">
+    select
+    count(device_maintain_id)
+    from device_maintain
+  </select>
+
+  <resultMap id="VoResultMap" type="com.cskaoyan.domain.deviceManagement.vo.Device_maintainVo">
+    <id column="device_maintain_id" jdbcType="VARCHAR" property="deviceMaintainId" />
+    <result column="device_fault_id" jdbcType="VARCHAR" property="deviceFaultId" />
+    <result column="device_maintain_emp_id" jdbcType="VARCHAR" property="deviceMaintainEmpId" />
+    <result column="device_maintain_date" jdbcType="TIMESTAMP" property="deviceMaintainDate" />
+    <result column="device_maintain_result" jdbcType="VARCHAR" property="deviceMaintainResult" />
+    <result column="device_maintain_cost" jdbcType="DECIMAL" property="deviceMaintainCost" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+    <!--<association column="device_maintain_emp_id" property="deviceMaintainEmp"
+                select="???等待employee表接口" />-->
+  </resultMap>
+
+  <select id="selectByLimitOffset" parameterType="java.lang.Integer" resultMap="VoResultMap">
     select
     <include refid="Base_Column_List" />
     from device_maintain

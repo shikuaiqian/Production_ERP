@@ -105,7 +105,26 @@
     where device_fault_id = #{deviceFaultId,jdbcType=VARCHAR}
   </update>
 
-  <select id="selectByLimitOffset" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <!--逆向工程分割线.......................................................-->
+
+  <select id="selectTableAmount"  resultType="string">
+    select
+    count(device_fault_id)
+    from device_fault
+  </select>
+
+  <resultMap id="VoResultMap" type="com.cskaoyan.domain.deviceManagement.vo.Device_faultVo">
+    <id column="device_fault_id" jdbcType="VARCHAR" property="deviceFaultId" />
+    <result column="device_id" jdbcType="VARCHAR" property="deviceId" />
+    <result column="device_fault_cause" jdbcType="VARCHAR" property="deviceFaultCause" />
+    <result column="device_fault_detail" jdbcType="VARCHAR" property="deviceFaultDetail" />
+    <result column="device_fault_date" jdbcType="TIMESTAMP" property="deviceFaultDate" />
+    <result column="device_fault_maintenance" jdbcType="VARCHAR" property="deviceFaultMaintenance" />
+    <association column="device_id" property="deviceName"
+                 select="com.cskaoyan.dao.deviceManagement.DeviceMapper.selectDeviceNameByPrimaryKey"/>
+  </resultMap>
+
+  <select id="selectByLimitOffset" parameterType="java.lang.Integer" resultMap="VoResultMap">
     select
     <include refid="Base_Column_List" />
     from device_fault

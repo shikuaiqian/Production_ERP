@@ -105,7 +105,28 @@
     where device_check_id = #{deviceCheckId,jdbcType=VARCHAR}
   </update>
 
-  <select id="selectByLimitOffset" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <!--逆向工程分割线.......................................................-->
+
+  <select id="selectTableAmount"  resultType="string">
+    select
+    count(device_check_id)
+    from device_check
+  </select>
+
+  <resultMap id="VoResultMap" type="com.cskaoyan.domain.deviceManagement.vo.Device_checkVo">
+    <id column="device_check_id" jdbcType="VARCHAR" property="deviceCheckId" />
+    <result column="device_id" jdbcType="VARCHAR" property="deviceId" />
+    <result column="device_check_emp_id" jdbcType="VARCHAR" property="deviceCheckEmpId" />
+    <result column="device_check_date" jdbcType="TIMESTAMP" property="deviceCheckDate" />
+    <result column="device_check_result" jdbcType="VARCHAR" property="deviceCheckResult" />
+    <result column="device_check_fault_id" jdbcType="VARCHAR" property="deviceCheckFaultId" />
+    <association column="device_id" property="deviceName"
+                 select="com.cskaoyan.dao.deviceManagement.DeviceMapper.selectDeviceNameByPrimaryKey" />
+    <!--<association column="device_keeper_id" property="deviceCheckEmp"
+                 select="???等待employee表接口" />-->
+  </resultMap>
+
+  <select id="selectByLimitOffset" parameterType="java.lang.Integer" resultMap="VoResultMap">
     select
     <include refid="Base_Column_List" />
     from device_check

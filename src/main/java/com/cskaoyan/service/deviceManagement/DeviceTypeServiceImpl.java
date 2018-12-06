@@ -20,4 +20,9 @@ public class DeviceTypeServiceImpl implements DeviceTypeService {
         List<Device_type> list=deviceTypeMapper.selectByLimitOffset(limit,offset);
         return list;
     }
+
+    @Override
+    public String tableSize() {
+        return deviceTypeMapper.selectTableAmount();
+    }
 }

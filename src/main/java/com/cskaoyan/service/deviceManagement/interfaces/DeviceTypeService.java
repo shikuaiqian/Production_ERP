@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface DeviceTypeService {
     List<Device_type> tableInfo(String page, String rows);
+
+    String tableSize();
 }

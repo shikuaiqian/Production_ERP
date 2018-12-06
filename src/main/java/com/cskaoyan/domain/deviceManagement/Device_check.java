@@ -7,13 +7,17 @@ public class Device_check {
 
     private String deviceId;
 
+
+
     private String deviceCheckEmpId;
+
 
     private Date deviceCheckDate;
 
     private String deviceCheckResult;
 
     private String deviceCheckFaultId;
+
 
     public String getDeviceCheckId() {
         return deviceCheckId;

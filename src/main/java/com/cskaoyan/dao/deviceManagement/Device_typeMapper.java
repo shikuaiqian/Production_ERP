@@ -18,5 +18,7 @@ public interface Device_typeMapper {
 
     int updateByPrimaryKey(Device_type record);
 
+    String selectTableAmount();
+
     List<Device_type> selectByLimitOffset(@Param("limit") int limit, @Param("offset") int offset);
 }

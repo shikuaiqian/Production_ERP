@@ -26,6 +26,7 @@ public class Device {
 
     private String note;
 
+
     public String getDeviceId() {
         return deviceId;
     }
