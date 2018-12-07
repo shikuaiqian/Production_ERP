@@ -110,7 +110,7 @@
              where product_id=#{param3.productId}
            </if>
            <if test="param3.productName!=null">
-             where product_name=#{param3.productName}
+             where product_name  like '%#{param.productName}%'
            </if>
            <if test="param3.productType!=null">
                         where product_type=#{param3.productType}
@@ -128,7 +128,7 @@
                    where product_id=#{param.productId}
                  </if>
                  <if test="param3.productName!=null">
-                   where product_name=#{param.productName}
+                   where product_name  like '%#{param.productName}%'
                  </if>
                  <if test="param3.productType!=null">
                     where product_type=#{param.productType}

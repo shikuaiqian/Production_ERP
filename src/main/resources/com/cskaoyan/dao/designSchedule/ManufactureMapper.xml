@@ -154,7 +154,7 @@
         where manufacture_sn=#{param3.manufactureSn}
       </if>
       <if test="param3.technologyName!=null">
-        where technology.technology_name=#{param3.technologyName}
+        where technology.technology_name like  '% #{param3.technologyName}%'
       </if>
     </if>
 
@@ -174,7 +174,7 @@
         where manufacture_sn=#{param3.manufactureSn}
       </if>
       <if test="param3.technologyName!=null">
-        where technology.technology_name=#{param3.technologyName}
+        where technology.technology_name like  '% #{param3.technologyName}%'
       </if>
     </if>
   </select>
