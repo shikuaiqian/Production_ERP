@@ -60,4 +60,9 @@ public class WorkServiceimp implements WorkService{
         workMapper.updateByPrimaryKey(work);
     }
 
+    @Override
+    public List<Work> findAll() {
+        return workMapper.findAll();
+    }
+
 }

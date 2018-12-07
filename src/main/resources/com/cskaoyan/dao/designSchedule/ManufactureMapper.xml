@@ -10,8 +10,41 @@
     <result column="end_date" jdbcType="TIMESTAMP" property="endDate" />
   </resultMap>
   <sql id="Base_Column_List">
-    manufacture_sn, order_id, technology_id, launch_quantity, begin_date, end_date
+    manufacture_sn, manufacture.order_id, manufacture.technology_id, launch_quantity, begin_date, end_date
   </sql>
+  <resultMap id="ManufactureVoMap" type="com.cskaoyan.domain.designScheduleDomain.ManufactureVo">
+    <id column="manufacture_sn" jdbcType="VARCHAR" property="manufactureSn" />
+    <result column="order_id" jdbcType="VARCHAR" property="orderId" />
+    <result column="technology_id" jdbcType="VARCHAR" property="technologyId" />
+    <result column="launch_quantity" jdbcType="INTEGER" property="launchQuantity" />
+    <result column="begin_date" jdbcType="TIMESTAMP" property="beginDate" />
+    <result column="end_date" jdbcType="TIMESTAMP" property="endDate" />
+    <association property="cOrder" javaType="com.cskaoyan.domain.designScheduleDomain.Order">
+      <result column="order_id" jdbcType="VARCHAR" property="orderId" />
+      <result column="custom_id" jdbcType="VARCHAR" property="customId" />
+      <result column="product_id" jdbcType="VARCHAR" property="productId" />
+      <result column="order_date" jdbcType="TIMESTAMP" property="orderDate" />
+      <result column="request_date" jdbcType="TIMESTAMP" property="requestDate" />
+      <result column="note" jdbcType="VARCHAR" property="note" />
+      <result column="quantity" jdbcType="INTEGER" property="quantity" />
+      <result column="unit_price" jdbcType="DECIMAL" property="unitPrice" />
+      <result column="unit" jdbcType="VARCHAR" property="unit" />
+      <result column="image" jdbcType="VARCHAR" property="image" />
+      <result column="file" jdbcType="VARCHAR" property="file" />
+      <result column="status" jdbcType="INTEGER" property="status" />
+    </association>
+    <association property="technology" javaType="com.cskaoyan.domain.designScheduleDomain.Technology">
+      <result column="technology_id" jdbcType="VARCHAR" property="technologyId" />
+      <result column="technology_name" jdbcType="VARCHAR" property="technologyName" />
+      <result column="price" jdbcType="DECIMAL" property="price" />
+      <result column="vital_process_period" jdbcType="VARCHAR" property="vitalProcessPeriod" />
+      <result column="standard_capacity" jdbcType="INTEGER" property="standardCapacity" />
+      <result column="overtime_standard_capacity" jdbcType="INTEGER" property="overtimeStandardCapacity" />
+      <result column="overtime_overfulfil_capacity" jdbcType="INTEGER" property="overtimeOverfulfilCapacity" />
+      <result column="double_capacity" jdbcType="INTEGER" property="doubleCapacity" />
+      <result column="overfulfil_capacity" jdbcType="INTEGER" property="overfulfilCapacity" />
+    </association>
+  </resultMap>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -103,4 +136,50 @@
       end_date = #{endDate,jdbcType=TIMESTAMP}
     where manufacture_sn = #{manufactureSn,jdbcType=VARCHAR}
   </update>
+  <select id="selectByPage" resultMap="ManufactureVoMap">
+    SELECT  <include refid="Base_Column_List"/>   ,
+    c_order.custom_id, c_order.product_id, order_date, request_date, c_order.note, c_order.quantity,
+    c_order.unit_price,
+    c_order.unit,c_order.image, c_order.file, c_order. status,
+   technology_name, price, vital_process_period, standard_capacity, overtime_standard_capacity,
+    overtime_overfulfil_capacity, double_capacity, overfulfil_capacity
+    from manufacture
+    LEFT join c_order  ON  manufacture.order_id=c_order.order_id
+  left join technology ON technology.technology_id=manufacture.technology_id
+    <if test="param3!=null">
+      <if test="param3.orderId!=null">
+        where manufacture.order_id=#{param3.orderId}
+      </if>
+      <if test="param3.manufactureSn!=null">
+        where manufacture_sn=#{param3.manufactureSn}
+      </if>
+      <if test="param3.technologyName!=null">
+        where technology.technology_name=#{param3.technologyName}
+      </if>
+    </if>
+
+    limit
+    #{param2} offset  #{param1}
+  </select>
+  <select id="count" resultType="_int">
+    select count(*)
+    from manufacture
+    LEFT join c_order  ON  manufacture.order_id=c_order.order_id
+    left join technology ON technology.technology_id=manufacture.technology_id
+    <if test="param3!=null">
+      <if test="param3.orderId!=null">
+        where manufacture.order_id=#{param3.orderId}
+      </if>
+      <if test="param3.manufactureSn!=null">
+        where manufacture_sn=#{param3.manufactureSn}
+      </if>
+      <if test="param3.technologyName!=null">
+        where technology.technology_name=#{param3.technologyName}
+      </if>
+    </if>
+  </select>
+  <select id="findAll" resultMap="BaseResultMap">
+    select  <include refid="Base_Column_List"/>
+    from  manufacture
+  </select>
 </mapper>

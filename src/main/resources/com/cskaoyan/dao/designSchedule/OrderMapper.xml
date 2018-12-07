@@ -238,17 +238,20 @@
     from c_order
     left join custom on custom.custom_id=c_order.custom_id
     left join product on product.product_id=c_order.product_id
-    <if test="param!=null">
-      <if test="param.customName!=null">
+    <if test="param3!=null">
+      <if test="param3.customName!=null">
         where custom_name=#{param3.customName}
       </if>
-      <if test="param.orderId!=null">
+      <if test="param3.orderId!=null">
         where order_id=#{param3.orderId}
       </if>
-      <if test="param.productName!=null">
+      <if test="param3.productName!=null">
         where product_name=#{param3.productName}
       </if>
     </if>
+  </select>
 
+  <select id="findAll" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List"/> from c_order
   </select>
 </mapper>

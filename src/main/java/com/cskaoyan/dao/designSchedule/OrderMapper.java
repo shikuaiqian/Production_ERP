@@ -24,4 +24,5 @@ public interface OrderMapper {
     int count(@Param("param3") Map searchid);
 
 
+    List<Order> findAll();
 }

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -71,7 +71,7 @@ public class ProductController {
     }
     @ResponseBody
     @RequestMapping("insert")
-    public Map insert(@Valid Product product,BindingResult bindingResult){
+    public Map insert( Product product,BindingResult bindingResult){
 
         HashMap<String ,Object> map=new HashMap<>();
         map.put("msg","ok");

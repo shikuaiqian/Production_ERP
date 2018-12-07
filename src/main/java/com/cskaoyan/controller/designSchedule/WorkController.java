@@ -143,4 +143,11 @@ public class WorkController {
         }
         return map;
     }
+    @ResponseBody
+    @RequestMapping("get_data")
+    public List<Work> getData()
+    {
+        List<Work> works= workService.findAll();
+        return works;
+    }
 }

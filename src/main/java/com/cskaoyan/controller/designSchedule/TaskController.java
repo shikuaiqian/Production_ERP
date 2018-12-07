@@ -1,8 +1,7 @@
 package com.cskaoyan.controller.designSchedule;
 
-import com.cskaoyan.domain.designScheduleDomain.Custom;
-import com.cskaoyan.domain.designScheduleDomain.Order;
-import com.cskaoyan.service.designSchedule.OrderService;
+import com.cskaoyan.domain.designScheduleDomain.Task;
+import com.cskaoyan.service.designSchedule.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,54 +9,54 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("order")
-public class OrderController {
+@RequestMapping("task")
+public class TaskController {
+    
     @Autowired
-    OrderService orderService;
+    TaskService taskService;
     @RequestMapping("find")
     public String  find(HttpSession session){
-        String[]  Orderop=new String[]{"order:add","order:edit","order:delete"};
-        session.setAttribute("sysPermissionList",Orderop);
-        return   "/designSchedule/order/order_list";
+        String[]  taskop=new String[]{"task:add","task:edit","task:delete"};
+        session.setAttribute("sysPermissionList",taskop);
+        return   "/designSchedule/task/task_list";
     }
 
     @ResponseBody
     @RequestMapping("list")
-    public Map  list(String page ,String rows)
+    public Map list(String page , String rows)
     {
-        Map<String ,Object> orders=orderService.selectByPage(page,rows);
-        return orders;
+        Map<String ,Object> tasks=taskService.selectByPage(page,rows);
+        return tasks;
     }
     @ResponseBody
-    @RequestMapping("search_order_by_orderId")
-    public Map search_Order_by_OrderId(String searchValue,String page ,String rows)
+    @RequestMapping("search_task_by_taskId")
+    public Map searchTaskByTaskId(String searchValue,String page ,String rows)
     {
         HashMap<String,Object> ret=new HashMap<>();
-        ret.put("orderId",searchValue);
-        Map<String ,Object> Orders=orderService.selectBySearchValue(ret,page,rows);
-        return Orders;
+        ret.put("taskId",searchValue);
+        Map<String ,Object> tasks=taskService.selectBySearchValue(ret,page,rows);
+        return tasks;
     }
     @ResponseBody
-    @RequestMapping("search_order_by_orderCustom")
-    public Map search_Order_by_CustomName(String searchValue,String page ,String rows)
+    @RequestMapping("search_task_by_taskManufactureSn")
+    public Map searchTaskByTaskManufactureSn(String searchValue,String page ,String rows)
     {
         HashMap<String,Object> ret=new HashMap<>();
-        ret.put("customName",searchValue);
-        Map<String ,Object> Orders=orderService.selectBySearchValue(ret,page,rows);
-        return Orders;
+        ret.put("manufactureSn",searchValue);
+        Map<String ,Object> tasks=taskService.selectBySearchValue(ret,page,rows);
+        return tasks;
     }
     @ResponseBody
-    @RequestMapping("search_order_by_orderProduct")
-    public Map search_Order_by_OrderProduct(String searchValue,String page ,String rows)
+    @RequestMapping("search_task_by_taskWorkId")
+    public Map searchTaskByTaskWorkId(String searchValue,String page ,String rows)
     {
         HashMap<String,Object> ret=new HashMap<>();
-        ret.put("productName",searchValue);
-        Map<String ,Object> Orders=orderService.selectBySearchValue(ret,page,rows);
-        return Orders;
+        ret.put("workId",searchValue);
+        Map<String ,Object> tasks=taskService.selectBySearchValue(ret,page,rows);
+        return tasks;
     }
     @ResponseBody
     @RequestMapping("add_judge")
@@ -66,16 +65,16 @@ public class OrderController {
     }
     @RequestMapping("add")
     public String add(){
-        return "/designSchedule/order/order_add";
+        return "/designSchedule/task/task_add";
     }
     @ResponseBody
     @RequestMapping("insert")
-    public Map insert(  Order order){
+    public Map insert(  Task task){
         HashMap<String ,Object> map=new HashMap<>();
         map.put("msg","ok");
         map.put("status",200);
         try {
-            orderService.insert(order);
+            taskService.insert(task);
         }catch (Exception e)
         {
             e.printStackTrace();
@@ -97,7 +96,7 @@ public class OrderController {
         map.put("msg","ok");
         map.put("status",200);
         try{
-            orderService.delete(ids);
+            taskService.delete(ids);
         }catch (Exception e)
         {
             e.printStackTrace();
@@ -115,17 +114,17 @@ public class OrderController {
     @RequestMapping("edit")
     public String edit()
     {
-        return "/designSchedule/order/order_edit";
+        return "/designSchedule/task/task_edit";
     }
     @ResponseBody
     @RequestMapping("update_all")
-    public Map updateAll( Order Order)
+    public Map updateAll( Task task)
     {
         HashMap<String ,Object> map=new HashMap<>();
         map.put("msg","ok");
         map.put("status",200);
         try{
-            orderService.update(Order);
+            taskService.update(task);
         }catch (Exception e)
         {
             e.printStackTrace();
@@ -134,13 +133,5 @@ public class OrderController {
             map.put("status",0);
         }
         return map;
-    }
-
-    @ResponseBody
-    @RequestMapping("get_data")
-    public List<Order> getData()
-    {
-        List<Order> orders= orderService.findAll();
-        return orders;
     }
 }

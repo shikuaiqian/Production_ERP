@@ -21,4 +21,6 @@ public interface WorkMapper {
     int count(@Param("param3") Map o);
 
     List<Work> selectByPage(int offset, Integer rows, Map o);
+
+    List<Work> findAll();
 }

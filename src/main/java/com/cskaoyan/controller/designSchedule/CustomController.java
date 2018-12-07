@@ -115,7 +115,7 @@ public class CustomController {
         return "/designSchedule/custom/custom_edit";
     }
     @ResponseBody
-    @RequestMapping("update_all ")
+    @RequestMapping("update_all")
     public Map updateAll(Custom custom)
     {
         HashMap<String ,Object> map=new HashMap<>();

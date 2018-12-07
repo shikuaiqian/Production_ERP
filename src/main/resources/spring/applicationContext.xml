@@ -35,11 +35,11 @@
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
 
-    <bean id="datasource" class="org.apache.commons.dbcp2.BasicDataSource">
+    <bean id="datasource" class="com.alibaba.druid.pool.DruidDataSource">
         <property name="username" value="root"/>
         <property name="password" value="1234"/>
-        <property name="url" value="jdbc:mysql://192.168.4.21:3306/erp-ssm?serverTimezone=GMT%2B8"></property>
-        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
+        <property name="url" value="jdbc:mysql://192.168.4.21:3306/erp-ssm?serverTimezone=GMT%2B8"/>
+
     </bean>
 
     <tx:annotation-driven transaction-manager="transactionManager"/>

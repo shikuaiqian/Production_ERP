@@ -189,4 +189,8 @@
       </if>
     </if>
   </select>
+  <select id="findAll" resultMap="BaseResultMap">
+    select  <include refid="Base_Column_List"/>
+    from  work
+  </select>
 </mapper>
