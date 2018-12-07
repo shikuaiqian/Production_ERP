@@ -2,6 +2,8 @@ package com.cskaoyan.dao.person;
 
 import com.cskaoyan.domain.person.Employee;
 
+import java.util.List;
+
 public interface EmployeeMapper {
     int deleteByPrimaryKey(String empId);
 
@@ -14,4 +16,9 @@ public interface EmployeeMapper {
     int updateByPrimaryKeySelective(Employee record);
 
     int updateByPrimaryKey(Employee record);
+
+
+
+    List<Employee> selectEmployeeList(int limit, int offset);
+    String count();
 }

@@ -1,10 +1,13 @@
 package com.cskaoyan.domain.person;
 
+import javax.validation.constraints.NotNull;
+
 public class Department {
+    @NotNull(message = "该输入项为必填项")
     private String departmentId;
-
+    @NotNull(message = "该输入项为必填项")
     private String departmentName;
-
+    @NotNull(message = "该输入项为必填项")
     private String note;
 
     public String getDepartmentId() {

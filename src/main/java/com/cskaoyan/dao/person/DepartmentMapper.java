@@ -12,7 +12,7 @@ public interface DepartmentMapper {
 
     int insertSelective(Department record);
 
-    Department selectByPrimaryKey(String departmentId);
+    List<Department>  selectByPrimaryKey(String departmentId);
 
     int updateByPrimaryKeySelective(Department record);
 
@@ -21,4 +21,5 @@ public interface DepartmentMapper {
     List<Department> selectDepartmentList(@Param("limit") int limit, @Param("offset") int offset);
     String count();
 
+    List<Department>  selectBydepartmentName(@Param("departmentName") String departmentName);
 }

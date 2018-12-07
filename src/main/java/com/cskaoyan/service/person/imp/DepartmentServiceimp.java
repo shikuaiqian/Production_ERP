@@ -42,5 +42,30 @@ public class DepartmentServiceimp implements DepartmentService {
         ret.put("rows",allDepartment);
         return ret;
     }
+    public void insert(Department department){
 
+         departmentMapper.insertSelective(department);
+
+    }
+
+    @Override
+    public void update(Department department) {
+        departmentMapper.updateByPrimaryKey(department);
+    }
+
+    public void delete(String[] ids){
+
+        for (int i = 0; i <ids.length; i++) {
+            departmentMapper.deleteByPrimaryKey(ids[i]+"");
+        }
+
+    }
+    public List<Department> searchById(String id){
+        return departmentMapper.selectByPrimaryKey(id);
+
+    }
+    public List<Department> searchByName(String name){
+        return departmentMapper.selectBydepartmentName(name);
+
+    }
 }

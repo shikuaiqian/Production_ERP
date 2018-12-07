@@ -11,20 +11,20 @@
 	<form id="departmentAddForm" class="departmentForm" method="post">
 	    <table cellpadding="5" >
 	        <tr>
-	            <td>部门编号:</td>
+	            <td>部门编号:${usernameerror}</td>
 	            <td>
 	            	<input class="easyui-textbox" type="text" name="departmentId" data-options="required:true"/>
 	            </td>
 	        </tr>
 	        <tr>
-	            <td>部门名称:</td>
+	            <td>部门名称:${usernameerror}</td>
 	            <td>
 	            	<input class="easyui-textbox" type="text" name="departmentName" 
 	            		data-options="required:true"/>
     			</td>  
 	        </tr>
 	        <tr>
-	            <td>部门职责:</td>
+	            <td>部门职责:${usernameerror}</td>
 	            <td>
 	                <textarea style="width:800px;height:300px;visibility:hidden;" name="note"></textarea>
 	            </td>
