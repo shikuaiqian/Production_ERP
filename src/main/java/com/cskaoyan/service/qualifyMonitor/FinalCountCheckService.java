@@ -10,4 +10,5 @@ import java.util.Map;
 public interface FinalCountCheckService {
     Map<Object, Object> findPage(int page, int rows);
     void add(FinalCountCheck finalCountCheck) throws Exception;
+    void edit(FinalCountCheck finalCountCheck) throws Exception;
 }

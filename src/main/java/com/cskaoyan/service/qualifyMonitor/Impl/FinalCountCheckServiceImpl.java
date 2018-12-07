@@ -42,4 +42,10 @@ public class FinalCountCheckServiceImpl implements FinalCountCheckService {
         if (finalCountCheckMapper.insert(finalCountCheck)!=1)
             throw new Exception("添加失败");
     }
+
+    @Override
+    public void edit(FinalCountCheck finalCountCheck) throws Exception {
+        if (finalCountCheckMapper.updateByPrimaryKeySelective(finalCountCheck)!=1)
+            throw new Exception("修改失败");
+    }
 }

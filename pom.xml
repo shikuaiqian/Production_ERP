@@ -148,6 +148,11 @@
       <version>2.9.4</version>
     </dependency>
 
+    <dependency>
+      <groupId>org.apache.shiro</groupId>
+      <artifactId>shiro-web</artifactId>
+      <version>1.2.6</version>
+    </dependency>
 
 </dependencies>
 </project>

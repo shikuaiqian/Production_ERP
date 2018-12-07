@@ -10,4 +10,5 @@ import java.util.Map;
 public interface FinishmeasureService {
     Map<Object, Object> findPage(int page, int rows);
     void add(FinalMeasuretCheck finalMeasuretCheck) throws Exception;
+    void edit(FinalMeasuretCheck finalMeasuretCheck) throws Exception;
 }

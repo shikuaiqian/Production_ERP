@@ -45,4 +45,10 @@ public class ProcessMeasureCheckServiceImpl implements ProcessMeasureCheckServic
             throw new Exception("添加失败");
         }
     }
+
+    @Override
+    public void edit(ProcessMeasureCheck processMeasureCheck) throws Exception {
+        if (processMeasureCheckMapper.updateByPrimaryKeySelective(processMeasureCheck)!=1)
+            throw new Exception("修改失败");
+    }
 }

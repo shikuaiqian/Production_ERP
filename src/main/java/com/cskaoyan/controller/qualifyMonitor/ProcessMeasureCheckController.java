@@ -17,7 +17,7 @@ import java.util.Map;
  * Created by LZH on 2018/12/6
  */
 @Controller
-@RequestMapping("/p_measure_check")
+@RequestMapping({"/p_measure_check","/pMeasureCheck"})
 public class ProcessMeasureCheckController {
     @Autowired
     ProcessMeasureCheckService processMeasureCheckService;
@@ -61,5 +61,29 @@ public class ProcessMeasureCheckController {
         }
             return map;
 
+    }
+    @RequestMapping("/edit")
+    public String editPage(){
+        return "qualifyMonitor/p_measure_check_edit";
+    }
+    @RequestMapping("/edit_judge")
+    @ResponseBody
+    public String edit(){
+        return null;
+    }
+    @RequestMapping("/update_all")
+    @ResponseBody
+    public Map update(ProcessMeasureCheck processMeasureCheck){
+        HashMap<Object, Object> map = new HashMap<>();
+        try {
+            processMeasureCheckService.edit(processMeasureCheck);
+            map.put("status", 200);
+            map.put("msg","success");
+        } catch (Exception e) {
+            e.printStackTrace();
+            map.put("status",500);
+            map.put("msg","工序计量修改失败");
+        }
+        return map;
     }
 }

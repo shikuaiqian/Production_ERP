@@ -518,7 +518,7 @@ function getFMeasureSelectionsIds(){
     
 //////////////////////////////////////////////////////////////////////////
 function fMeasureCheck_add(){
-	$.get("measure/add_judge",'',function(data){
+	$.get("fMeasureCheck/add_judge",'',function(data){
    		if(data.msg != null){
    			$.messager.alert('提示', data.msg);
    		}else{

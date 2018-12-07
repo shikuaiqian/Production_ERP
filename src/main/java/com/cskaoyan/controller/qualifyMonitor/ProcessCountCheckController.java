@@ -15,7 +15,7 @@ import java.util.Map;
  * Created by LZH on 2018/12/6
  */
 @Controller
-@RequestMapping("/p_count_check")
+@RequestMapping({"/p_count_check","/pCountCheck"})
 public class ProcessCountCheckController {
     @Autowired
     ProcessCountCheckService processCountCheckService;
@@ -55,6 +55,30 @@ public class ProcessCountCheckController {
             e.printStackTrace();
             map.put("status",500);
             map.put("msg","工序计数增加失败");
+        }
+        return map;
+    }
+    @RequestMapping("/edit")
+    public String editPage(){
+        return "qualifyMonitor/p_count_check_edit";
+    }
+    @RequestMapping("/edit_judge")
+    @ResponseBody
+    public String edit(){
+        return null;
+    }
+    @RequestMapping("/update_all")
+    @ResponseBody
+    public Map update(ProcessCountCheck processCountCheck){
+        HashMap<Object, Object> map = new HashMap<>();
+        try {
+            processCountCheckService.edit(processCountCheck);
+            map.put("status", 200);
+            map.put("msg","success");
+        } catch (Exception e) {
+            e.printStackTrace();
+            map.put("status",500);
+            map.put("msg","工序计数修改失败");
         }
         return map;
     }

@@ -418,7 +418,7 @@ function submitEmpEditForm_pCount(){
     
 //////////////////////////////////////////////////////////////////////////
     function pCountCheck_add(){
-    	$.get("p_count_check/add_judge",'',function(data){
+    	$.get("pCountCheck/add_judge",'',function(data){
        		if(data.msg != null){
        			$.messager.alert('提示', data.msg);
        		}else{
