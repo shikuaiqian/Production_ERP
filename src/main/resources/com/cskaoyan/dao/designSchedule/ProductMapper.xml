@@ -134,11 +134,12 @@
                     where product_type=#{param.productType}
                   </if>
             </if>
-
-  </select>
-  <select id="findall" resultMap="BaseResultMap">
+     </select>
+    <select id="findall" resultMap="BaseResultMap">
       select  <include refid="Base_Column_List"/>
       from  product
-
+    </select>
+    <select id="selectNameById" resultType="string">
+        select product_name from product where product_id=#{id};
     </select>
 </mapper>
