@@ -15,7 +15,7 @@ import java.util.Map;
  * Created by LZH on 2018/12/6
  */
 @Controller
-@RequestMapping("/f_count_check")
+@RequestMapping({"/f_count_check","/fCountCheck"})
 public class FinalCountCheckController {
 
     @Autowired
@@ -59,11 +59,32 @@ public class FinalCountCheckController {
             map.put("msg","成品计数增加失败");
         }
 
-
-
-
-
         return map;
     }
 
+    @RequestMapping("/edit")
+    public String editPage(){
+        return "qualifyMonitor/f_count_check_edit";
+    }
+    @RequestMapping("/edit_judge")
+    @ResponseBody
+    public String edit(){
+        return null;
+    }
+
+    @RequestMapping("/update_all")
+    @ResponseBody
+    public Map update(FinalCountCheck finalCountCheck){
+        HashMap<Object, Object> map = new HashMap<>();
+        try {
+            finalCountCheckService.edit(finalCountCheck);
+            map.put("status", 200);
+            map.put("msg","success");
+        } catch (Exception e) {
+            e.printStackTrace();
+            map.put("status",500);
+            map.put("msg","成品计数修改失败");
+        }
+        return map;
+    }
 }

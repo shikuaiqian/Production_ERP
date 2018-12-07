@@ -10,4 +10,5 @@ import java.util.Map;
 public interface ProcessCountCheckService {
     Map<Object, Object> findPage(int page, int rows);
     void add(ProcessCountCheck processCountCheck) throws Exception;
+    void edit(ProcessCountCheck processCountCheck) throws Exception;
 }

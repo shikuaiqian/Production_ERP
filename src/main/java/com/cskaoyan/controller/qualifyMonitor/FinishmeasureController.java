@@ -17,7 +17,7 @@ import java.util.Map;
  * Created by LZH on 2018/12/6
  */
 @Controller
-@RequestMapping("/measure")
+@RequestMapping({"/measure","/fMeasureCheck"})
 public class FinishmeasureController {
     @Autowired
     FinishmeasureService finishmeasureService;
@@ -62,5 +62,28 @@ public class FinishmeasureController {
         return map;
     }
 
-
+    @RequestMapping("/edit")
+    public String editPage(){
+        return "qualifyMonitor/measurement_list";
+    }
+    @RequestMapping("/edit_judge")
+    @ResponseBody
+    public String edit(){
+        return null;
+    }
+    @RequestMapping("/update_all")
+    @ResponseBody
+    public Map update(FinalMeasuretCheck finalMeasuretCheck){
+        HashMap<Object, Object> map = new HashMap<>();
+        try {
+            finishmeasureService.edit(finalMeasuretCheck);
+            map.put("status", 200);
+            map.put("msg","success");
+        } catch (Exception e) {
+            e.printStackTrace();
+            map.put("status",500);
+            map.put("msg","成品计量修改失败");
+        }
+        return map;
+    }
 }

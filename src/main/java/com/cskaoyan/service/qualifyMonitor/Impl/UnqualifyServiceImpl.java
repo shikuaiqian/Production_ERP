@@ -43,4 +43,10 @@ public class UnqualifyServiceImpl implements UnqualifyService {
             throw new Exception("添加失败");
         }
     }
+
+    @Override
+    public void edit(UnqualifyApply unqualifyApply) throws Exception {
+        if (unqualifyApplyMapper.updateByPrimaryKeySelective(unqualifyApply)!=1)
+            throw new Exception("修改失败");
+    }
 }

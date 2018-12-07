@@ -77,6 +77,20 @@ public class UnqualifyController {
     public String editPage(){
         return "qualifyMonitor/unqualify_edit";
     }
-
+    @RequestMapping("/update_all")
+    @ResponseBody
+    public Map update(UnqualifyApply unqualifyApply){
+        HashMap<Object, Object> map = new HashMap<>();
+        try {
+            unqualifyService.edit(unqualifyApply);
+            map.put("status", 200);
+            map.put("msg","success");
+        } catch (Exception e) {
+            e.printStackTrace();
+            map.put("status",500);
+            map.put("msg","不合格产品修改失败");
+        }
+        return map;
+    }
 
 }

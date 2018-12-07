@@ -11,4 +11,5 @@ import java.util.Map;
 public interface ProcessMeasureCheckService {
     Map<Object, Object> findPage(int page, int rows);
     void add(ProcessMeasureCheck processMeasureCheck) throws Exception;
+    void edit(ProcessMeasureCheck processMeasureCheck) throws Exception;
 }

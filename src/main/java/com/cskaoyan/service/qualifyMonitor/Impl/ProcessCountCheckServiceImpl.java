@@ -41,4 +41,10 @@ public class ProcessCountCheckServiceImpl implements ProcessCountCheckService {
         if (processCountCheckMapper.insert(processCountCheck)!=1)
             throw new Exception("添加失败");
     }
+
+    @Override
+    public void edit(ProcessCountCheck processCountCheck) throws Exception {
+        if (processCountCheckMapper.updateByPrimaryKeySelective(processCountCheck)!=1)
+            throw new Exception("修改失败");
+    }
 }

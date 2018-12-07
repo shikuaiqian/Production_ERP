@@ -41,4 +41,10 @@ public class FinishmeasureServiceImpl implements FinishmeasureService {
         if (finalMeasuretCheckMapper.insert(finalMeasuretCheck)!=1)
             throw new Exception("添加失败");
     }
+
+    @Override
+    public void edit(FinalMeasuretCheck finalMeasuretCheck) throws Exception {
+        if (finalMeasuretCheckMapper.updateByPrimaryKeySelective(finalMeasuretCheck)!=1)
+            throw new Exception("修改失败");
+    }
 }

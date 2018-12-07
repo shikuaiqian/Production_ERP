@@ -12,4 +12,5 @@ public interface UnqualifyService {
     Map<Object, Object> findPage(int page, int rows);
 
     void add(UnqualifyApply unqualifyApply) throws Exception;
+    void edit(UnqualifyApply unqualifyApply) throws Exception;
 }
