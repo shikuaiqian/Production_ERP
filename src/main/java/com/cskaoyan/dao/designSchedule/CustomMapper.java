@@ -1,9 +1,9 @@
 package com.cskaoyan.dao.designSchedule;
 
-import com.cskaoyan.domain.Custom;
+import com.cskaoyan.domain.designScheduleDomain.Custom;
 import org.apache.ibatis.annotations.Param;
 
-import java.util.List;
+import java.util.*;
 
 public interface CustomMapper {
     int deleteByPrimaryKey(String customId);
@@ -19,6 +19,7 @@ public interface CustomMapper {
     int updateByPrimaryKey(Custom record);
 
     List<Custom>  findall();
-    int count(@Param("searchid") Integer searchid);
-    List<Custom> selectByPage(Integer page, Integer rows, Integer i);
+    int count(@Param("search") Map searchvalue);
+    List<Custom> selectByPage(@Param("param1") Integer page,@Param("param2") Integer rows,
+                              @Param("param3") Map searchvalue);
 }

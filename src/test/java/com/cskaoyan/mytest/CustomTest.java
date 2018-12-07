@@ -1,6 +1,6 @@
 package com.cskaoyan.mytest;
 
-import com.cskaoyan.domain.Custom;
+import com.cskaoyan.domain.designScheduleDomain.Custom;
 import com.cskaoyan.dao.designSchedule.CustomMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;

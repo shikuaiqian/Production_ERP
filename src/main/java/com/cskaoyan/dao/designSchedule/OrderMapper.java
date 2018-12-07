@@ -1,7 +1,8 @@
 package com.cskaoyan.dao.designSchedule;
 
-import com.cskaoyan.domain.Order;
-import com.cskaoyan.domain.Task;
+import com.cskaoyan.domain.designScheduleDomain.Order;
+import com.cskaoyan.domain.designScheduleDomain.OrderVo;
+import java.util.*;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -18,21 +19,9 @@ public interface OrderMapper {
 
     int updateByPrimaryKey(Order record);
 
-    List<Order> selectByPage(int offset, Integer rows, Integer searchValue);
+    List<OrderVo> selectByPage(int offset, Integer rows, Map searchValue);
 
-    int count(@Param("searchid") Integer searchid);
+    int count(@Param("param3") Map searchid);
 
-    interface TaskMapper {
-        int deleteByPrimaryKey(String taskId);
 
-        int insert(Task record);
-
-        int insertSelective(Task record);
-
-        Task selectByPrimaryKey(String taskId);
-
-        int updateByPrimaryKeySelective(Task record);
-
-        int updateByPrimaryKey(Task record);
-    }
 }

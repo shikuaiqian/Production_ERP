@@ -1,18 +1,18 @@
 package com.cskaoyan.service.designSchedule;
 
-import com.cskaoyan.domain.Product;
+import com.cskaoyan.domain.designScheduleDomain.Product;
 
 import java.util.List;
 import java.util.Map;
 
 public interface ProductService {
-    Map<String,Object> selectByPage(Integer page, Integer rows);
+    Map<String,Object> selectByPage(String page, String rows);
 
-    Map<String,Object> selectByIdandPage(Integer searchValue, Integer page, Integer rows);
+    Map<String,Object> selectBysearchValue(Map searchValue, String page, String rows);
 
     void insert(Product product);
 
-    void delete(Integer[] ids);
+    void delete(String[] ids);
 
     void update(Product product);
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cskaoyan.dao.designSchedule.TechnologyMapper">
-  <resultMap id="BaseResultMap" type="com.cskaoyan.domain.Technology">
+  <resultMap id="BaseResultMap" type="com.cskaoyan.domain.designScheduleDomain.Technology">
     <id column="technology_id" jdbcType="VARCHAR" property="technologyId" />
     <result column="technology_name" jdbcType="VARCHAR" property="technologyName" />
     <result column="price" jdbcType="DECIMAL" property="price" />
@@ -26,7 +26,7 @@
     delete from technology
     where technology_id = #{technologyId,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.cskaoyan.domain.Technology">
+  <insert id="insert" parameterType="com.cskaoyan.domain.designScheduleDomain.Technology">
     insert into technology (technology_id, technology_name, price, 
       vital_process_period, standard_capacity, overtime_standard_capacity, 
       overtime_overfulfil_capacity, double_capacity, 
@@ -36,7 +36,7 @@
       #{overtimeOverfulfilCapacity,jdbcType=INTEGER}, #{doubleCapacity,jdbcType=INTEGER}, 
       #{overfulfilCapacity,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.cskaoyan.domain.Technology">
+  <insert id="insertSelective" parameterType="com.cskaoyan.domain.designScheduleDomain.Technology">
     insert into technology
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="technologyId != null">
@@ -97,7 +97,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.cskaoyan.domain.Technology">
+  <update id="updateByPrimaryKeySelective" parameterType="com.cskaoyan.domain.designScheduleDomain.Technology">
     update technology
     <set>
       <if test="technologyName != null">
@@ -127,7 +127,7 @@
     </set>
     where technology_id = #{technologyId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.cskaoyan.domain.Technology">
+  <update id="updateByPrimaryKey" parameterType="com.cskaoyan.domain.designScheduleDomain.Technology">
     update technology
     set technology_name = #{technologyName,jdbcType=VARCHAR},
       price = #{price,jdbcType=DECIMAL},

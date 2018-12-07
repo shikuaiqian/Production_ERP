@@ -1,13 +1,15 @@
-package com.cskaoyan.domain;
+package com.cskaoyan.domain.designScheduleDomain;
 
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Date;
 
 public class Order {
+    @NotNull
     private String orderId;
-
+    @NotNull
     private String customId;
-
+    @NotNull
     private String productId;
 
     private Date orderDate;

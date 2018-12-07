@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cskaoyan.dao.designSchedule.CustomMapper">
-  <resultMap id="BaseResultMap" type="com.cskaoyan.domain.Custom">
+  <resultMap id="BaseResultMap" type="com.cskaoyan.domain.designScheduleDomain.Custom">
     <id column="custom_id" jdbcType="VARCHAR" property="customId" />
     <result column="custom_name" jdbcType="VARCHAR" property="customName" />
     <result column="full_name" jdbcType="VARCHAR" property="fullName" />
@@ -14,8 +14,8 @@
     <result column="note" jdbcType="VARCHAR" property="note" />
   </resultMap>
   <sql id="Base_Column_List">
-    custom_id, custom_name, full_name, address, fax, email, owner_name, owner_tel, status, 
-    note
+    custom_id, custom_name, full_name, address, fax, email, owner_name, owner_tel, custom.status,
+    custom.note
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -27,7 +27,7 @@
     delete from custom
     where custom_id = #{customId,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.cskaoyan.domain.Custom">
+  <insert id="insert" parameterType="com.cskaoyan.domain.designScheduleDomain.Custom">
     insert into custom (custom_id, custom_name, full_name, 
       address, fax, email, 
       owner_name, owner_tel, status, 
@@ -37,7 +37,7 @@
       #{ownerName,jdbcType=VARCHAR}, #{ownerTel,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
       #{note,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.cskaoyan.domain.Custom">
+  <insert id="insertSelective" parameterType="com.cskaoyan.domain.designScheduleDomain.Custom">
     insert into custom
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="customId != null">
@@ -104,7 +104,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.cskaoyan.domain.Custom">
+  <update id="updateByPrimaryKeySelective" parameterType="com.cskaoyan.domain.designScheduleDomain.Custom">
     update custom
     <set>
       <if test="customName != null">
@@ -137,7 +137,7 @@
     </set>
     where custom_id = #{customId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.cskaoyan.domain.Custom">
+  <update id="updateByPrimaryKey" parameterType="com.cskaoyan.domain.designScheduleDomain.Custom">
     update custom
     set custom_name = #{customName,jdbcType=VARCHAR},
       full_name = #{fullName,jdbcType=VARCHAR},
@@ -157,18 +157,26 @@
   <select id="selectByPage" resultMap="BaseResultMap">
     SELECT  <include refid="Base_Column_List"/>  from custom
     <if test="param3!=null">
-      where custom_id=#{param3}
+      <if test="param3.customId!=null">
+        where custom_id=#{param3.customId}
+      </if>
+      <if test="param3.customName!=null">
+        where custom_name=#{param3.customName}
+      </if>
     </if>
-
-  limit
+    limit
     #{param2} offset  #{param1}
   </select>
   <select id="count" resultType="_int">
     select count(*)
     from custom
-    <if test="searchid!=null">
-      where custom_id=#{searchid}
+    <if test="param1!=null">
+    <if test="param1.customId!=null">
+      where custom_id=#{param1.customId}
     </if>
-
+    <if test="param1.customName!=null">
+      where custom_name=#{param1.customName}
+    </if>
+    </if>
   </select>
 </mapper>

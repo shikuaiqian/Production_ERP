@@ -1,6 +1,6 @@
 package com.cskaoyan.controller.designSchedule;
 
-import com.cskaoyan.domain.Order;
+import com.cskaoyan.domain.designScheduleDomain.Order;
 import com.cskaoyan.service.designSchedule.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,16 +26,36 @@ public class OrderController {
 
     @ResponseBody
     @RequestMapping("list")
-    public Map  list(Integer page ,Integer rows)
+    public Map  list(String page ,String rows)
     {
         Map<String ,Object> orders=orderService.selectByPage(page,rows);
         return orders;
     }
     @ResponseBody
     @RequestMapping("search_order_by_orderId")
-    public Map search_Order_by_OrderId(Integer searchValue,Integer page ,Integer rows)
+    public Map search_Order_by_OrderId(String searchValue,String page ,String rows)
     {
-        Map<String ,Object> Orders=orderService.selectByIdandPage(searchValue,page,rows);
+        HashMap<String,Object> ret=new HashMap<>();
+        ret.put("orderId",searchValue);
+        Map<String ,Object> Orders=orderService.selectBySearchValue(ret,page,rows);
+        return Orders;
+    }
+    @ResponseBody
+    @RequestMapping("search_order_by_orderCustom")
+    public Map search_Order_by_CustomName(String searchValue,String page ,String rows)
+    {
+        HashMap<String,Object> ret=new HashMap<>();
+        ret.put("customName",searchValue);
+        Map<String ,Object> Orders=orderService.selectBySearchValue(ret,page,rows);
+        return Orders;
+    }
+    @ResponseBody
+    @RequestMapping("search_order_by_orderProduct")
+    public Map search_Order_by_OrderProduct(String searchValue,String page ,String rows)
+    {
+        HashMap<String,Object> ret=new HashMap<>();
+        ret.put("productName",searchValue);
+        Map<String ,Object> Orders=orderService.selectBySearchValue(ret,page,rows);
         return Orders;
     }
     @ResponseBody
@@ -48,7 +69,7 @@ public class OrderController {
     }
     @ResponseBody
     @RequestMapping("insert")
-    public Map insert(Order order){
+    public Map insert( @Valid Order order){
         HashMap<String ,Object> map=new HashMap<>();
         map.put("msg","ok");
         map.put("status",200);
@@ -69,7 +90,7 @@ public class OrderController {
     }
     @ResponseBody
     @RequestMapping("delete_batch")
-    public Map delete(Integer[] ids)
+    public Map delete(String[] ids)
     {
         HashMap<String ,Object> map=new HashMap<>();
         map.put("msg","ok");
@@ -97,7 +118,7 @@ public class OrderController {
     }
     @ResponseBody
     @RequestMapping("update_all")
-    public Map updateAll(Order Order)
+    public Map updateAll(@Valid Order Order)
     {
         HashMap<String ,Object> map=new HashMap<>();
         map.put("msg","ok");

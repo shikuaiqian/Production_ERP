@@ -1,14 +1,17 @@
-package com.cskaoyan.domain;
+package com.cskaoyan.domain.designScheduleDomain;
+
+import javax.validation.constraints.NotNull;
 
 public class Work {
+    @NotNull
     private String workId;
-
+    @NotNull
     private String processNumber;
-
+@NotNull
     private String productId;
-
+    @NotNull
     private String processId;
-
+    @NotNull
     private String deviceId;
 
     private Integer rating;

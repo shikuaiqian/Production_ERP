@@ -3,7 +3,7 @@ package com.cskaoyan.service.designSchedule.imp;
 
 
 import com.cskaoyan.dao.designSchedule.ProductMapper;
-import com.cskaoyan.domain.Product;
+import com.cskaoyan.domain.designScheduleDomain.Product;
 
 import com.cskaoyan.service.designSchedule.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,9 @@ public class ProductServiceimp implements ProductService {
     @Autowired
     ProductMapper productMapper;
     @Override
-    public Map<String, Object> selectByPage(Integer page, Integer rows) {
+    public Map<String, Object> selectByPage(String page1, String rows1) {
+        int page = Integer.parseInt(page1);
+        int rows = Integer.parseInt(rows1);
         int i = (page - 1) * rows;
         int offset=i>0?i:0;
         List<Product> products = productMapper.selectByPage(offset, rows,null);
@@ -30,7 +32,9 @@ public class ProductServiceimp implements ProductService {
     }
 
     @Override
-    public Map<String, Object> selectByIdandPage(Integer searchValue, Integer page, Integer rows) {
+    public Map<String, Object> selectBysearchValue(Map searchValue, String page1, String rows1) {
+        int page = Integer.parseInt(page1);
+        int rows = Integer.parseInt(rows1);
         int i = (page - 1) * rows;
         int offset=i>0?i:0;
         List<Product> products = productMapper.selectByPage(offset,rows,searchValue);
@@ -47,7 +51,7 @@ public class ProductServiceimp implements ProductService {
     }
 
     @Override
-    public void delete(Integer[] ids) {
+    public void delete(String[] ids) {
         for (int i = 0; i <ids.length ; i++) {
             productMapper.deleteByPrimaryKey(ids[i]+"") ;
         }

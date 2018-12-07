@@ -1,8 +1,11 @@
-package com.cskaoyan.domain;
+package com.cskaoyan.domain.designScheduleDomain;
+
+import javax.validation.constraints.NotNull;
 
 public class Custom {
+    @NotNull
     private String customId;
-
+    @NotNull
     private String customName;
 
     @Override

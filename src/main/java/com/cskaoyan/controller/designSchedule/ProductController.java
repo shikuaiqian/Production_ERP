@@ -1,13 +1,15 @@
 package com.cskaoyan.controller.designSchedule;
 
-import com.cskaoyan.domain.Product;
+import com.cskaoyan.domain.designScheduleDomain.Product;
 import com.cskaoyan.service.designSchedule.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,16 +27,37 @@ public class ProductController {
 
     @ResponseBody
     @RequestMapping("list")
-    public Map list(Integer page , Integer rows)
+    public Map list(String page , String rows)
     {
         Map<String ,Object> producters=productService.selectByPage(page,rows);
         return producters;
     }
     @ResponseBody
     @RequestMapping("search_product_by_productId")
-    public Map search_product_by_productId(Integer searchValue,Integer page ,Integer rows)
+    public Map search_product_by_productId(String searchValue,String page ,String rows)
     {
-        Map<String ,Object> producters=productService.selectByIdandPage(searchValue,page,rows);
+        HashMap<String,String> ret=new HashMap<>();
+        ret.put("productId",searchValue);
+        Map<String ,Object> producters=productService.selectBysearchValue(ret,page,rows);
+        return producters;
+    }
+
+    @ResponseBody
+    @RequestMapping("search_product_by_productName")
+    public Map search_product_by_productName(String searchValue,String page ,String rows)
+    {
+        HashMap<String,String> ret=new HashMap<>();
+        ret.put("productName",searchValue);
+        Map<String ,Object> producters=productService.selectBysearchValue(ret,page,rows);
+        return producters;
+    }
+    @ResponseBody
+    @RequestMapping("search_product_by_productType")
+    public Map search_product_by_productType(String searchValue,String page ,String rows)
+    {
+        HashMap<String,String> ret=new HashMap<>();
+        ret.put("productType",searchValue);
+        Map<String ,Object> producters=productService.selectBysearchValue(ret,page,rows);
         return producters;
     }
     @ResponseBody
@@ -48,10 +71,15 @@ public class ProductController {
     }
     @ResponseBody
     @RequestMapping("insert")
-    public Map insert(Product product){
+    public Map insert(@Valid Product product,BindingResult bindingResult){
+
         HashMap<String ,Object> map=new HashMap<>();
         map.put("msg","ok");
         map.put("status",200);
+        if(bindingResult.hasFieldErrors()) {
+            map.put("msg","必选项不允许空");
+            map.put("status",0);
+        }
         try {
             productService.insert(product);
         }catch (Exception e)
@@ -69,7 +97,7 @@ public class ProductController {
     }
     @ResponseBody
     @RequestMapping("delete_batch")
-    public Map delete(Integer[] ids)
+    public Map delete(String[] ids)
     {
         HashMap<String ,Object> map=new HashMap<>();
         map.put("msg","ok");

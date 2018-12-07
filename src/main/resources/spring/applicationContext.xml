@@ -5,7 +5,11 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <Context:component-scan base-package="com.cskaoyan"/>
+<<<<<<< HEAD
     <mvc:annotation-driven validator="validator"/>
+=======
+    <mvc:annotation-driven conversion-service="service"/>
+>>>>>>> 2e3e6de164162908ca4b899d7a18231472067363
 
 
 
@@ -22,7 +26,7 @@
     </mvc:interceptors>-->
 
     <bean  id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-        <property name="maxUploadSize" value="1024000"/>
+        <property name="maxUploadSize" value="10240000"/>
     </bean>
 
     <bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactory">
@@ -50,5 +54,15 @@
         <property name="dataSource" ref="datasource"/>
     </bean>
     <mvc:resources mapping="/**" location="/WEB-INF/"/>
+<<<<<<< HEAD
 
+=======
+    <bean id="service" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+        <property name="converters">
+            <set>
+                <bean  class="com.cskaoyan.controller.Convert"/>
+            </set>
+        </property>
+    </bean>
+>>>>>>> 2e3e6de164162908ca4b899d7a18231472067363
 </beans>

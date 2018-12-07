@@ -1,6 +1,6 @@
 package com.cskaoyan.service.designSchedule.imp;
 
-import com.cskaoyan.domain.Custom;
+import com.cskaoyan.domain.designScheduleDomain.Custom;
 import com.cskaoyan.dao.designSchedule.CustomMapper;
 import com.cskaoyan.service.designSchedule.CustomService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,9 @@ public class CustomServiecimp  implements CustomService{
     @Autowired
     CustomMapper  customMapper;
     @Override
-    public Map<String, Object> selectByPage(Integer page, Integer rows) {
+    public Map<String, Object> selectByPage(String page1, String rows1) {
+        int page = Integer.parseInt(page1);
+        int rows = Integer.parseInt(rows1);
         int i = (page - 1) * rows;
         int offset=i>0?i:0;
         List<Custom> customs = customMapper.selectByPage(offset, rows,null);
@@ -27,15 +29,9 @@ public class CustomServiecimp  implements CustomService{
     }
 
     @Override
-    public Map<String, Object> selectByIdandPage(Integer searchValue, Integer page, Integer rows) {
-        int i = (page - 1) * rows;
-        int offset=i>0?i:0;
-        List<Custom> customs = customMapper.selectByPage(offset,rows,searchValue);
-        int count = customMapper.count(searchValue);
-        HashMap<String, Object> map = new HashMap<>();
-        map.put("total" ,count);
-        map.put("rows",customs);
-        return map;
+    public Map<String, Object> selectByIdandPage(HashMap<String, String>  searchValue, String page1, String rows1) {
+        Map<String, Object> stringObjectMap = selectBySearchValueandPage(searchValue, page1, rows1);
+        return stringObjectMap;
     }
 
     @Override
@@ -44,7 +40,7 @@ public class CustomServiecimp  implements CustomService{
     }
 
     @Override
-    public void delete(Integer[] ids) {
+    public void delete(String[] ids) {
         for (int i = 0; i <ids.length ; i++) {
             customMapper.deleteByPrimaryKey(ids[i]+"") ;
         }
@@ -58,5 +54,19 @@ public class CustomServiecimp  implements CustomService{
     @Override
     public List<Custom> findAll() {
         return customMapper.findall();
+    }
+
+    @Override
+    public Map<String, Object> selectBySearchValueandPage(HashMap<String, String> ret, String page1, String rows1) {
+        int page = Integer.parseInt(page1);
+        int rows = Integer.parseInt(rows1);
+        int i = (page - 1) * rows;
+        int offset=i>0?i:0;
+        List<Custom> customs = customMapper.selectByPage(offset,rows,ret);
+        int count = customMapper.count(ret);
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("total" ,count);
+        map.put("rows",customs);
+        return map;
     }
 }

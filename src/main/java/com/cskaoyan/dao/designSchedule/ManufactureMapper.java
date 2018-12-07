@@ -1,6 +1,6 @@
 package com.cskaoyan.dao.designSchedule;
 
-import com.cskaoyan.domain.Manufacture;
+import com.cskaoyan.domain.designScheduleDomain.Manufacture;
 
 public interface ManufactureMapper {
     int deleteByPrimaryKey(String manufactureSn);
