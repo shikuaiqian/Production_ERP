@@ -14,8 +14,8 @@
     <result column="note" jdbcType="VARCHAR" property="note" />
   </resultMap>
   <sql id="Base_Column_List">
-    custom_id, custom_name, full_name, address, fax, email, owner_name, owner_tel, status, 
-    note
+    custom_id, custom_name, full_name, address, fax, email, owner_name, owner_tel, custom.status,
+    custom.note
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 

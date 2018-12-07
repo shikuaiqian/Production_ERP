@@ -2,7 +2,7 @@ package com.cskaoyan.domain.designScheduleDomain;
 
 public class WorkVo  extends Work {
     Product product;
-    Device device;
+//    Device device;
    Process process;
 
     public Product getProduct() {
@@ -13,13 +13,13 @@ public class WorkVo  extends Work {
         this.product = product;
     }
 
-    public Device getDevice() {
+   /* public Device getDevice() {
         return device;
     }
 
     public void setDevice(Device device) {
         this.device = device;
-    }
+    }*/
 
     public Process getProcess() {
         return process;

@@ -16,14 +16,36 @@
     <result column="process_id" jdbcType="VARCHAR" property="processId" />
     <result column="device_id" jdbcType="VARCHAR" property="deviceId" />
     <result column="rating" jdbcType="INTEGER" property="rating" />
-    <association property="product" column="product_id" select="com.cskaoyan.dao.designSchedule.ProductMapper.selectByPrimaryKey"/>
-<!--
-    <association property="device" column="device_id" select="com.cskaoyan.dao.deviceManagement.DeviceMapper.selectByPrimaryKey"/>
--->
-    <association property="process" column="process_id" select="com.cskaoyan.dao.designSchedule.ProcessMapper.selectByPrimaryKey"/>
+    <association property="product"  javaType="com.cskaoyan.domain.designScheduleDomain.Product">
+      <result column="product_id" jdbcType="VARCHAR" property="productId" />
+      <result column="product_name" jdbcType="VARCHAR" property="productName" />
+      <result column="product_type" jdbcType="VARCHAR" property="productType" />
+      <result column="prdoductimage" jdbcType="VARCHAR" property="image" />
+      <result column="productnote" jdbcType="VARCHAR" property="note" />
+      <result column="productstatus" jdbcType="INTEGER" property="status" />
+    </association>
+   <!-- <association property="device" javaType="com.cskaoyan.domain.deviceManagement.Device">
+ <result column="device_id" jdbcType="VARCHAR" property="deviceId" />
+    <result column="device_name" jdbcType="VARCHAR" property="deviceName" />
+    <result column="device_type_id" jdbcType="VARCHAR" property="deviceTypeId" />
+    <result column="device_status_id" jdbcType="VARCHAR" property="deviceStatusId" />
+    <result column="device_status" jdbcType="VARCHAR" property="deviceStatus" />
+    <result column="device_purchase_date" jdbcType="TIMESTAMP" property="devicePurchaseDate" />
+    <result column="device_purchase_price" jdbcType="DECIMAL" property="devicePurchasePrice" />
+    <result column="device_manufacture_date" jdbcType="TIMESTAMP" property="deviceManufactureDate" />
+    <result column="device_service_life" jdbcType="TIMESTAMP" property="deviceServiceLife" />
+    <result column="device_keeper_id" jdbcType="VARCHAR" property="deviceKeeperId" />
+    <result column="deviecnote" jdbcType="VARCHAR" property="note" />
+    </association>-->
+    <association property="process" javaType="com.cskaoyan.domain.designScheduleDomain.Process">
+      <result column="process_id" jdbcType="VARCHAR" property="processId" />
+      <result column="technology_plan_id" jdbcType="VARCHAR" property="technologyPlanId" />
+      <result column="sequence" jdbcType="INTEGER" property="sequence" />
+      <result column="quota" jdbcType="INTEGER" property="quota" />
+    </association>
   </resultMap>
   <sql id="Base_Column_List">
-    work_id, process_number, product_id, process_id, device_id, rating
+    work_id, process_number,work.product_id,work.process_id, work.device_id, rating
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -117,9 +139,31 @@
     where work_id = #{workId,jdbcType=VARCHAR}
   </update>
   <select id="selectByPage" resultMap="WorkV0Map">
-    SELECT  <include refid="Base_Column_List"/>  from work
+    SELECT   work_id, process_number,work.product_id,work.process_id, work.device_id, rating,
+    product.product_name, product_type, product.image  as productimage,
+    product.note as productnote,product.status as productstatus ,
+    technology_plan_id, sequence, quota,
+    device_name, device_type_id, device_status_id, device_status, device_purchase_date,
+    device_purchase_price, device_manufacture_date, device_service_life, device_keeper_id,
+    device.note as devicenote
+
+    from work
+    left join product on  product.product_id=work.product_id
+    left join device on   device.device_id=work.device_id
+    left join process   c on   c.process_id=work.process_id
     <if test="param3!=null">
-      where work_id=#{param3}
+      <if test="param3.workId!=null">
+        where work_id=#{param3.workId}
+      </if>
+      <if test="param3.productName!=null">
+        where product_Name=#{param3.productName}
+      </if>
+      <if test="param3.deviceName!=null">
+        where device_name=#{param3.deviceName}
+      </if>
+      <if test="param3.sequence!=null">
+        where sequence=#{param3.sequence}
+      </if>
     </if>
     limit
     #{param2} offset  #{param1}
@@ -127,8 +171,22 @@
   <select id="count" resultType="_int">
     select count(*)
     from work
-    <if test="searchid!=null">
-      where work_id=#{searchid}
+    left join process on   process.process_id=work.process_id
+    left join product on product.product_id=work.product_id
+    left join device on device.device_id=work.device_id
+    <if test="param3!=null">
+      <if test="param3.workId!=null">
+        where work_id=#{param3.workId}
+      </if>
+      <if test="param3.productName!=null">
+        where product_Name=#{param3.productName}
+      </if>
+      <if test="param3.deviceName!=null">
+        where device_name=#{param3.deviceName}
+      </if>
+      <if test="param3.sequence!=null">
+        where sequence=#{param3.sequence}
+      </if>
     </if>
   </select>
 </mapper>

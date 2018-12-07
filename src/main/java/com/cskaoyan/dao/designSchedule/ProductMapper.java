@@ -1,7 +1,7 @@
 package com.cskaoyan.dao.designSchedule;
 
 import com.cskaoyan.domain.designScheduleDomain.Product;
-import org.apache.ibatis.annotations.Param;
+import java.util.*;
 
 import java.util.List;
 
@@ -19,6 +19,6 @@ public interface ProductMapper {
     int updateByPrimaryKey(Product record);
 
     List<Product>  findall();
-    int count(@Param("searchid") String searchid);
-    List<Product> selectByPage(Integer page, Integer rows, String i);
+    int count( Map searchid);
+    List<Product> selectByPage(Integer page, Integer rows, Map i);
 }

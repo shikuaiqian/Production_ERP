@@ -36,7 +36,28 @@ public class ProductController {
     @RequestMapping("search_product_by_productId")
     public Map search_product_by_productId(String searchValue,String page ,String rows)
     {
-        Map<String ,Object> producters=productService.selectByIdandPage(searchValue,page,rows);
+        HashMap<String,String> ret=new HashMap<>();
+        ret.put("productId",searchValue);
+        Map<String ,Object> producters=productService.selectBysearchValue(ret,page,rows);
+        return producters;
+    }
+
+    @ResponseBody
+    @RequestMapping("search_product_by_productName")
+    public Map search_product_by_productName(String searchValue,String page ,String rows)
+    {
+        HashMap<String,String> ret=new HashMap<>();
+        ret.put("productName",searchValue);
+        Map<String ,Object> producters=productService.selectBysearchValue(ret,page,rows);
+        return producters;
+    }
+    @ResponseBody
+    @RequestMapping("search_product_by_productType")
+    public Map search_product_by_productType(String searchValue,String page ,String rows)
+    {
+        HashMap<String,String> ret=new HashMap<>();
+        ret.put("productType",searchValue);
+        Map<String ,Object> producters=productService.selectBysearchValue(ret,page,rows);
         return producters;
     }
     @ResponseBody

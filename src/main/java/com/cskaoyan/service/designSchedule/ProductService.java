@@ -8,7 +8,7 @@ import java.util.Map;
 public interface ProductService {
     Map<String,Object> selectByPage(String page, String rows);
 
-    Map<String,Object> selectByIdandPage(String searchValue, String page, String rows);
+    Map<String,Object> selectBysearchValue(Map searchValue, String page, String rows);
 
     void insert(Product product);
 

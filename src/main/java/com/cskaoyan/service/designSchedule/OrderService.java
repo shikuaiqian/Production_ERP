@@ -7,7 +7,7 @@ import java.util.Map;
 public interface OrderService {
     Map<String,Object> selectByPage(String page, String rows);
 
-    Map<String,Object> selectByIdandPage(String searchValue, String page, String rows);
+    Map<String,Object> selectBySearchValue(Map searchValue, String page, String rows);
 
     void insert(Order order);
 

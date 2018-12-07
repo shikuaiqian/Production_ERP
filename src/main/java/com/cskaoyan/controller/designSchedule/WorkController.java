@@ -34,10 +34,38 @@ public class WorkController {
     @RequestMapping("search_work_by_workId")
     public Map search_work_by_workId(String searchValue,String page ,String rows)
     {
-        Map<String ,Object> workers=workService.selectByIdandPage(searchValue,page,rows);
+        HashMap<String,String> ret=new HashMap<>();
+        ret.put("workId",searchValue);
+        Map<String ,Object> workers=workService.selectBysearchValue(ret,page,rows);
         return workers;
     }
-
+    @ResponseBody
+    @RequestMapping("search_work_by_workProduct")
+    public Map search_work_by_workProduct(String searchValue,String page ,String rows)
+    {
+        HashMap<String,String> ret=new HashMap<>();
+        ret.put("productName",searchValue);
+        Map<String ,Object> workers=workService.selectBysearchValue(ret,page,rows);
+        return workers;
+    }
+    @ResponseBody
+    @RequestMapping("search_work_by_workDevice")
+    public Map search_work_by_workDevice(String searchValue,String page ,String rows)
+    {
+        HashMap<String,String> ret=new HashMap<>();
+        ret.put("deviceName",searchValue);
+        Map<String ,Object> workers=workService.selectBysearchValue(ret,page,rows);
+        return workers;
+    }
+    @ResponseBody
+    @RequestMapping("search_work_by_workProcess")
+    public Map search_work_by_workProcess(String searchValue,String page ,String rows)
+    {
+        HashMap<String,String> ret=new HashMap<>();
+        ret.put("sequence",searchValue);
+        Map<String ,Object> workers=workService.selectBysearchValue(ret,page,rows);
+        return workers;
+    }
 
     @ResponseBody
     @RequestMapping("add_judge")

@@ -3,7 +3,7 @@ package com.cskaoyan.dao.designSchedule;
 import com.cskaoyan.domain.designScheduleDomain.Work;
 import org.apache.ibatis.annotations.Param;
 
-import java.util.List;
+import java.util.*;
 
 public interface WorkMapper {
     int deleteByPrimaryKey(String workId);
@@ -18,7 +18,7 @@ public interface WorkMapper {
 
     int updateByPrimaryKey(Work record);
 
-    int count(@Param("searchid") Object o);
+    int count(@Param("param3") Map o);
 
-    List<Work> selectByPage(int offset, Integer rows, Object o);
+    List<Work> selectByPage(int offset, Integer rows, Map o);
 }

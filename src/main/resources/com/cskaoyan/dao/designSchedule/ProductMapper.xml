@@ -10,7 +10,7 @@
     <result column="status" jdbcType="INTEGER" property="status" />
   </resultMap>
   <sql id="Base_Column_List">
-    product_id, product_name, product_type, image, note, status
+   product.product_id, product.product_name, product_type, product.image, note,product.status
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
@@ -105,8 +105,16 @@
   </update>
   <select id="selectByPage" resultMap="BaseResultMap">
       SELECT  <include refid="Base_Column_List"/>  from product
-      <if test="param3!=null">
-        where product_id=#{param3}
+     <if test="param3!=null">
+           <if test="param3.productId!=null">
+             where product_id=#{param3.productId}
+           </if>
+           <if test="param3.productName!=null">
+             where product_name=#{param3.productName}
+           </if>
+           <if test="param3.productType!=null">
+                        where product_type=#{param3.productType}
+            </if>
       </if>
   
     limit
@@ -115,12 +123,22 @@
     <select id="count" resultType="_int">
       select count(*)
       from product
-      <if test="searchid!=null">
-        where product_id=#{searchid}
-      </if>
+      <if test="param3!=null">
+                 <if test="param.productId!=null">
+                   where product_id=#{param.productId}
+                 </if>
+                 <if test="param3.productName!=null">
+                   where product_name=#{param.productName}
+                 </if>
+                 <if test="param3.productType!=null">
+                    where product_type=#{param.productType}
+                  </if>
+            </if>
+
   </select>
   <select id="findall" resultMap="BaseResultMap">
       select  <include refid="Base_Column_List"/>
       from  product
+
     </select>
 </mapper>

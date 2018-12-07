@@ -29,8 +29,26 @@
     <result column="image" jdbcType="VARCHAR" property="image" />
     <result column="file" jdbcType="VARCHAR" property="file" />
     <result column="status" jdbcType="INTEGER" property="status" />
-  <association property="custom" column="custom_id" select="com.cskaoyan.dao.designSchedule.CustomMapper.selectByPrimaryKey"/>
-    <association property="product" column="product_id" select="com.cskaoyan.dao.designSchedule.ProductMapper.selectByPrimaryKey"/>
+  <association property="custom"  javaType="com.cskaoyan.domain.designScheduleDomain.Custom">
+    <result column="custom_id" jdbcType="VARCHAR" property="customId" />
+    <result column="custom_name" jdbcType="VARCHAR" property="customName" />
+    <result column="full_name" jdbcType="VARCHAR" property="fullName" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="fax" jdbcType="VARCHAR" property="fax" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="owner_name" jdbcType="VARCHAR" property="ownerName" />
+    <result column="owner_tel" jdbcType="VARCHAR" property="ownerTel" />
+    <result column="customstatus" jdbcType="INTEGER" property="status" />
+    <result column="customnote" jdbcType="VARCHAR" property="note" />
+  </association>
+    <association property="product"  javaType="com.cskaoyan.domain.designScheduleDomain.Product">
+      <result column="product_id" jdbcType="VARCHAR" property="productId" />
+      <result column="product_name" jdbcType="VARCHAR" property="productName" />
+      <result column="product_type" jdbcType="VARCHAR" property="productType" />
+      <result column="prdoductimage" jdbcType="VARCHAR" property="image" />
+      <result column="productnote" jdbcType="VARCHAR" property="note" />
+      <result column="productstatus" jdbcType="INTEGER" property="status" />
+    </association>
   </resultMap>
   <sql id="Base_Column_List">
     order_id, c_order.custom_id, c_order.product_id, order_date, request_date, c_order.note, c_order.quantity,
@@ -193,19 +211,43 @@
     where order_id = #{orderId,jdbcType=VARCHAR}
   </update>
   <select id="selectByPage" resultMap="VoMap">
-    SELECT  <include refid="Base_Column_List"/>  from c_order
+    SELECT  <include refid="Base_Column_List"/>  ,
+    product.product_name, product_type, product.image  as productimage,
+    product.note as productnote,product.status as productstatus ,custom_name, full_name, address, fax,
+    email, owner_name, owner_tel, custom.status  as customstatus,
+    custom.note as customnote
+    from c_order
+    left join custom on custom.custom_id=c_order.custom_id
+    left join product on product.product_id=c_order.product_id
     <if test="param3!=null">
-      where order_id=#{param3}
+      <if test="param3.customName!=null">
+        where custom_name=#{param3.customName}
+      </if>
+      <if test="param3.orderId!=null">
+        where order_id=#{param3.orderId}
+      </if>
+      <if test="param3.productName!=null">
+        where product_name=#{param3.productName}
+      </if>
     </if>
-
     limit
     #{param2} offset  #{param1}
   </select>
   <select id="count" resultType="_int">
     select count(*)
     from c_order
-    <if test="searchid!=null">
-      where order_id=#{searchid}
+    left join custom on custom.custom_id=c_order.custom_id
+    left join product on product.product_id=c_order.product_id
+    <if test="param!=null">
+      <if test="param.customName!=null">
+        where custom_name=#{param3.customName}
+      </if>
+      <if test="param.orderId!=null">
+        where order_id=#{param3.orderId}
+      </if>
+      <if test="param.productName!=null">
+        where product_name=#{param3.productName}
+      </if>
     </if>
 
   </select>

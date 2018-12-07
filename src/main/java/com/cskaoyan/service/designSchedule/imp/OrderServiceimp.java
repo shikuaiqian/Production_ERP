@@ -30,7 +30,7 @@ public class OrderServiceimp  implements OrderService{
     }
 
     @Override
-    public Map<String, Object> selectByIdandPage(String searchValue, String page1, String rows1) {
+    public Map<String, Object> selectBySearchValue(Map searchValue, String page1, String rows1) {
         int page = Integer.parseInt(page1);
         int rows = Integer.parseInt(rows1);
         int i = (page - 1) * rows;
