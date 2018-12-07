@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/order")
+@RequestMapping("order")
 public class OrderController {
     @Autowired
     OrderService orderService;

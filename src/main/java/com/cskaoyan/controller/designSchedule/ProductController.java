@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 @Controller
-@RequestMapping("/product")
+@RequestMapping("product")
 public class ProductController {
     @Autowired
     ProductService productService;

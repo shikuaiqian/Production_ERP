@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@RequestMapping("/custom")
+@RequestMapping("custom")
 @Controller
 public class CustomController {
     @Autowired

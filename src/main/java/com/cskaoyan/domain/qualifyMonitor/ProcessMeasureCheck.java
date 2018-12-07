@@ -1,5 +1,7 @@
 package com.cskaoyan.domain.qualifyMonitor;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class ProcessMeasureCheck {
@@ -9,6 +11,7 @@ public class ProcessMeasureCheck {
 
     private String checkItem;
 
+    @DateTimeFormat(pattern = "yyyy-MM-yy")
     private Date cdate;
 
     private String measureData;
