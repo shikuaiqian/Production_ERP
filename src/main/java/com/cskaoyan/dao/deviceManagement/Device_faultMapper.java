@@ -22,4 +22,11 @@ public interface Device_faultMapper {
     String selectTableAmount();
 
     List<Device_faultVo> selectByLimitOffset(@Param("limit") int limit, @Param("offset") int offset);
+
+//    没有name属性只有id
+    List<Device_fault> getIdMappingName();
+
+    List<Device_faultVo> selectByMultiCondition(int limit, int offset, Device_faultVo deviceFaultVo);
+
+    String selectTableAmountByMultiCondition(Device_faultVo deviceFaultVo);
 }

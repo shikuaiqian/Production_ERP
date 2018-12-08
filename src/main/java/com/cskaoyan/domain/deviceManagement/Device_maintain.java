@@ -1,5 +1,7 @@
 package com.cskaoyan.domain.deviceManagement;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -10,6 +12,7 @@ public class Device_maintain {
 
     private String deviceMaintainEmpId;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date deviceMaintainDate;
 
     private String deviceMaintainResult;

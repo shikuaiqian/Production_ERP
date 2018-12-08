@@ -137,6 +137,12 @@
     from device_type
   </select>
 
+  <select id="getIdMappingName"  resultMap="BaseResultMap">
+    select
+    device_type_id,device_type_name
+    from device_type
+  </select>
+
   <select id="selectByLimitOffset" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />

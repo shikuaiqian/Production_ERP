@@ -31,7 +31,7 @@
 	
 	<c:forEach items="${sessionScope.sysPermissionList}" var="per" >
 		<c:if test="${per=='deviceCheck:add'}">
-		    <div style="float: left;">  
+		    <div style="float: left;">
 		        <a href="#" class="easyui-linkbutton" plain="true" icon="icon-add" onclick="deviceCheck_add()">
 		        	新增</a>  
 		    </div>  

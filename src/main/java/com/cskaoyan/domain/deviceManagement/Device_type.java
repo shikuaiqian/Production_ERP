@@ -1,5 +1,8 @@
 package com.cskaoyan.domain.deviceManagement;
 
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Device_type {
@@ -17,6 +20,7 @@ public class Device_type {
 
     private Integer deviceTypeQuantity;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date deviceTypeWarranty;
 
     public String getDeviceTypeId() {

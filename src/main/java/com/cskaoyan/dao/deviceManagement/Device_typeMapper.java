@@ -21,4 +21,10 @@ public interface Device_typeMapper {
     String selectTableAmount();
 
     List<Device_type> selectByLimitOffset(@Param("limit") int limit, @Param("offset") int offset);
+
+    List<Device_type> getIdMappingName();
+
+    List<Device_type> selectByMultiCondition(int limit, int offset, Device_type deviceType);
+
+    String selectTableAmountByMultiCondition(Device_type deviceType);
 }

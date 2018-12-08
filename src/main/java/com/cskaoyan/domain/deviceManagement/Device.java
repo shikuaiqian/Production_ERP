@@ -1,5 +1,7 @@
 package com.cskaoyan.domain.deviceManagement;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -14,12 +16,15 @@ public class Device {
 
     private String deviceStatus;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date devicePurchaseDate;
 
     private BigDecimal devicePurchasePrice;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date deviceManufactureDate;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date deviceServiceLife;
 
     private String deviceKeeperId;
@@ -113,5 +118,22 @@ public class Device {
 
     public void setNote(String note) {
         this.note = note == null ? null : note.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "Device{" +
+                "deviceId='" + deviceId + '\'' +
+                ", deviceName='" + deviceName + '\'' +
+                ", deviceTypeId='" + deviceTypeId + '\'' +
+                ", deviceStatusId='" + deviceStatusId + '\'' +
+                ", deviceStatus='" + deviceStatus + '\'' +
+                ", devicePurchaseDate=" + devicePurchaseDate +
+                ", devicePurchasePrice=" + devicePurchasePrice +
+                ", deviceManufactureDate=" + deviceManufactureDate +
+                ", deviceServiceLife=" + deviceServiceLife +
+                ", deviceKeeperId='" + deviceKeeperId + '\'' +
+                ", note='" + note + '\'' +
+                '}';
     }
 }

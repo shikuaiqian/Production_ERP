@@ -113,6 +113,13 @@
     from device_fault
   </select>
 
+  <!--没有name属性-->
+  <select id="getIdMappingName"  resultMap="BaseResultMap">
+    select
+    device_fault_id
+    from device_fault
+  </select>
+
   <resultMap id="VoResultMap" type="com.cskaoyan.domain.deviceManagement.vo.Device_faultVo">
     <id column="device_fault_id" jdbcType="VARCHAR" property="deviceFaultId" />
     <result column="device_id" jdbcType="VARCHAR" property="deviceId" />

@@ -174,6 +174,12 @@
     from device
   </select>
 
+  <select id="getIdMappingName"  resultMap="BaseResultMap">
+    select
+    device_id,device_name
+    from device
+  </select>
+
   <select id="selectDeviceNameByPrimaryKey" parameterType="java.lang.String" resultType="string">
     select
     device_name
@@ -193,16 +199,66 @@
     <result column="device_service_life" jdbcType="TIMESTAMP" property="deviceServiceLife" />
     <result column="device_keeper_id" jdbcType="VARCHAR" property="deviceKeeperId" />
     <result column="note" jdbcType="VARCHAR" property="note" />
-    <association column="device_type_id" property="deviceTypeName"
-                 select="com.cskaoyan.dao.deviceManagement.Device_typeMapper.selectTypeNameByPrimaryKey" />
+    <association column="device_type_id" property="deviceTypeName" javaType="java.lang.String">
+      <result column="device_type_name" property="deviceTypeName"/>
+    </association>
+    <association column="device_keeper_id" property="deviceKeeper" javaType="java.lang.String">
+      <result column="emp_name" property="deviceKeeper"/>
+    </association>
+
+   <!-- <association column="device_type_id" property="deviceTypeName"
+                 select="com.cskaoyan.dao.deviceManagement.Device_typeMapper.selectTypeNameByPrimaryKey" />-->
     <!--<association column="device_keeper_id" property="deviceKeeper"
                  select="???等待employee表接口" />-->
   </resultMap>
+
+  <sql id="select_Column_List">
+    device_id, device_name, d.device_type_id, device_status_id, device_status, device_purchase_date,
+    device_purchase_price, device_manufacture_date, device_service_life, d.device_keeper_id,
+    note
+  </sql>
   <select id="selectByLimitOffset" parameterType="java.lang.Integer" resultMap="VoResultMap">
     select
-    <include refid="Base_Column_List" />
-    from device
+    <include refid="select_Column_List" />,device_type_name,emp_name
+    from device d
+    LEFT JOIN device_type dt ON d.device_type_id = dt.device_type_id
+    LEFT JOIN employee em ON d.device_keeper_id = em.emp_id
     limit #{limit,jdbcType=NUMERIC} offset #{offset,jdbcType=NUMERIC}
   </select>
 
+  <sql id="select_MultiCondition">
+    <where>
+      <if test="SearchVo.deviceId != null">
+        <bind name="pattern" value="'%' + SearchVo.deviceId + '%'" />
+        device_id like #{pattern}
+      </if>
+      <if test="SearchVo.deviceName != null">
+        <bind name="pattern" value="'%' + SearchVo.deviceName + '%'" />
+        and device_name like #{pattern}
+      </if>
+      <if test="SearchVo.deviceTypeName != null">
+        <bind name="pattern" value="'%' + SearchVo.deviceTypeName + '%'" />
+        and device_type_name like #{pattern}
+      </if>
+    </where>
+  </sql>
+
+  <select id="selectByMultiCondition"  resultMap="VoResultMap">
+    select
+    <include refid="select_Column_List" />,device_type_name,emp_name
+    from device d
+    LEFT JOIN device_type dt ON d.device_type_id = dt.device_type_id
+    LEFT JOIN employee em ON d.device_keeper_id = em.emp_id
+    <include refid="select_MultiCondition" />
+    limit #{limit,jdbcType=NUMERIC} offset #{offset,jdbcType=NUMERIC}
+  </select>
+
+  <select id="selectTableAmountByMultiCondition"  resultType="string">
+    select
+    count(device_id)
+    from device d
+    LEFT JOIN device_type dt ON d.device_type_id = dt.device_type_id
+    LEFT JOIN employee em ON d.device_keeper_id = em.emp_id
+    <include refid="select_MultiCondition" />
+  </select>
 </mapper>

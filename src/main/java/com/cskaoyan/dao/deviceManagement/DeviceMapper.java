@@ -22,4 +22,11 @@ public interface DeviceMapper {
     String selectTableAmount();
 
     List<DeviceVo> selectByLimitOffset(@Param("limit") int limit,@Param("offset") int offset);
+
+    List<Device> getIdMappingName();
+
+    List<DeviceVo> selectByMultiCondition(@Param("limit") int limit
+            ,@Param("offset") int offset, @Param("SearchVo")DeviceVo deviceVo);
+
+    String selectTableAmountByMultiCondition(@Param("SearchVo")DeviceVo deviceVo);
 }

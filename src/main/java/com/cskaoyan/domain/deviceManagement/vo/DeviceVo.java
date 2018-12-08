@@ -22,4 +22,12 @@ public class DeviceVo extends Device {
     public void setDeviceKeeper(String deviceKeeper) {
         this.deviceKeeper = deviceKeeper == null ? null : deviceKeeper.trim();
     }
+
+    @Override
+    public String toString() {
+        return "DeviceVo{" +
+                "deviceTypeName='" + deviceTypeName + '\'' +
+                ", deviceKeeper='" + deviceKeeper + '\'' +
+                '}';
+    }
 }

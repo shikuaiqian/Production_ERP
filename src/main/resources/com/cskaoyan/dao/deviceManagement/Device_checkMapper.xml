@@ -113,6 +113,12 @@
     from device_check
   </select>
 
+  <select id="getIdMappingName"  resultMap="BaseResultMap">
+    select
+    device_check_id
+    from device_check
+  </select>
+
   <resultMap id="VoResultMap" type="com.cskaoyan.domain.deviceManagement.vo.Device_checkVo">
     <id column="device_check_id" jdbcType="VARCHAR" property="deviceCheckId" />
     <result column="device_id" jdbcType="VARCHAR" property="deviceId" />

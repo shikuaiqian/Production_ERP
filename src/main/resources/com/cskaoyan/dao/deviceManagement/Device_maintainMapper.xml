@@ -126,6 +126,12 @@
     from device_maintain
   </select>
 
+  <select id="getIdMappingName"   resultMap="BaseResultMap">
+    select
+    device_maintain_id
+    from device_maintain
+  </select>
+
   <resultMap id="VoResultMap" type="com.cskaoyan.domain.deviceManagement.vo.Device_maintainVo">
     <id column="device_maintain_id" jdbcType="VARCHAR" property="deviceMaintainId" />
     <result column="device_fault_id" jdbcType="VARCHAR" property="deviceFaultId" />

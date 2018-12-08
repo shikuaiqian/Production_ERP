@@ -1,5 +1,7 @@
 package com.cskaoyan.domain.deviceManagement;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Device_check {
@@ -7,11 +9,9 @@ public class Device_check {
 
     private String deviceId;
 
-
-
     private String deviceCheckEmpId;
 
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date deviceCheckDate;
 
     private String deviceCheckResult;

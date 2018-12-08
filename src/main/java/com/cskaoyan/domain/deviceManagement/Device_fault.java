@@ -1,5 +1,7 @@
 package com.cskaoyan.domain.deviceManagement;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Device_fault {
@@ -11,6 +13,7 @@ public class Device_fault {
 
     private String deviceFaultDetail;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date deviceFaultDate;
 
     private String deviceFaultMaintenance;
