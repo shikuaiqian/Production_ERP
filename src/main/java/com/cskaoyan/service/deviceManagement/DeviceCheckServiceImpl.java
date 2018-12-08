@@ -88,6 +88,16 @@ public class DeviceCheckServiceImpl implements DeviceCheckService {
     }
 
     @Override
+    public ChangeResult updateCheckResult(String deviceCheckId, String deviceCheckResult) {
+        ChangeResult changeResult = new ChangeResult("200", "OK", null);
+        Device_check deviceCheck = new Device_check();
+        deviceCheck.setDeviceCheckId(deviceCheckId);
+        deviceCheck.setDeviceCheckResult(deviceCheckResult);
+        deviceCheckMapper.updateByPrimaryKeySelective(deviceCheck);
+        return changeResult;
+    }
+
+    @Override
     public ChangeResult update(Device_check deviceCheck) {
         ChangeResult changeResult = new ChangeResult("200", "OK", null);
             deviceCheckMapper.updateByPrimaryKey(deviceCheck);
