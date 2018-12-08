@@ -20,8 +20,6 @@
     <mvc:annotation-driven conversion-service="service"  validator="validator"/>
 
 
-
-
     <bean id="viewResolver"	class="org.springframework.web.servlet.view.UrlBasedViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
         <property name="prefix" value="/WEB-INF/jsp/" />
@@ -63,6 +61,7 @@
     <bean class="org.springframework.jdbc.datasource.DataSourceTransactionManager" id="transactionManager">
         <property name="dataSource" ref="datasource"/>
     </bean>
+
     <mvc:resources mapping="/**" location="/WEB-INF/"/>
     <bean id="service" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
         <property name="converters">
