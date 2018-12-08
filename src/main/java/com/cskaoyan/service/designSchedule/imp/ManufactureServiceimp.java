@@ -66,4 +66,9 @@ public class ManufactureServiceimp implements ManufactureService {
     public List<Manufacture> findAll() {
         return manufactureMapper.findAll();
     }
+
+    @Override
+    public Manufacture getManufactureById(String manufactureId) {
+        return manufactureMapper.selectByPrimaryKey(manufactureId);
+    }
 }

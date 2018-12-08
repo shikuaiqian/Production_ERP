@@ -17,4 +17,6 @@ public interface ProductService {
     void update(Product product);
 
     List<Product> findAll();
+
+    Product getProductById(String productId);
 }

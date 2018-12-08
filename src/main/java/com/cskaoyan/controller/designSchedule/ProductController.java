@@ -5,6 +5,7 @@ import com.cskaoyan.service.designSchedule.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -147,5 +148,11 @@ public class ProductController {
     {
         List<Product> products= productService.findAll();
         return products;
+    }
+
+    @ResponseBody
+    @RequestMapping("/get/{productId}")
+    public Product getCustomById(@PathVariable String productId){
+        return  productService.getProductById(productId);
     }
 }

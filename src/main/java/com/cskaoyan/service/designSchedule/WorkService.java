@@ -17,4 +17,6 @@ public interface WorkService  {
     void update(Work work);
 
     List<Work> findAll();
+
+    Work getWorkIdById(String workId);
 }

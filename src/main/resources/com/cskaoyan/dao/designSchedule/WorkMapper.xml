@@ -24,7 +24,7 @@
       <result column="productnote" jdbcType="VARCHAR" property="note" />
       <result column="productstatus" jdbcType="INTEGER" property="status" />
     </association>
-    <association property="device" javaType="com.cskaoyan.domain.deviceManagement.Device">
+    <!--<association property="device" javaType="com.cskaoyan.domain.deviceManagement.Device">
  <result column="device_id" jdbcType="VARCHAR" property="deviceId" />
     <result column="device_name" jdbcType="VARCHAR" property="deviceName" />
     <result column="device_type_id" jdbcType="VARCHAR" property="deviceTypeId" />
@@ -42,7 +42,7 @@
       <result column="technology_plan_id" jdbcType="VARCHAR" property="technologyPlanId" />
       <result column="sequence" jdbcType="INTEGER" property="sequence" />
       <result column="quota" jdbcType="INTEGER" property="quota" />
-    </association>
+    </association>-->
   </resultMap>
   <sql id="Base_Column_List">
     work_id, process_number,work.product_id,work.process_id, work.device_id, rating

@@ -17,4 +17,6 @@ public interface OrderService {
     void update(Order order);
 
     List<Order> findAll();
+
+    Order getOrderById(String orderId);
 }

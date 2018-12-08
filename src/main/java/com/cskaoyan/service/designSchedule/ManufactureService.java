@@ -18,4 +18,6 @@ public interface ManufactureService {
     void update(Manufacture manufacture);
 
     List<Manufacture> findAll();
+
+    Manufacture getManufactureById(String manufactureId);
 }

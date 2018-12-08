@@ -23,4 +23,6 @@ public   interface CustomService {
     List<Custom> findAll();
 
     Map<String,Object> selectBySearchValueandPage(HashMap<String, String> ret, String page, String rows);
+
+    Custom getCustomById(String customId);
 }

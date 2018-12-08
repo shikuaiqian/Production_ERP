@@ -15,4 +15,6 @@ public interface TaskService {
     Map<String,Object> selectBySearchValue(Map ret, String page, String rows);
 
     Map<String,Object> selectByPage(String page, String rows);
+
+    Task getTaskIdById(String taskId);
 }

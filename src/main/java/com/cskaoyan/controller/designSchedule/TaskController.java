@@ -4,6 +4,7 @@ import com.cskaoyan.domain.designScheduleDomain.Task;
 import com.cskaoyan.service.designSchedule.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -133,5 +134,11 @@ public class TaskController {
             map.put("status",0);
         }
         return map;
+    }
+
+    @ResponseBody
+    @RequestMapping("/get/{taskId}")
+    public Task getCustomById(@PathVariable String taskId){
+        return  taskService.getTaskIdById(taskId);
     }
 }

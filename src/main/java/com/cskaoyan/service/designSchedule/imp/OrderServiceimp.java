@@ -64,4 +64,9 @@ public class OrderServiceimp  implements OrderService{
     public List<Order> findAll() {
         return orderMapper.findAll();
     }
+
+    @Override
+    public Order getOrderById(String orderId) {
+        return orderMapper.selectByPrimaryKey(orderId);
+    }
 }

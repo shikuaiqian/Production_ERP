@@ -61,6 +61,11 @@ public class WorkServiceimp implements WorkService{
     }
 
     @Override
+    public Work getWorkIdById(String workId) {
+        return workMapper.selectByPrimaryKey(workId);
+    }
+
+    @Override
     public List<Work> findAll() {
         return workMapper.findAll();
     }

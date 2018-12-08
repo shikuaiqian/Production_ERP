@@ -16,6 +16,12 @@ public class TaskServiceimp implements TaskService {
 
     @Autowired
     TaskMapper taskMapper;
+
+    @Override
+    public Task getTaskIdById(String taskId) {
+        return taskMapper.selectByPrimaryKey(taskId);
+    }
+
     @Override
     public Map<String, Object> selectByPage(String page1, String rows1) {
         int page = Integer.parseInt(page1);
