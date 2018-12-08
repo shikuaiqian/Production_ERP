@@ -38,4 +38,7 @@ public interface DeviceListService {
 
     String tableSizeByDeviceTypeName(String searchValue);
 
+    Device getObjectByPrimaryKey(String primaryKey);
+
+    ChangeResult updateNote(String deviceId, String note);
 }

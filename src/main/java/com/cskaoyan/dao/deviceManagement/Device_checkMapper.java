@@ -26,7 +26,8 @@ public interface Device_checkMapper {
     //    没有name属性只有id
     List<Device_check> getIdMappingName();
 
-    List<Device_checkVo> selectByMultiCondition(int limit, int offset, Device_checkVo deviceCheckVo);
+    List<Device_checkVo> selectByMultiCondition(@Param("limit") int limit
+            , @Param("offset") int offset, @Param("SearchVo")Device_checkVo deviceCheckVo);
 
-    String selectTableAmountByMultiCondition(Device_checkVo deviceCheckVo);
+    String selectTableAmountByMultiCondition(@Param("SearchVo")Device_checkVo deviceCheckVo);
 }

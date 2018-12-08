@@ -110,4 +110,14 @@ public class DeviceMaintainServiceImpl implements DeviceMaintainService {
         deviceMaintainVo.setDeviceFaultId(searchValue);
         return deviceMaintainMapper.selectTableAmountByMultiCondition(deviceMaintainVo);
     }
+
+    @Override
+    public ChangeResult updateNote(String deviceMaintainId, String note) {
+        ChangeResult changeResult = new ChangeResult("200", "OK", null);
+        Device_maintain deviceMaintain = new Device_maintain();
+        deviceMaintain.setDeviceMaintainId(deviceMaintainId);
+        deviceMaintain.setNote(note);
+        deviceMaintainMapper.updateByPrimaryKeySelective(deviceMaintain);
+        return changeResult;
+    }
 }

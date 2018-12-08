@@ -26,7 +26,8 @@ public interface Device_faultMapper {
 //    没有name属性只有id
     List<Device_fault> getIdMappingName();
 
-    List<Device_faultVo> selectByMultiCondition(int limit, int offset, Device_faultVo deviceFaultVo);
+    List<Device_faultVo> selectByMultiCondition(@Param("limit") int limit
+            , @Param("offset") int offset, @Param("SearchVo")Device_faultVo deviceFaultVo);
 
-    String selectTableAmountByMultiCondition(Device_faultVo deviceFaultVo);
+    String selectTableAmountByMultiCondition(@Param("SearchVo")Device_faultVo deviceFaultVo);
 }

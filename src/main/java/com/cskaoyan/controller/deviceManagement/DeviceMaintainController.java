@@ -34,6 +34,13 @@ public class DeviceMaintainController {
         return changeResult;
     }
 
+    @RequestMapping("/update_note")
+    @ResponseBody
+    public ChangeResult updateNote(String deviceMaintainId,String note) {
+        ChangeResult changeResult = deviceMaintainService.updateNote(deviceMaintainId,note);
+        return changeResult;
+    }
+
     @RequestMapping("/delete_batch")
     @ResponseBody
     public ChangeResult deleteBatch(@RequestParam("ids") List<String> deleteList) {

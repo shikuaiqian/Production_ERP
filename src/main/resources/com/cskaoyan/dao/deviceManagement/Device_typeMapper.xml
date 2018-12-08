@@ -150,10 +150,40 @@
     limit #{limit,jdbcType=NUMERIC} offset #{offset,jdbcType=NUMERIC}
   </select>
 
-  <select id="selectTypeNameByPrimaryKey" parameterType="java.lang.String" resultType="string">
+
+  <sql id="select_MultiCondition">
+    <where>
+      <if test="SearchVo.deviceTypeName != null">
+        <bind name="pattern" value="'%' + SearchVo.deviceTypeName + '%'" />
+        device_type_name like #{pattern}
+      </if>
+      <if test="SearchVo.deviceTypeId != null">
+        <bind name="pattern" value="'%' + SearchVo.deviceTypeId + '%'" />
+        and device_type_id like #{pattern}
+      </if>
+    </where>
+  </sql>
+
+  <select id="selectByMultiCondition"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from device_type
+    <include refid="select_MultiCondition" />
+    limit #{limit,jdbcType=NUMERIC} offset #{offset,jdbcType=NUMERIC}
+  </select>
+
+  <select id="selectTableAmountByMultiCondition"  resultType="string">
+    select
+    count(device_type_id)
+    from device_type
+    <include refid="select_MultiCondition" />
+  </select>
+
+
+  <!--<select id="selectTypeNameByPrimaryKey" parameterType="java.lang.String" resultType="string">
     select
     device_type_name
     from device_type
     where device_type_id = #{deviceTypeId,jdbcType=VARCHAR}
-  </select>
+  </select>-->
 </mapper>

@@ -114,4 +114,9 @@ public class DeviceTypeServiceImpl implements DeviceTypeService {
         deviceType.setDeviceTypeName(searchValue);
         return deviceTypeMapper.selectTableAmountByMultiCondition(deviceType);
     }
+
+    @Override
+    public Device_type getObjectByPrimaryKey(String primaryKey) {
+        return deviceTypeMapper.selectByPrimaryKey(primaryKey);
+    }
 }

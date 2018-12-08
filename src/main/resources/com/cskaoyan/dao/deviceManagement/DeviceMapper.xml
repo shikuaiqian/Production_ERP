@@ -180,12 +180,12 @@
     from device
   </select>
 
-  <select id="selectDeviceNameByPrimaryKey" parameterType="java.lang.String" resultType="string">
+  <!--<select id="selectDeviceNameByPrimaryKey" parameterType="java.lang.String" resultType="string">
     select
     device_name
     from device
     where device_id = #{deviceId,jdbcType=VARCHAR}
-  </select>
+  </select>-->
 
   <resultMap id="VoResultMap" type="com.cskaoyan.domain.deviceManagement.vo.DeviceVo">
     <id column="device_id" jdbcType="VARCHAR" property="deviceId" />

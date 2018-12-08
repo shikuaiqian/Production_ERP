@@ -140,14 +140,52 @@
     <result column="device_maintain_result" jdbcType="VARCHAR" property="deviceMaintainResult" />
     <result column="device_maintain_cost" jdbcType="DECIMAL" property="deviceMaintainCost" />
     <result column="note" jdbcType="VARCHAR" property="note" />
+    <association column="device_maintain_emp_id" property="deviceMaintainEmp" javaType="java.lang.String">
+      <result column="emp_name" property="deviceTypeName"/>
+    </association>
     <!--<association column="device_maintain_emp_id" property="deviceMaintainEmp"
                 select="???等待employee表接口" />-->
   </resultMap>
 
   <select id="selectByLimitOffset" parameterType="java.lang.Integer" resultMap="VoResultMap">
     select
-    <include refid="Base_Column_List" />
+    <include refid="Base_Column_List" />,emp_name
     from device_maintain
+    left join employee on device_maintain_emp_id = emp_id
     limit #{limit,jdbcType=NUMERIC} offset #{offset,jdbcType=NUMERIC}
   </select>
+
+  <sql id="select_MultiCondition">
+    <where>
+      <if test="SearchVo.deviceMaintainId != null">
+        <bind name="pattern" value="'%' + SearchVo.deviceMaintainId + '%'" />
+        device_maintain_id like #{pattern}
+      </if>
+      <if test="SearchVo.deviceFaultId != null">
+        <bind name="pattern" value="'%' + SearchVo.deviceFaultId + '%'" />
+        and device_fault_id like #{pattern}
+      </if>
+    </where>
+  </sql>
+
+  <select id="selectByMultiCondition" resultMap="VoResultMap">
+    select
+    <include refid="Base_Column_List" />,emp_name
+    from device_maintain
+    left join employee on device_maintain_emp_id = emp_id
+    <include refid="select_MultiCondition" />
+    limit #{limit,jdbcType=NUMERIC} offset #{offset,jdbcType=NUMERIC}
+  </select>
+
+  <select id="selectTableAmountByMultiCondition"  resultType="string">
+    select
+    count(device_maintain_id)
+    from device_maintain
+    left join employee on device_maintain_emp_id = emp_id
+    <include refid="select_MultiCondition" />
+  </select>
+
+
+
+
 </mapper>

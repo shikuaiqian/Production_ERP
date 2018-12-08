@@ -30,4 +30,6 @@ public interface DeviceCheckService {
     List<Device_checkVo> searchDeviceByDeviceName(String page, String rows, String searchValue);
 
     String tableSizeByDeviceName(String searchValue);
+
+    ChangeResult updateCheckResult(String deviceCheckId, String deviceCheckResult);
 }

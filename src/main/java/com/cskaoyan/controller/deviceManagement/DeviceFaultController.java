@@ -36,6 +36,22 @@ public class DeviceFaultController {
         return changeResult;
     }
 
+    @RequestMapping("/update_all")
+    @ResponseBody
+    public ChangeResult updateAll(Device_fault deviceFault) {
+        ChangeResult changeResult = deviceFaultService.update(deviceFault);
+        return changeResult;
+    }
+
+    @RequestMapping("/update_note")
+    @ResponseBody
+    public ChangeResult updateFaultDetail(String deviceFaultId,String deviceFaultDetail) {
+        ChangeResult changeResult = deviceFaultService.updateFaultDetail(deviceFaultId,deviceFaultDetail);
+        return changeResult;
+    }
+
+
+
     @RequestMapping("/delete_batch")
     @ResponseBody
     public ChangeResult deleteBatch(@RequestParam("ids") List<String> deleteList) {
@@ -45,17 +61,17 @@ public class DeviceFaultController {
 
     @RequestMapping("/search_deviceFault_by_deviceFaultId")
     @ResponseBody
-    public HashMap<String, Object> searchDeviceByFaultId(@RequestParam("page") String page
+    public HashMap<String, Object> searchDeviceByDeviceFaultId(@RequestParam("page") String page
             , @RequestParam("rows") String rows , @RequestParam("searchValue") String searchValue) {
-        List<Device_faultVo> list=deviceFaultService.searchDeviceByFaultId(page,rows,searchValue);
-        String tableSize =deviceFaultService.tableSizeByFaultId(searchValue);
+        List<Device_faultVo> list=deviceFaultService.searchDeviceByDeviceFaultId(page,rows,searchValue);
+        String tableSize =deviceFaultService.tableSizeByDeviceFaultId(searchValue);
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("rows",list);
         hashMap.put("total",tableSize);
         return hashMap;
     }
 
-    @RequestMapping("/search_deviceCheck_by_deviceName")
+    @RequestMapping("/search_deviceFault_by_deviceName")
     @ResponseBody
     public HashMap<String, Object> searchDeviceByDeviceName(@RequestParam("page") String page
             , @RequestParam("rows") String rows , @RequestParam("searchValue") String searchValue) {

@@ -22,7 +22,6 @@ public class DeviceListServiceImpl implements DeviceListService {
         int limit=Integer.parseInt(rows);
         int offset=(Integer.parseInt(page)-1)*limit;
         List<DeviceVo> list=deviceMapper.selectByLimitOffset(limit,offset);
-        System.out.println(list);
         return list;
     }
 
@@ -98,6 +97,21 @@ public class DeviceListServiceImpl implements DeviceListService {
         DeviceVo deviceVo = new DeviceVo();
         deviceVo.setDeviceTypeName(searchValue);
         return deviceMapper.selectTableAmountByMultiCondition(deviceVo);
+    }
+
+    @Override
+    public Device getObjectByPrimaryKey(String primaryKey) {
+        return deviceMapper.selectByPrimaryKey(primaryKey);
+    }
+
+    @Override
+    public ChangeResult updateNote(String deviceId, String note) {
+        ChangeResult changeResult = new ChangeResult("200", "OK", null);
+        Device device = new Device();
+        device.setDeviceId(deviceId);
+        device.setNote(note);
+        deviceMapper.updateByPrimaryKeySelective(device);
+        return changeResult;
     }
 
 

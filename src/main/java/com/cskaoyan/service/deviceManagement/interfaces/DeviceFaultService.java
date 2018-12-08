@@ -25,11 +25,15 @@ public interface DeviceFaultService {
 
     ChangeResult deleteBatch(List<String> deleteList);
 
-    List<Device_faultVo> searchDeviceByFaultId(String page, String rows, String searchValue);
+    List<Device_faultVo> searchDeviceByDeviceFaultId(String page, String rows, String searchValue);
 
-    String tableSizeByFaultId(String searchValue);
+    String tableSizeByDeviceFaultId(String searchValue);
 
     List<Device_faultVo> searchDeviceByDeviceName(String page, String rows, String searchValue);
 
     String tableSizeByDeviceName(String searchValue);
+
+    Device_fault getObjectByPrimaryKey(String primaryKey);
+
+    ChangeResult updateFaultDetail(String deviceFaultId, String deviceFaultDetail);
 }

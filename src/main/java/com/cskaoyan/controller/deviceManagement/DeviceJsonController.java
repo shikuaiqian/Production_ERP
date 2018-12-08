@@ -161,17 +161,15 @@ public class DeviceJsonController {
 
     @RequestMapping("/{tableName}/get_data")
     @ResponseBody
-    public List getData(@PathVariable("tableName") String tableName){
+    public List getTableData(@PathVariable("tableName") String tableName){
         List list=null;
         switch (tableName){
             case "department":
-
                 break;
             case "deviceType":
                 list=deviceTypeService.getIdMappingName();
                 break;
             case "employee":
-
                 break;
             case "deviceFault":
                 list=deviceFaultService.getIdMappingName();
@@ -182,6 +180,28 @@ public class DeviceJsonController {
         }
         return list;
     }
+
+    @RequestMapping("/{tableName}/get/{primaryKey}")
+    @ResponseBody
+    public Object getData(@PathVariable("tableName") String tableName,@PathVariable("primaryKey") String primaryKey ){
+        Object object=null;
+        switch (tableName){
+            case "deviceType":
+                object=deviceTypeService.getObjectByPrimaryKey(primaryKey);
+                break;
+            case "employee":
+                break;
+            case "deviceFault":
+                object=deviceFaultService.getObjectByPrimaryKey(primaryKey);
+                break;
+            case "deviceList":
+                object=deviceListService.getObjectByPrimaryKey(primaryKey);
+                break;
+        }
+        return object;
+    }
+
+
 
 
 

@@ -126,16 +126,61 @@
     <result column="device_check_date" jdbcType="TIMESTAMP" property="deviceCheckDate" />
     <result column="device_check_result" jdbcType="VARCHAR" property="deviceCheckResult" />
     <result column="device_check_fault_id" jdbcType="VARCHAR" property="deviceCheckFaultId" />
-    <association column="device_id" property="deviceName"
+    <association column="device_id" property="deviceName" javaType="java.lang.String">
+      <result column="device_name" property="deviceName"/>
+    </association>
+    <association column="device_check_emp_id" property="deviceCheckEmp" javaType="java.lang.String">
+      <result column="emp_name" property="deviceCheckEmp"/>
+    </association>
+    <!--<association column="device_id" property="deviceName"
                  select="com.cskaoyan.dao.deviceManagement.DeviceMapper.selectDeviceNameByPrimaryKey" />
-    <!--<association column="device_keeper_id" property="deviceCheckEmp"
+    <association column="device_check_emp_id" property="deviceCheckEmp"
                  select="???等待employee表接口" />-->
   </resultMap>
 
-  <select id="selectByLimitOffset" parameterType="java.lang.Integer" resultMap="VoResultMap">
+  <sql id="select_Column_List">
+    device_check_id, dc.device_id, device_check_emp_id, device_check_date, device_check_result,
+    device_check_fault_id
+  </sql>
+
+  <select id="selectByLimitOffset"  resultMap="VoResultMap">
     select
-    <include refid="Base_Column_List" />
-    from device_check
+    <include refid="select_Column_List" />,device_name,emp_name
+    from device_check dc
+    left join device d on dc.device_id = d.device_id
+    left join employee em ON dc.device_check_emp_id = em.emp_id
     limit #{limit,jdbcType=NUMERIC} offset #{offset,jdbcType=NUMERIC}
+  </select>
+
+  <sql id="select_MultiCondition">
+    <where>
+      <if test="SearchVo.deviceCheckId != null">
+        <bind name="pattern" value="'%' + SearchVo.deviceCheckId + '%'" />
+        device_check_id like #{pattern}
+      </if>
+      <if test="SearchVo.deviceName != null">
+        <bind name="pattern" value="'%' + SearchVo.deviceName + '%'" />
+        and device_name like #{pattern}
+      </if>
+    </where>
+  </sql>
+
+  <select id="selectByMultiCondition"  resultMap="VoResultMap">
+    select
+    <include refid="select_Column_List" />,device_name,emp_name
+    from device_check dc
+    left join device d on dc.device_id = d.device_id
+    left join employee em ON dc.device_check_emp_id = em.emp_id
+    <include refid="select_MultiCondition" />
+    limit #{limit,jdbcType=NUMERIC} offset #{offset,jdbcType=NUMERIC}
+  </select>
+
+  <select id="selectTableAmountByMultiCondition"  resultType="string">
+    select
+    count(device_check_id)
+    from device_check dc
+    left join device d on dc.device_id = d.device_id
+    left join employee em ON dc.device_check_emp_id = em.emp_id
+    <include refid="select_MultiCondition" />
   </select>
 </mapper>

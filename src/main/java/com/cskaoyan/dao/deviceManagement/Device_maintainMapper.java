@@ -26,7 +26,8 @@ public interface Device_maintainMapper {
     //    没有name属性只有id
     List<Device_maintain> getIdMappingName();
 
-    List<Device_maintainVo> selectByMultiCondition(int limit, int offset, Device_maintainVo deviceMaintainVo);
+    List<Device_maintainVo> selectByMultiCondition(@Param("limit") int limit
+            , @Param("offset") int offset,@Param("SearchVo") Device_maintainVo deviceMaintainVo);
 
-    String selectTableAmountByMultiCondition(Device_maintainVo deviceMaintainVo);
+    String selectTableAmountByMultiCondition(@Param("SearchVo")Device_maintainVo deviceMaintainVo);
 }

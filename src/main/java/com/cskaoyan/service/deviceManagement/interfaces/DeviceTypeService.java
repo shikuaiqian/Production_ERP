@@ -32,4 +32,7 @@ public interface DeviceTypeService {
     List<Device_type> searchDeviceByDeviceTypeName(String page, String rows, String searchValue);
 
     String tableSizeByDeviceTypeName(String searchValue);
+
+
+    Device_type getObjectByPrimaryKey(String primaryKey);
 }

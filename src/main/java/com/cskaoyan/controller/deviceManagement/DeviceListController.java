@@ -35,6 +35,24 @@ public class DeviceListController {
         return changeResult;
     }
 
+    @RequestMapping("/update_all")
+    @ResponseBody
+    public ChangeResult updateAll(Device device) {
+        ChangeResult changeResult = deviceListService.update(device);
+        return changeResult;
+    }
+
+    @RequestMapping("/update_note")
+    @ResponseBody
+    public ChangeResult updateNote(String deviceId,String note) {
+        ChangeResult changeResult = deviceListService.updateNote(deviceId,note);
+        return changeResult;
+    }
+
+
+
+
+
 
     @RequestMapping("/delete_batch")
     @ResponseBody

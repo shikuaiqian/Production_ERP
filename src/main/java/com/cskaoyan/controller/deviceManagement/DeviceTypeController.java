@@ -33,6 +33,15 @@ public class DeviceTypeController {
         return changeResult;
     }
 
+    @RequestMapping("/update_all")
+    @ResponseBody
+    public ChangeResult updateAll(Device_type deviceType) {
+        ChangeResult changeResult = deviceTypeService.update(deviceType);
+        return changeResult;
+    }
+
+
+
     @RequestMapping("/delete_batch")
     @ResponseBody
     public ChangeResult deleteBatch(@RequestParam("ids") List<String> deleteList) {

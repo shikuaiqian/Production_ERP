@@ -66,6 +66,13 @@ public class DeviceCheckController {
         return hashMap;
     }
 
+    @RequestMapping("/update_note")
+    @ResponseBody
+    public ChangeResult updateCheckResult(String deviceCheckId,String deviceCheckResult) {
+        ChangeResult changeResult = deviceCheckService.updateCheckResult(deviceCheckId,deviceCheckResult);
+        return changeResult;
+    }
+
 
 
 

@@ -84,7 +84,7 @@ public class DeviceFaultServiceImpl implements DeviceFaultService {
     }
 
     @Override
-    public List<Device_faultVo> searchDeviceByFaultId(String page, String rows, String searchValue) {
+    public List<Device_faultVo> searchDeviceByDeviceFaultId(String page, String rows, String searchValue) {
         int limit=Integer.parseInt(rows);
         int offset=(Integer.parseInt(page)-1)*limit;
         Device_faultVo deviceFaultVo = new Device_faultVo();
@@ -94,7 +94,7 @@ public class DeviceFaultServiceImpl implements DeviceFaultService {
     }
 
     @Override
-    public String tableSizeByFaultId(String searchValue) {
+    public String tableSizeByDeviceFaultId(String searchValue) {
         Device_faultVo deviceFaultVo = new Device_faultVo();
         deviceFaultVo.setDeviceFaultId(searchValue);
         return deviceFaultMapper.selectTableAmountByMultiCondition(deviceFaultVo);
@@ -115,5 +115,20 @@ public class DeviceFaultServiceImpl implements DeviceFaultService {
         Device_faultVo deviceFaultVo = new Device_faultVo();
         deviceFaultVo.setDeviceName(searchValue);
         return deviceFaultMapper.selectTableAmountByMultiCondition(deviceFaultVo);
+    }
+
+    @Override
+    public Device_fault getObjectByPrimaryKey(String primaryKey) {
+        return  deviceFaultMapper.selectByPrimaryKey(primaryKey);
+    }
+
+    @Override
+    public ChangeResult updateFaultDetail(String deviceFaultId, String deviceFaultDetail) {
+        ChangeResult changeResult = new ChangeResult("200", "OK", null);
+        Device_fault deviceFault = new Device_fault();
+        deviceFault.setDeviceFaultId(deviceFaultId);
+        deviceFault.setDeviceFaultDetail(deviceFaultDetail);
+        deviceFaultMapper.updateByPrimaryKeySelective(deviceFault);
+        return changeResult;
     }
 }

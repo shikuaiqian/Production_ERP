@@ -30,4 +30,6 @@ public interface DeviceMaintainService {
     List<Device_maintainVo> searchDeviceByDeviceFaultId(String page, String rows, String searchValue);
 
     String tableSizeByDeviceFaultId(String searchValue);
+
+    ChangeResult updateNote(String deviceMaintainId, String note);
 }
