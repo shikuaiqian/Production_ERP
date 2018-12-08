@@ -1,0 +1,2 @@
+
+echo '.idea' >> .gitignore

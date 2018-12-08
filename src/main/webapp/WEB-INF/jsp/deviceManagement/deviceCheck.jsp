@@ -27,8 +27,7 @@
 </table>
 
 <!-- Toolbar -->
-<div  id="toolbar_deviceCheck" style=" height: 22px; padding: 3px 11px; background: #fafafa;">  
-	
+<div  id="toolbar_deviceCheck" style=" height: 22px; padding: 3px 11px; background: #fafafa;">
 	<c:forEach items="${sessionScope.sysPermissionList}" var="per" >
 		<c:if test="${per=='deviceCheck:add'}">
 		    <div style="float: left;">

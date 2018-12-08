@@ -1,5 +1,7 @@
 package com.cskaoyan.domain.qualifyMonitor;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class FinalMeasuretCheck {
@@ -9,6 +11,7 @@ public class FinalMeasuretCheck {
 
     private String checkItem;
 
+    @DateTimeFormat(pattern = "yyyy-MM-yy")
     private Date cdate;
 
     private String measureData;
@@ -81,5 +84,19 @@ public class FinalMeasuretCheck {
 
     public void setNote(String note) {
         this.note = note == null ? null : note.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "FinalMeasuretCheck{" +
+                "fMeasureCheckId='" + fMeasureCheckId + '\'' +
+                ", orderId='" + orderId + '\'' +
+                ", checkItem='" + checkItem + '\'' +
+                ", cdate=" + cdate +
+                ", measureData='" + measureData + '\'' +
+                ", empId='" + empId + '\'' +
+                ", result='" + result + '\'' +
+                ", note='" + note + '\'' +
+                '}';
     }
 }

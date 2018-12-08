@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cskaoyan.dao.designSchedule.WorkMapper">
+  <resultMap id="BaseResultMap" type="com.cskaoyan.domain.designScheduleDomain.Work">
+    <id column="work_id" jdbcType="VARCHAR" property="workId" />
+    <result column="process_number" jdbcType="VARCHAR" property="processNumber" />
+    <result column="product_id" jdbcType="VARCHAR" property="productId" />
+    <result column="process_id" jdbcType="VARCHAR" property="processId" />
+    <result column="device_id" jdbcType="VARCHAR" property="deviceId" />
+    <result column="rating" jdbcType="INTEGER" property="rating" />
+  </resultMap>
+  <resultMap id="WorkV0Map" type="com.cskaoyan.domain.designScheduleDomain.WorkVo">
+    <id column="work_id" jdbcType="VARCHAR" property="workId" />
+    <result column="process_number" jdbcType="VARCHAR" property="processNumber" />
+    <result column="product_id" jdbcType="VARCHAR" property="productId" />
+    <result column="process_id" jdbcType="VARCHAR" property="processId" />
+    <result column="device_id" jdbcType="VARCHAR" property="deviceId" />
+    <result column="rating" jdbcType="INTEGER" property="rating" />
+    <association property="product"  javaType="com.cskaoyan.domain.designScheduleDomain.Product">
+      <result column="product_id" jdbcType="VARCHAR" property="productId" />
+      <result column="product_name" jdbcType="VARCHAR" property="productName" />
+      <result column="product_type" jdbcType="VARCHAR" property="productType" />
+      <result column="prdoductimage" jdbcType="VARCHAR" property="image" />
+      <result column="productnote" jdbcType="VARCHAR" property="note" />
+      <result column="productstatus" jdbcType="INTEGER" property="status" />
+    </association>
+    <!--<association property="device" javaType="com.cskaoyan.domain.deviceManagement.Device">
+ <result column="device_id" jdbcType="VARCHAR" property="deviceId" />
+    <result column="device_name" jdbcType="VARCHAR" property="deviceName" />
+    <result column="device_type_id" jdbcType="VARCHAR" property="deviceTypeId" />
+    <result column="device_status_id" jdbcType="VARCHAR" property="deviceStatusId" />
+    <result column="device_status" jdbcType="VARCHAR" property="deviceStatus" />
+    <result column="device_purchase_date" jdbcType="TIMESTAMP" property="devicePurchaseDate" />
+    <result column="device_purchase_price" jdbcType="DECIMAL" property="devicePurchasePrice" />
+    <result column="device_manufacture_date" jdbcType="TIMESTAMP" property="deviceManufactureDate" />
+    <result column="device_service_life" jdbcType="TIMESTAMP" property="deviceServiceLife" />
+    <result column="device_keeper_id" jdbcType="VARCHAR" property="deviceKeeperId" />
+    <result column="deviecnote" jdbcType="VARCHAR" property="note" />
+    </association>
+    <association property="process" javaType="com.cskaoyan.domain.technologyMonitor.Process">
+      <result column="process_id" jdbcType="VARCHAR" property="processId" />
+      <result column="technology_plan_id" jdbcType="VARCHAR" property="technologyPlanId" />
+      <result column="sequence" jdbcType="INTEGER" property="sequence" />
+      <result column="quota" jdbcType="INTEGER" property="quota" />
+    </association>-->
+  </resultMap>
+  <sql id="Base_Column_List">
+    work_id, process_number,work.product_id,work.process_id, work.device_id, rating
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from work
+    where work_id = #{workId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from work
+    where work_id = #{workId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.cskaoyan.domain.designScheduleDomain.Work">
+    insert into work (work_id, process_number, product_id, 
+      process_id, device_id, rating
+      )
+    values (#{workId,jdbcType=VARCHAR}, #{processNumber,jdbcType=VARCHAR}, #{productId,jdbcType=VARCHAR}, 
+      #{processId,jdbcType=VARCHAR}, #{deviceId,jdbcType=VARCHAR}, #{rating,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cskaoyan.domain.designScheduleDomain.Work">
+    insert into work
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="workId != null">
+        work_id,
+      </if>
+      <if test="processNumber != null">
+        process_number,
+      </if>
+      <if test="productId != null">
+        product_id,
+      </if>
+      <if test="processId != null">
+        process_id,
+      </if>
+      <if test="deviceId != null">
+        device_id,
+      </if>
+      <if test="rating != null">
+        rating,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="workId != null">
+        #{workId,jdbcType=VARCHAR},
+      </if>
+      <if test="processNumber != null">
+        #{processNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="productId != null">
+        #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="processId != null">
+        #{processId,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceId != null">
+        #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="rating != null">
+        #{rating,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cskaoyan.domain.designScheduleDomain.Work">
+    update work
+    <set>
+      <if test="processNumber != null">
+        process_number = #{processNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="productId != null">
+        product_id = #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="processId != null">
+        process_id = #{processId,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceId != null">
+        device_id = #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="rating != null">
+        rating = #{rating,jdbcType=INTEGER},
+      </if>
+    </set>
+    where work_id = #{workId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cskaoyan.domain.designScheduleDomain.Work">
+    update work
+    set process_number = #{processNumber,jdbcType=VARCHAR},
+      product_id = #{productId,jdbcType=VARCHAR},
+      process_id = #{processId,jdbcType=VARCHAR},
+      device_id = #{deviceId,jdbcType=VARCHAR},
+      rating = #{rating,jdbcType=INTEGER}
+    where work_id = #{workId,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPage" resultMap="WorkV0Map">
+    SELECT   work_id, process_number,work.product_id,work.process_id, work.device_id, rating,
+    product.product_name, product_type, product.image  as productimage,
+    product.note as productnote,product.status as productstatus ,
+    technology_plan_id, sequence, quota,
+    device_name, device_type_id, device_status_id, device_status, device_purchase_date,
+    device_purchase_price, device_manufacture_date, device_service_life, device_keeper_id,
+    device.note as devicenote
+
+    from work
+    left join product on  product.product_id=work.product_id
+    left join device on   device.device_id=work.device_id
+    left join process   c on   c.process_id=work.process_id
+    <if test="param3!=null">
+      <if test="param3.workId!=null">
+        where work_id=#{param3.workId}
+      </if>
+      <if test="param3.productName!=null">
+        where product_Name  like  '%#{param3.productName}%'
+      </if>
+      <if test="param3.deviceName!=null">
+        where device_name    like  '%#{param3.deviceName}%'
+      </if>
+      <if test="param3.sequence!=null">
+        where sequence=#{param3.sequence}
+      </if>
+    </if>
+    limit
+    #{param2} offset  #{param1}
+  </select>
+  <select id="count" resultType="_int">
+    select count(*)
+    from work
+    left join process on   process.process_id=work.process_id
+    left join product on product.product_id=work.product_id
+    left join device on device.device_id=work.device_id
+    <if test="param3!=null">
+      <if test="param3.workId!=null">
+        where work_id=#{param3.workId}
+      </if>
+      <if test="param3.productName!=null">
+        where product_Name  like  '%#{param3.productName}%'
+      </if>
+      <if test="param3.deviceName!=null">
+        where device_name   like  '%#{param3.deviceName}%'
+      </if>
+      <if test="param3.sequence!=null">
+        where sequence=#{param3.sequence}
+      </if>
+    </if>
+  </select>
+  <select id="findAll" resultMap="BaseResultMap">
+    select  <include refid="Base_Column_List"/>
+    from  work
+  </select>
+
+</mapper>
