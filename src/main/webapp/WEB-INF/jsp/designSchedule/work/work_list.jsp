@@ -229,7 +229,7 @@ function doSearch_work(value,name){ //用户输入用户名,点击搜素,触发�
 				{field : 'processNumber', width : 100, align : 'center', title : '工序号'},
 				{field : 'product', width : 100, align : 'center', title : '产品', formatter:formatWorkProduct},
 				{field : 'process', width : 100, title : '工序', align:'center', formatter:formatWorkProcess},
-				{field : 'deviceManagement111', width : 100, title : '设备', align:'center',formatter:formatWorkDevice},
+				{field : 'device', width : 100, title : '设备', align:'center',formatter:formatWorkDevice},
 				{field : 'rating', width : 100, title : '班产定额', align:'center'}
 	        ] ],
 	    });
@@ -244,7 +244,7 @@ function doSearch_work(value,name){ //用户输入用户名,点击搜素,触发�
 				{field : 'processNumber', width : 100, align : 'center', title : '工序号'},
 				{field : 'product', width : 100, align : 'center', title : '产品', formatter:formatWorkProduct},
 				{field : 'process', width : 100, title : '工序', align:'center', formatter:formatWorkProcess},
-				{field : 'deviceManagement111', width : 100, title : '设备', align:'center',formatter:formatWorkDevice},
+				{field : 'device', width : 100, title : '设备', align:'center',formatter:formatWorkDevice},
 				{field : 'rating', width : 100, title : '班产定额', align:'center'}
 	        ] ],  
 	    });
