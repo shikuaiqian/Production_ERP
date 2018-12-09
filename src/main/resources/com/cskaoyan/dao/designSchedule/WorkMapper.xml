@@ -156,10 +156,10 @@
         where work_id=#{param3.workId}
       </if>
       <if test="param3.productName!=null">
-        where product_Name  like  '%#{param3.productName}%'
+        where product_Name  like  "%"#{param3.productName}"%"
       </if>
       <if test="param3.deviceName!=null">
-        where device_name    like  '%#{param3.deviceName}%'
+        where device_name    like  "%"#{param3.deviceName}"%"
       </if>
       <if test="param3.sequence!=null">
         where sequence=#{param3.sequence}
@@ -179,10 +179,10 @@
         where work_id=#{param3.workId}
       </if>
       <if test="param3.productName!=null">
-        where product_Name  like  '%#{param3.productName}%'
+        where product_Name  like  "%"#{param3.productName}"%"
       </if>
       <if test="param3.deviceName!=null">
-        where device_name   like  '%#{param3.deviceName}%'
+        where device_name   like  "%"#{param3.deviceName}"%"
       </if>
       <if test="param3.sequence!=null">
         where sequence=#{param3.sequence}

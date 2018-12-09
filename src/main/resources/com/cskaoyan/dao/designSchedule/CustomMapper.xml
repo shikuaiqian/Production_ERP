@@ -161,7 +161,7 @@
         where custom_id=#{param3.customId}
       </if>
       <if test="param3.customName!=null">
-        where custom_name like '%#{param3.customName}%'
+        where custom_name like "%"#{param3.customName}"%"
       </if>
     </if>
     limit
@@ -175,7 +175,7 @@
       where custom_id=#{param1.customId}
     </if>
     <if test="param1.customName!=null">
-      where custom_name like '%#{param3.customName}%'
+      where custom_name like "%"#{param1.customName}"%"
     </if>
     </if>
   </select>
