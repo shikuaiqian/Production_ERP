@@ -17,4 +17,6 @@ public interface DepartmentService {
     public void delete(String[] ids);
     public List<Department> searchById(String id);
     public List<Department> searchByName(String name);
+    List<Department>  select();
+    Department select2(String departmentId);
 }

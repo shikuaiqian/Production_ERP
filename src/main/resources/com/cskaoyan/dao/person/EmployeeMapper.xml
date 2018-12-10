@@ -225,7 +225,8 @@
       department_id = #{departmentId,jdbcType=VARCHAR}
     where emp_id = #{empId,jdbcType=VARCHAR}
   </update>
-  <resultMap id="EmployeeList" type="com.cskaoyan.domain.person.Employee">
+  <!--返回的是vo-->
+  <resultMap id="EmployeeList" type="com.cskaoyan.domain.person.EmployeeVo">
   <result column="emp_id" property="empId"></result>
   <result column="emp_name" property="empName"></result>
   <result column="sex" property="sex"></result>
@@ -247,9 +248,51 @@
   <select id="selectEmployeeList" resultMap="EmployeeList">
     select e.emp_id,e.emp_name,e.sex,e.id_code,e.birthday,e.join_date,e.status,e.education,e.degree,e.major,e.graduate_school,e.education_form,e.department_id,
     d.department_name,d.note
-    from employee e left join department d on e.department_id= d.department_id
+    from employee e left join department d on e.department_id= d.department_id limit  #{limit} offset  #{offset}
   </select>
   <select id="count" resultType="string">
     SELECT COUNT(*) FROM employee
+  </select>
+  <select id="selectEmployeeList2" resultMap="EmployeeList">
+    select e.emp_id,e.emp_name,e.sex,e.id_code,e.birthday,e.join_date,e.status,e.education,e.degree,e.major,e.graduate_school,e.education_form,e.department_id,
+    d.department_name,d.note
+    from employee e left join department d on e.department_id= d.department_id
+    <if test="map!=null">
+      <if test="map.employeeId!=null">
+        where emp_id=#{map.employeeId}
+      </if>
+      <if test="map.employeeName!=null">
+        where emp_name like '%${map.employeeName}%'
+      </if>
+      <if test="map.departmentName!=null">
+        where department_name like '%${map.departmentName}%'
+      </if>
+    </if>
+    limit
+    #{limit} offset  #{offset}
+  </select>
+  <select id="count2" resultType="string">
+    select count(*)
+    from employee e left join department d on e.department_id= d.department_id
+    <if test="map!=null">
+      <if test="map.employeeId!=null">
+        where emp_id=#{map.employeeId}
+      </if>
+      <if test="map.employeeName!=null">
+        where emp_name like '%${map.employeeName}%'
+      </if>
+      <if test="map.departmentName!=null">
+        where department_name like '%${map.departmentName}%'
+      </if>
+    </if>
+
+  </select>
+  <select id="selectNameById" resultType="string">
+    select emp_name from employee where emp_id = #{id}
+  </select>
+  <select id="select" resultMap="EmployeeList">
+    select e.emp_id,e.emp_name,e.sex,e.id_code,e.birthday,e.join_date,e.status,e.education,e.degree,e.major,e.graduate_school,e.education_form,e.department_id,
+    d.department_name,d.note
+    from employee e left join department d on e.department_id= d.department_id
   </select>
 </mapper>
