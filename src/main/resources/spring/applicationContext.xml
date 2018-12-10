@@ -5,14 +5,12 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <Context:component-scan base-package="com.cskaoyan"/>
-<<<<<<< HEAD
-    <mvc:annotation-driven validator="validator"/>
-=======
-    <mvc:annotation-driven conversion-service="service"/>
->>>>>>> 2e3e6de164162908ca4b899d7a18231472067363
+    <mvc:annotation-driven conversion-service="service" validator="validator"/>
 
 
-
+    <bean id = "validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+    <property name="providerClass" value = "org.hibernate.validator.HibernateValidator"></property>
+    </bean>
     <bean id="viewResolver"	class="org.springframework.web.servlet.view.UrlBasedViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
         <property name="prefix" value="/WEB-INF/jsp/" />
@@ -39,24 +37,18 @@
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
 
-    <bean id="datasource" class="org.apache.commons.dbcp2.BasicDataSource">
+    <bean id="datasource" class="com.alibaba.druid.pool.DruidDataSource">
         <property name="username" value="root"/>
         <property name="password" value="1234"/>
-        <property name="url" value="jdbc:mysql://192.168.4.21:3306/erp-ssm?serverTimezone=GMT%2B8"></property>
-        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
+        <property name="url" value="jdbc:mysql://192.168.4.21:3306/erp-ssm?serverTimezone=GMT%2B8"/>
+
     </bean>
 
-    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
-        <property name="providerClass" value="org.hibernate.validator.HibernateValidator"></property>
-    </bean>
     <tx:annotation-driven transaction-manager="transactionManager"/>
     <bean class="org.springframework.jdbc.datasource.DataSourceTransactionManager" id="transactionManager">
         <property name="dataSource" ref="datasource"/>
     </bean>
     <mvc:resources mapping="/**" location="/WEB-INF/"/>
-<<<<<<< HEAD
-
-=======
     <bean id="service" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
         <property name="converters">
             <set>
@@ -64,5 +56,4 @@
             </set>
         </property>
     </bean>
->>>>>>> 2e3e6de164162908ca4b899d7a18231472067363
 </beans>

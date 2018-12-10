@@ -1,6 +1,6 @@
 package com.cskaoyan.service.person;
 
-import com.cskaoyan.domain.Custom;
+
 import com.cskaoyan.domain.person.Department;
 
 import java.util.List;
@@ -17,4 +17,6 @@ public interface DepartmentService {
     public void delete(String[] ids);
     public List<Department> searchById(String id);
     public List<Department> searchByName(String name);
+    List<Department>  select();
+    Department select2(String departmentId);
 }

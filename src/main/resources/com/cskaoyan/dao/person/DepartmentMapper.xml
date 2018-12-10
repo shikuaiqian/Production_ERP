@@ -93,4 +93,14 @@
   <select id="selectBydepartmentName" resultMap="departmentName">
     SELECT department_id,department_name,note from department where department_name like  '%${departmentName}%';
   </select>
+  <resultMap id="select" type="com.cskaoyan.domain.person.Department">
+    <result column="department_id" property="departmentId"></result>
+    <result column="department_name" property="departmentName"></result>
+  </resultMap>
+  <select id="select" resultMap="select" >
+     SELECT department_id,department_name,note from department
+  </select>
+    <select id="selectBydepartmentId" resultMap="departmentName">
+       SELECT department_id,department_name,note from department where department_id = #{departmentId}
+    </select>
 </mapper>

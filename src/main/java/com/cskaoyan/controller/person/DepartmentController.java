@@ -1,6 +1,6 @@
 package com.cskaoyan.controller.person;
 
-import com.cskaoyan.domain.Custom;
+
 import com.cskaoyan.domain.person.Department;
 import com.cskaoyan.service.person.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -129,6 +130,18 @@ public class DepartmentController {
         map.put("rows",departments);
         map.put("total",1);
         return map;
+    }
+    @ResponseBody
+    @RequestMapping("/get_data")
+    public List get_data(){
+        List<Department> select = service.select();
+        return select;
+    }
+    @ResponseBody
+    @RequestMapping("/get/{departmentId}")
+    public Department get(@PathVariable String departmentId){
+        Department department = service.select2(departmentId);
+        return department;
     }
 }
 

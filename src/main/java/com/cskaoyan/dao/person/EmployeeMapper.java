@@ -1,8 +1,11 @@
 package com.cskaoyan.dao.person;
 
 import com.cskaoyan.domain.person.Employee;
+import com.cskaoyan.domain.person.EmployeeVo;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface EmployeeMapper {
     int deleteByPrimaryKey(String empId);
@@ -19,6 +22,11 @@ public interface EmployeeMapper {
 
 
 
-    List<Employee> selectEmployeeList(int limit, int offset);
+    List<EmployeeVo> selectEmployeeList(@Param("limit") int limit, @Param("offset") int offset);
     String count();
+
+    List<EmployeeVo> selectEmployeeList2(@Param("map") Map map, @Param("limit")int limit, @Param("offset")int offset);
+    String count2(@Param("map") Map map);
+    String selectNameById(@Param("id") String id);
+    List<EmployeeVo> select();
 }

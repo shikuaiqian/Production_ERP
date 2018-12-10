@@ -14,6 +14,8 @@ public interface DepartmentMapper {
 
     List<Department>  selectByPrimaryKey(String departmentId);
 
+    List<Department>  select();
+
     int updateByPrimaryKeySelective(Department record);
 
     int updateByPrimaryKey(Department record);
@@ -22,4 +24,5 @@ public interface DepartmentMapper {
     String count();
 
     List<Department>  selectBydepartmentName(@Param("departmentName") String departmentName);
+    Department selectBydepartmentId(@Param("departmentId") String departmentId);
 }

@@ -22,7 +22,7 @@ import java.util.Map;
 @RequestMapping("unqualify")
 public class UnqualifyController {
 
-   @Autowired
+
    UnqualifyService unqualifyService;
 
     @RequestMapping("find")

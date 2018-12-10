@@ -1,14 +1,17 @@
 package com.cskaoyan.domain.person;
 
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 public class Employee {
+    @Size(max = 40,message = "{id.length.error}")
     private String empId;
-
+    @Size(max = 40,message = "姓名不合法")
     private String empName;
-
+    @Size(max = 2,message = "性别不合法")
     private String sex;
-
+    @Size(max = 18,min = 18,message = "请输入正确的身份证号")
     private String idCode;
 
     private Date birthday;
@@ -16,11 +19,11 @@ public class Employee {
     private Date joinDate;
 
     private String status;
-
+    @Size(max = 20,message = "学历长度限制在20")
     private String education;
-
+    @Size(max = 20,message = "学位长度限制在20")
     private String degree;
-
+    @Size(max = 20,message = "专业长度限制在20")
     private String major;
 
     private String graduateSchool;
@@ -29,15 +32,9 @@ public class Employee {
 
     private String departmentId;
 
-    public Department getDepartment() {
-        return department;
-    }
 
-    public void setDepartment(Department department) {
-        this.department = department;
-    }
 
-    private Department department;
+
 
     public String getEmpId() {
         return empId;

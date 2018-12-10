@@ -68,4 +68,15 @@ public class DepartmentServiceimp implements DepartmentService {
         return departmentMapper.selectBydepartmentName(name);
 
     }
+
+    @Override
+    public List<Department> select() {
+        return departmentMapper.select();
+    }
+
+    @Override
+    public Department select2(String departmentId) {
+        return departmentMapper.selectBydepartmentId(departmentId);
+    }
+
 }
