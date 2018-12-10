@@ -1,12 +1,12 @@
 package com.cskaoyan.domain.designScheduleDomain;
 
 import com.cskaoyan.domain.deviceManagement.Device;
+import com.cskaoyan.domain.technologyMonitor.Process;
 
 public class WorkVo  extends Work {
     Product product;
     Device device;
-   Process process;
-
+        Process  process;
     public Product getProduct() {
         return product;
     }

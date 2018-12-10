@@ -37,12 +37,12 @@
     <result column="device_keeper_id" jdbcType="VARCHAR" property="deviceKeeperId" />
     <result column="deviecnote" jdbcType="VARCHAR" property="note" />
     </association>
-   <!-- <association property="process" javaType="com.cskaoyan.domain.technologyMonitor.Process">
+    <association property="process" javaType="com.cskaoyan.domain.technologyMonitor.Process">
       <result column="process_id" jdbcType="VARCHAR" property="processId" />
       <result column="technology_plan_id" jdbcType="VARCHAR" property="technologyPlanId" />
       <result column="sequence" jdbcType="INTEGER" property="sequence" />
       <result column="quota" jdbcType="INTEGER" property="quota" />
-    </association>-->
+    </association>
   </resultMap>
   <sql id="Base_Column_List">
     work_id, process_number,work.product_id,work.process_id, work.device_id, rating
