@@ -2,6 +2,7 @@ package com.cskaoyan.service.designSchedule;
 
 import com.cskaoyan.domain.designScheduleDomain.Order;
 
+import java.util.List;
 import java.util.Map;
 
 public interface OrderService {
@@ -14,4 +15,8 @@ public interface OrderService {
     void delete(String[] ids);
 
     void update(Order order);
+
+    List<Order> findAll();
+
+    Order getOrderById(String orderId);
 }

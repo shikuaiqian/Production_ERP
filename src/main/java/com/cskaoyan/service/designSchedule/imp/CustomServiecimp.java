@@ -69,4 +69,9 @@ public class CustomServiecimp  implements CustomService{
         map.put("rows",customs);
         return map;
     }
+
+    @Override
+    public Custom getCustomById(String customId) {
+        return customMapper.selectByPrimaryKey(customId);
+    }
 }

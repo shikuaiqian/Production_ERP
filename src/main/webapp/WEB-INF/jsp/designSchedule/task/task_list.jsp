@@ -180,8 +180,8 @@ function doSearch_task(value,name){ //用户输入用户名,点击搜素,触发�
 				{field : 'workId', width : 100, align : 'center', title : '作业编号', formatter:formatTaskWork},
 				{field : 'manufactureSn', width : 100, align : 'center', title : '生产批号',
 					formatter:formatTaskManufacture},
-				{field : 'workingHours', width : 100, title : '派工数量', align:'center'},
-				{field : 'unitPrice', width : 100, title : '派工工时', align:'center'},
+				{field : 'taskQuantity', width : 100, title : '派工数量', align:'center'},
+				{field : 'workingHours', width : 100, title : '派工工时', align:'center'},
 	        ] ],  
 	    });
 	}else{
@@ -195,8 +195,8 @@ function doSearch_task(value,name){ //用户输入用户名,点击搜素,触发�
 				{field : 'workId', width : 100, align : 'center', title : '作业编号', formatter:formatTaskWork},
 				{field : 'manufactureSn', width : 100, align : 'center', title : '生产批号',
 					formatter:formatTaskManufacture},
-				{field : 'workingHours', width : 100, title : '派工数量', align:'center'},
-				{field : 'unitPrice', width : 100, title : '派工工时', align:'center'},
+				{field : 'taskQuantity', width : 100, title : '派工数量', align:'center'},
+				{field : 'workingHours', width : 100, title : '派工工时', align:'center'},
 	        ] ],  
 	    });
 	}
@@ -236,9 +236,9 @@ function doSearch_task(value,name){ //用户输入用户名,点击搜素,触发�
 		$("#taskWorkInfo").dialog({
     		onOpen :function(){
     			$.get("work/get/"+row.workId,'',function(data){
-  		    		data.processId = data.process.processId; 
-  	        		data.productId = data.product.productId;
-  	        		data.deviceId = data.device.deviceId;
+  		    		data.processId = data.processId;
+  	        		data.productId = data.productId;
+  	        		data.deviceId = data.deviceId;
   		    		//回显数据
   		    		$("#taskWorkEditForm").form("load", data);
     	    	});
@@ -275,8 +275,8 @@ function doSearch_task(value,name){ //用户输入用户名,点击搜素,触发�
 		$("#taskManufactureInfo").dialog({
     		onOpen :function(){
     			$.get("manufacture/get/"+row.manufactureSn,'',function(data){
-    				data.orderId = data.cOrder.orderId; 
-        			data.technologyId = data.technology.technologyId; 
+    				data.orderId = data.orderId;
+        			data.technologyId = data.technologyId;
         			data.beginDate = TAOTAO.formatDateTime(data.beginDate);
            			data.endDate = TAOTAO.formatDateTime(data.endDate);
     		    	//回显数据

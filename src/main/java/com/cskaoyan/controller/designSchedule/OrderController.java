@@ -1,15 +1,17 @@
 package com.cskaoyan.controller.designSchedule;
 
+import com.cskaoyan.domain.designScheduleDomain.Custom;
 import com.cskaoyan.domain.designScheduleDomain.Order;
 import com.cskaoyan.service.designSchedule.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -69,7 +71,7 @@ public class OrderController {
     }
     @ResponseBody
     @RequestMapping("insert")
-    public Map insert( @Valid Order order){
+    public Map insert(  Order order){
         HashMap<String ,Object> map=new HashMap<>();
         map.put("msg","ok");
         map.put("status",200);
@@ -118,7 +120,7 @@ public class OrderController {
     }
     @ResponseBody
     @RequestMapping("update_all")
-    public Map updateAll(@Valid Order Order)
+    public Map updateAll( Order Order)
     {
         HashMap<String ,Object> map=new HashMap<>();
         map.put("msg","ok");
@@ -133,5 +135,18 @@ public class OrderController {
             map.put("status",0);
         }
         return map;
+    }
+
+    @ResponseBody
+    @RequestMapping("get_data")
+    public List<Order> getData()
+    {
+        List<Order> orders= orderService.findAll();
+        return orders;
+    }
+    @ResponseBody
+    @RequestMapping("/get/{orderId}")
+    public Order getCustomById(@PathVariable String orderId){
+        return  orderService.getOrderById(orderId);
     }
 }

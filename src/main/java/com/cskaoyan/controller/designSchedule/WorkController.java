@@ -4,6 +4,7 @@ import com.cskaoyan.domain.designScheduleDomain.Work;
 import com.cskaoyan.service.designSchedule.WorkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -142,5 +143,18 @@ public class WorkController {
             map.put("status",0);
         }
         return map;
+    }
+    @ResponseBody
+    @RequestMapping("get_data")
+    public List<Work> getData()
+    {
+        List<Work> works= workService.findAll();
+        return works;
+    }
+
+    @ResponseBody
+    @RequestMapping("/get/{workId}")
+    public Work getCustomById(@PathVariable String workId){
+        return  workService.getWorkIdById(workId);
     }
 }

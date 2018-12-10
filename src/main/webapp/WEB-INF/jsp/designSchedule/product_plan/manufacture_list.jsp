@@ -283,8 +283,8 @@ function doSearch_manufacture(value,name){ //用户输入用户名,点击搜素,
     			$.get("order/get/"+row.cOrder.orderId,'',function(data){
     				manuOrderEditor = TAOTAO.createEditor("#manuOrderEditForm [name=note]");	
  		    		//回显数据
- 	        		data.customId = data.custom.customId; 
- 	        		data.productId = data.product.productId; 
+ 	        		data.customId = data.customId;
+ 	        		data.productId = data.productId;
  	        		data.orderDate = TAOTAO.formatDateTime(data.orderDate);
  	        		data.requestDate = TAOTAO.formatDateTime(data.requestDate);
  	        		$("#manuOrderEditForm").form("load", data);

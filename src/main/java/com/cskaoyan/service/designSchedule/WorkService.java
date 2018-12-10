@@ -2,6 +2,7 @@ package com.cskaoyan.service.designSchedule;
 
 import com.cskaoyan.domain.designScheduleDomain.Work;
 
+import java.util.List;
 import java.util.Map;
 
 public interface WorkService  {
@@ -14,4 +15,8 @@ public interface WorkService  {
     void delete(String[] ids);
 
     void update(Work work);
+
+    List<Work> findAll();
+
+    Work getWorkIdById(String workId);
 }

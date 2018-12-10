@@ -5,6 +5,7 @@ import com.cskaoyan.domain.designScheduleDomain.Custom;
 import com.cskaoyan.service.designSchedule.CustomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -115,7 +116,7 @@ public class CustomController {
         return "/designSchedule/custom/custom_edit";
     }
     @ResponseBody
-    @RequestMapping("update_all ")
+    @RequestMapping("update_all")
     public Map updateAll(Custom custom)
     {
         HashMap<String ,Object> map=new HashMap<>();
@@ -138,5 +139,10 @@ public class CustomController {
     {
      List<Custom> customs= customService.findAll();
     return customs;
+    }
+    @ResponseBody
+    @RequestMapping("/get/{customId}")
+    public Custom getCustomById(@PathVariable String customId){
+     return  customService.getCustomById(customId);
     }
 }

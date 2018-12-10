@@ -63,6 +63,11 @@ public class ProductServiceimp implements ProductService {
     }
 
     @Override
+    public Product getProductById(String productId) {
+        return productMapper.selectByPrimaryKey(productId);
+    }
+
+    @Override
     public List<Product> findAll() {
         return productMapper.findall();
     }

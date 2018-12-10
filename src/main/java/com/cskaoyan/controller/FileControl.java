@@ -21,11 +21,11 @@ public class FileControl {
         HashMap<String ,Object> map=new HashMap<>();
 
         String filename = file.getOriginalFilename();
-        filename=  UUID.randomUUID().toString()+filename;
-        String realPath = req.getRealPath("files"+filename);
+
+        String realPath = req.getRealPath("/WEB-INF/files/"+filename);
         File file1=new File(realPath);
         map.put("error",0);
-        map.put("url",realPath);
+        map.put("url","files/"+filename);
         try {
             file.transferTo(file1);
         } catch (IOException e) {
@@ -38,8 +38,8 @@ public class FileControl {
         return map;
     }
     @RequestMapping("download")
-    public void download(String fileName, HttpServletResponse response) throws FileNotFoundException {
-
+    public void download(String fileName, HttpServletResponse response,HttpServletRequest request) throws FileNotFoundException {
+        fileName=request.getRealPath("/WEB-INF/"+fileName);
         InputStream inStream = new FileInputStream(fileName);
         response.reset();
         response.setContentType("bin");
@@ -54,5 +54,23 @@ public class FileControl {
             e.printStackTrace();
 
         }
+    }
+    @ResponseBody
+    @RequestMapping("delete")
+    public  Map delete(String fileName,HttpServletRequest request)
+    {
+        HashMap<String ,Object> map=new HashMap<>();
+        map.put("data","success");
+
+       String s=fileName.replace("file/download?fileName=","");
+        fileName=request.getRealPath("/WEB-INF/"+s);
+        try {
+            File file = new File(fileName);
+            file.delete();
+        } catch (Exception e) {
+            e.printStackTrace();
+            map.put("data","failed");
+        }
+        return map;
     }
 }

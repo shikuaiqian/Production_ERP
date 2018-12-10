@@ -110,7 +110,7 @@
              where product_id=#{param3.productId}
            </if>
            <if test="param3.productName!=null">
-             where product_name=#{param3.productName}
+             where product_name  like "%"#{param3.productName}"%"
            </if>
            <if test="param3.productType!=null">
                         where product_type=#{param3.productType}
@@ -128,17 +128,18 @@
                    where product_id=#{param.productId}
                  </if>
                  <if test="param3.productName!=null">
-                   where product_name=#{param.productName}
+                   where product_name  like "%"#{param3.productName}"%"
                  </if>
                  <if test="param3.productType!=null">
                     where product_type=#{param.productType}
                   </if>
             </if>
-
-  </select>
-  <select id="findall" resultMap="BaseResultMap">
+     </select>
+    <select id="findall" resultMap="BaseResultMap">
       select  <include refid="Base_Column_List"/>
       from  product
-
+    </select>
+    <select id="selectNameById" resultType="string">
+        select product_name from product where product_id=#{id};
     </select>
 </mapper>

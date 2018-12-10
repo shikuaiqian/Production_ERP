@@ -90,4 +90,40 @@
       working_hours = #{workingHours,jdbcType=DECIMAL}
     where task_id = #{taskId,jdbcType=VARCHAR}
   </update>
+  <select id="selectByPage" resultMap="BaseResultMap">
+    SELECT  <include refid="Base_Column_List"/>  from task
+    <if test="param3!=null">
+      <if test="param3.taskId!=null">
+        where task_id=#{param3.taskId}
+      </if>
+      <if test="param3.workId!=null">
+        where work_id=#{param3.workId}
+      </if>
+      <if test="param3.manufactureSn!=null">
+        where manufacture_sn=#{param3.manufactureSn}
+      </if>
+    </if>
+
+    limit
+    #{param2} offset  #{param1}
+  </select>
+  <select id="count" resultType="_int">
+    select count(*)
+    from task
+    <if test="param3!=null">
+      <if test="param3.taskId!=null">
+        where task_id=#{param3.taskId}
+      </if>
+      <if test="param3.workId!=null">
+        where work_id=#{param3.workId}
+      </if>
+      <if test="param3.manufactureSn!=null">
+        where manufacture_sn=#{param3.manufactureSn}
+      </if>
+    </if>
+  </select>
+  <select id="findAll" resultMap="BaseResultMap">
+    select  <include refid="Base_Column_List"/>
+    from  task
+  </select>
 </mapper>
