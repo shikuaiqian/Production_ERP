@@ -8,8 +8,11 @@ import com.cskaoyan.domain.materialMonitor.Material;
 import com.cskaoyan.domain.materialMonitor.MaterialConsume;
 import com.cskaoyan.domain.materialMonitor.MaterialReceive;
 import com.cskaoyan.service.materiaMonitor.MaterialService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -19,125 +22,63 @@ public class MaterialServiceImp implements MaterialService {
     @Autowired
     MaterialMapper materialMapper;
 
-    @Autowired
-    MaterialConsumeMapper materialConsumeMapper;
-
-    @Autowired
-    MaterialReceiveMapper materialReceiveMapper;
-
-
+    @Transactional(readOnly = true)
     @Override
-    public List<Material> selectMeterials() {
-        return null;
+    public List<Material> findAllMaterial() {
+        List<Material> materials = materialMapper.findAllMaterial();
+        return materials;
     }
 
     @Override
-    public List<MaterialConsume> materialConsumeList() {
-        return null;
+    public PageInfo<Material> findAllMaterial(Integer page,Integer rows) {
+        PageHelper.startPage(page,rows);
+        List<Material> materials = materialMapper.findAllMaterial();
+        PageInfo<Material> pageInfo = new PageInfo<>(materials);
+        return pageInfo;
     }
 
     @Override
-    public List<MaterialReceive> selectListMaterialRecive() {
-        return null;
+    public boolean insert(Material material) {
+        int insert = materialMapper.insert(material);
+        return insert==1;
     }
 
     @Override
-    public void insertMaterial(Material material) {
-
+    public boolean update(Material material) {
+        int update = materialMapper.updateByPrimaryKeySelective(material);
+        return update==1;
     }
 
     @Override
-    public void updateMaterial(Material material) {
-
+    public boolean delectById(String id) {
+        int delete = materialMapper.deleteById(id);
+        return delete==1;
     }
 
     @Override
-    public List<Material> selectMeterialsByMaterialId(String searchValue) {
-        return null;
+    public Material serachById(String id) {
+        Material material = materialMapper.selectByPrimaryKey(id);
+        return material;
     }
 
     @Override
-    public List<Material> selectMeterialsBymaterialType(String searchValue) {
-        return null;
+    public List<Material> searchByType(String searchValue) {
+        searchValue = "%" + searchValue + "%";
+        List<Material> materials = materialMapper.selectByType(searchValue);
+        return materials;
     }
 
     @Override
-    public void deleteBench(String[] ids) {
-
+    public List<Material> serachMaterialsById(String searchValue) {
+        searchValue = "%" + searchValue + "%";
+        List<Material> materials = materialMapper.selectByMaterialId(searchValue);
+        return materials;
     }
 
     @Override
-    public Material selectSingleMaterial(String materialId) {
-        return null;
+    public boolean updateNote(String materialId, String note) {
+        int update = materialMapper.updateNote(materialId,note);
+        return update==1;
     }
 
-    @Override
-    public void addMaterialReceiver(MaterialReceive materialReceive) {
-
-    }
-
-    @Override
-    public void updateMaterialNote(String materialId, String note) {
-
-    }
-
-    @Override
-    public void updateMaterialReceiveNote(String receiveId, String note) {
-
-    }
-
-    @Override
-    public void updateReceMaterial(MaterialReceive materialReceive) {
-
-    }
-
-    @Override
-    public void deleteReceBench(String[] ids) {
-
-    }
-
-    @Override
-    public List<MaterialReceive> searchByReceId(String searchValue) {
-        return null;
-    }
-
-    @Override
-    public List<MaterialReceive> searchByMaterialID(String searchValue) {
-        return null;
-    }
-
-    @Override
-    public void updateMaterialConsumeNote(String consumeId, String note) {
-
-    }
-
-    @Override
-    public void insertMaterialConsume(MaterialConsume materialConsume) {
-
-    }
-
-    @Override
-    public void updateMaterialConsume(MaterialConsume materialConsume) {
-
-    }
-
-    @Override
-    public void deleteConsumeBench(String[] ids) {
-
-    }
-
-    @Override
-    public List<MaterialConsume> searchByConsumeID(String searchValue) {
-        return null;
-    }
-
-    @Override
-    public List<MaterialConsume> searchByWorkID(String searchValue) {
-        return null;
-    }
-
-    @Override
-    public List<MaterialConsume> searchByMarerialID(String searchValue) {
-        return null;
-    }
 }

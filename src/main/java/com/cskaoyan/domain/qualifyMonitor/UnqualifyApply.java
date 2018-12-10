@@ -2,23 +2,26 @@ package com.cskaoyan.domain.qualifyMonitor;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 public class UnqualifyApply {
+    @Size(min = 3,max = 40,message = "不合格产品编号最小3位最大40位")
     private String unqualifyApplyId;
-
+    private String productName;
     private String productId;
 
     private String unqualifyItem;
-
+    @Min(1)
     private Integer unqualifyCount;
 
-    @DateTimeFormat(pattern = "yyyy-MM-yy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date assemblyDate;
 
     private String empId;
-
-    @DateTimeFormat(pattern = "yyyy-MM-yy")
+    private String empName;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date applyDate;
 
     private String note;
@@ -85,6 +88,22 @@ public class UnqualifyApply {
 
     public void setNote(String note) {
         this.note = note == null ? null : note.trim();
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public String getEmpName() {
+        return empName;
+    }
+
+    public void setEmpName(String empName) {
+        this.empName = empName;
     }
 
     @Override

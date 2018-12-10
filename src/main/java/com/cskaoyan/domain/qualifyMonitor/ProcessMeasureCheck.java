@@ -11,11 +11,11 @@ public class ProcessMeasureCheck {
 
     private String checkItem;
 
-    @DateTimeFormat(pattern = "yyyy-MM-yy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date cdate;
 
     private String measureData;
-
+    private String empName;
     private String empId;
 
     private String result;
@@ -84,5 +84,28 @@ public class ProcessMeasureCheck {
 
     public void setNote(String note) {
         this.note = note == null ? null : note.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "ProcessMeasureCheck{" +
+                "pMeasureCheckId='" + pMeasureCheckId + '\'' +
+                ", processId='" + processId + '\'' +
+                ", checkItem='" + checkItem + '\'' +
+                ", cdate=" + cdate +
+                ", measureData='" + measureData + '\'' +
+                ", empName='" + empName + '\'' +
+                ", empId='" + empId + '\'' +
+                ", result='" + result + '\'' +
+                ", note='" + note + '\'' +
+                '}';
+    }
+
+    public String getEmpName() {
+        return empName;
+    }
+
+    public void setEmpName(String empName) {
+        this.empName = empName;
     }
 }

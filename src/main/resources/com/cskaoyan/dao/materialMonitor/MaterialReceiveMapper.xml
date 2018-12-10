@@ -154,4 +154,22 @@
       note = #{note,jdbcType=VARCHAR}
     where receive_id = #{receiveId,jdbcType=VARCHAR}
   </update>
+
+  <select id="selectByReceiveId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List" />
+    from material_receive
+    WHERE receive_id LIKE #{receiveId,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectByMaterialId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List" />
+    from material_receive
+    WHERE material_id LIKE #{materialId,jdbcType=VARCHAR}
+  </select>
+
+  <select id="findAllMaterialReceive" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List"/> FROM material_receive
+  </select>
+
+
 </mapper>

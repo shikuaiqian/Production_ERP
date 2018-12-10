@@ -1,14 +1,18 @@
 package com.cskaoyan.domain.materialMonitor;
 
-public class Material {
-    private String materialId;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Size;
 
+public class Material {
+    @Size(min = 8,max = 20,message = "编号要在8-20位之间")
+    private String materialId;
+    @Size(min = 2,max = 8,message = "类型要在2-8位之间")
     private String materialType;
 
     private String status;
-
+    @Max(value = 999999999,message = "数量不合法")
     private Integer remaining;
-
+    @Size(max = 200,message = "描述信息要在200字以内")
     private String note;
 
     public String getMaterialId() {
