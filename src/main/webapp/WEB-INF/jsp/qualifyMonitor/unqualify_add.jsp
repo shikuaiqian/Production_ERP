@@ -50,7 +50,7 @@
     					data-options="required:true,editable:false,valueField:'empId',textField:'empName',
     						url:'employee/get_data'" />
 
-    			</td>  
+    			</td>
 	        </tr>
 	        <tr>
 	            <td>申请时间:</td>

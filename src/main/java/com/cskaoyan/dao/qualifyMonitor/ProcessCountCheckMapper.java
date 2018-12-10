@@ -20,5 +20,8 @@ public interface ProcessCountCheckMapper {
 
     int updateByPrimaryKey(ProcessCountCheck record);
     List<ProcessCountCheck> selectByPage(@Param("params") Map<Object,Object> map);
-    int count();
+    int count(@Param("params") Map<Object,Object> map);
+    int updateNote(@Param("id") String pCountCheckId,@Param("note") String note);
+
+    List<ProcessCountCheck> selectByPageAndSelections();
 }

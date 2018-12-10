@@ -14,7 +14,7 @@ public interface EmployeeMapper {
 
     int insertSelective(Employee record);
 
-    Employee selectByPrimaryKey(String empId);
+    EmployeeVo selectByPrimaryKey(@Param("empId") String empId);
 
     int updateByPrimaryKeySelective(Employee record);
 

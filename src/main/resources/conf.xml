@@ -4,11 +4,15 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 
+
+
     <typeAliases >
+
 
         <package name="com.cskaoyan.domain"/>
 
     </typeAliases>
+
 
     <!-- 配置分页插件 -->
     <plugins>
@@ -22,4 +26,5 @@
 
         <package name="com.cskaoyan.dao"/>
     </mappers>
+
 </configuration>

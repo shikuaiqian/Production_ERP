@@ -10,6 +10,8 @@
     <result column="emp_id" jdbcType="VARCHAR" property="empId" />
     <result column="result" jdbcType="VARCHAR" property="result" />
     <result column="note" jdbcType="VARCHAR" property="note" />
+    <result column="emp_name" property="empName"/>
+    <!--<association property="empName" column="emp_id" select="com.cskaoyan.dao.sysManager.EmployeeMapper.selectNameById"/>-->
   </resultMap>
   <sql id="Base_Column_List">
     f_measure_check_id, order_id, check_item, cdate, measure_data, emp_id, result, note
@@ -127,10 +129,38 @@
   </update>
   <select id="count" resultType="_int">
     select count(*) from final_measuret_check
+    <where>
+      <if test="params.fid!=null and params.fid!=''">
+        f_measure_check_id = #{params.fid}
+      </if>
+      <if test="params.oid!=null and params.oid!=''">
+        order_id = #{params.oid}
+      </if>
+    </where>
   </select>
+
+  <select id="selectByPageAndSelections" resultMap="BaseResultMap">
+        SELECT f_measure_check_id, order_id, check_item, cdate, measure_data, fm.emp_id, result, note,emp.emp_name
+        FROM final_measuret_check fm left join employee emp   on fm.emp_id=emp.emp_id
+    </select>
+
 
   <select id="selectByPage" resultMap="BaseResultMap">
-    select * from final_measuret_check limit #{params.limit} offset #{params.offset}
+    select  f_measure_check_id, order_id, check_item, cdate, measure_data, fm.emp_id, result, note,emp.emp_name
+    FROM final_measuret_check fm left join employee emp   on fm.emp_id=emp.emp_id
+    <where>
+      <if test="params.fid!=null and params.fid!=''">
+        f_measure_check_id = #{params.fid}
+      </if>
+      <if test="params.oid!=null and params.oid!=''">
+        order_id = #{params.oid}
+      </if>
+    </where>
+    limit #{params.limit} offset #{params.offset}
   </select>
-
+  <update id="updateNote" >
+    update final_measuret_check
+    set note = #{note}
+    where f_measure_check_id=#{id}
+  </update>
 </mapper>

@@ -10,6 +10,9 @@
     <result column="emp_id" jdbcType="VARCHAR" property="empId" />
     <result column="result" jdbcType="VARCHAR" property="result" />
     <result column="note" jdbcType="VARCHAR" property="note" />
+    <result column="emp_name" property="empName"/>
+    <!--<association property="empName" column="emp_id" select="com.cskaoyan.dao.sysManager.EmployeeMapper.selectNameById"/>-->
+
   </resultMap>
   <sql id="Base_Column_List">
     p_measure_check_id, process_id, check_item, cdate, measure_data, emp_id, result, 
@@ -128,9 +131,33 @@
   </update>
   <select id="count" resultType="_int">
     select count(*) from process_measure_check
+    <where>
+      <if test="params.fid!=null and params.fid!=''">
+        p_measure_check_id = #{params.fid}
+      </if>
+    </where>
   </select>
 
+  <select id="selectByPageAndSelections" resultMap="BaseResultMap">
+        SELECT   p_measure_check_id, process_id, check_item, cdate, measure_data, pm.emp_id, result,
+    note,emp.emp_name
+        FROM process_measure_check pm left join employee emp   on pm.emp_id=emp.emp_id
+    </select>
+
   <select id="selectByPage" resultMap="BaseResultMap">
-    select * from process_measure_check limit #{params.limit} offset #{params.offset}
+    select  p_measure_check_id, process_id, check_item, cdate, measure_data, pm.emp_id, result,
+    note,emp.emp_name
+    FROM process_measure_check pm left join employee emp   on pm.emp_id=emp.emp_id
+    <where>
+      <if test="params.fid!=null and params.fid!=''">
+        p_measure_check_id = #{params.fid}
+      </if>
+    </where>
+    limit #{params.limit} offset #{params.offset}
   </select>
+  <update id="updateNote" >
+    update process_measure_check
+    set note = #{note}
+    where p_measure_check_id=#{id}
+  </update>
 </mapper>

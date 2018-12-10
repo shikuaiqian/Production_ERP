@@ -102,7 +102,6 @@ public class TechnologyController {
         }
         return hashMap;
     }
-
     @RequestMapping("/delete_batch")
     @ResponseBody
     public Map deleteTechnology(String[] ids) {
