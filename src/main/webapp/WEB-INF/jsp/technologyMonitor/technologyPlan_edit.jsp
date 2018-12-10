@@ -44,13 +44,13 @@
 	        <tr>
 	            <td>工艺计划开始时间:</td>
 	            <td>
-	            	<input class="easyui-datetimebox" name="technologyStartPlan"/>
+	            	<input class="easyui-datetimebox" name="technologyPlanStart"/>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>工艺计划结束时间:</td>
 	            <td>
-		            <input class="easyui-datetimebox" name="technologyEndPlan"/>
+		            <input class="easyui-datetimebox" name="technologyPlanEnd"/>
 				</td>
 	        </tr>
 	         

@@ -49,14 +49,14 @@
 	        <tr>
 	            <td>工艺计划开始时间:</td>
 	            <td>
-	            	<input class="easyui-datetimebox" type="text" name="technologyStartPlan"
+	            	<input class="easyui-datetimebox" type="text" name="technologyPlanStart"
 						   value="date.format('yyyy-MM-dd hh:mm:ss')"/>
 	            </td>
 	        </tr>
 	        <tr>
 	            <td>工艺计划结束时间:</td>
 	            <td>
-	            	<input class="easyui-datetimebox" type="text" name="technologyEndPlan"
+	            	<input class="easyui-datetimebox" type="text" name="technologyPlanEnd"
 						   value="date.format('yyyy-MM-dd hh:mm:ss')"/>
 	            </td>
 	        </tr>

@@ -106,4 +106,13 @@ public class TechnologyRequirementServiceImpl implements TechnologyRequirementSe
         technologyRequirementExample.clear();
         return technologyRequirements;
     }
+
+    @Override
+    public boolean updateRequirement(String technologyRequirementId, String requirement) {
+        TechnologyRequirement technologyRequirement = new TechnologyRequirement();
+        technologyRequirement.setTechnologyRequirementId(technologyRequirementId);
+        technologyRequirement.setRequirement(requirement);
+        int i = technologyRequirementMapper.updateByPrimaryKeySelective(technologyRequirement);
+        return i==1;
+    }
 }

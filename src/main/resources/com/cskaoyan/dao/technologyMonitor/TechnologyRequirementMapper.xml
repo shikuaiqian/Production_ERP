@@ -83,11 +83,11 @@
     </if>
     <include refid="Base_Column_List" />
     <if test="multiTable != null">
-    ,${multiParamName} as technology_name
+    ,technology_name as technology_name
     </if>
     from technology_requirement
     <if test="multiTable != null">
-      left join ${multiTable} on technology_requirement.technology_id = ${multiTable}.technology_id
+      left join technology on technology_requirement.technology_id = technology.technology_id
     </if>
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />

@@ -101,4 +101,12 @@ public class TechnologyPlanServiceImpl implements TechnologyPlanService {
         List<TechnologyPlan> technologyPlans = technologyPlanMapper.selectByExample(technologyPlanExample);
         return technologyPlans;
     }
+
+    @Override
+    public TechnologyPlan selectTechnologyPlanByTechnologyPlanId(String id) {
+        String multiParamName = technologyPlanExample.getMultiParamName();
+        String multiTable = technologyPlanExample.getMultiTable();
+        TechnologyPlan technologyPlan = technologyPlanMapper.selectByPrimaryKey(id);
+        return technologyPlan;
+    }
 }
