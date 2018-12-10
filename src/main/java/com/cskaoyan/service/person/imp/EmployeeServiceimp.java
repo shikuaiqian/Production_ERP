@@ -70,4 +70,9 @@ public class EmployeeServiceimp implements EmployeeService {
     public List<EmployeeVo> select() {
         return employeeMapper.select();
     }
+
+    @Override
+    public EmployeeVo show(String id) {
+        return employeeMapper.selectByPrimaryKey(id);
+    }
 }

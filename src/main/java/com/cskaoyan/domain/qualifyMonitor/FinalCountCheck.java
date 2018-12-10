@@ -20,11 +20,11 @@ public class FinalCountCheck {
 
     private BigDecimal qualify;
 
-    @DateTimeFormat(pattern = "yyyy-MM-yy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date cdate;
 
     private String measureData;
-
+    private String empName;
     private String empId;
 
     private String result;
@@ -125,5 +125,32 @@ public class FinalCountCheck {
 
     public void setNote(String note) {
         this.note = note == null ? null : note.trim();
+    }
+
+    public String getEmpName() {
+        return empName;
+    }
+
+    public void setEmpName(String empName) {
+        this.empName = empName;
+    }
+
+    @Override
+    public String toString() {
+        return "FinalCountCheck{" +
+                "fCountCheckId='" + fCountCheckId + '\'' +
+                ", orderId='" + orderId + '\'' +
+                ", checkItem='" + checkItem + '\'' +
+                ", sample=" + sample +
+                ", checkNumber=" + checkNumber +
+                ", unqualify=" + unqualify +
+                ", qualify=" + qualify +
+                ", cdate=" + cdate +
+                ", measureData='" + measureData + '\'' +
+                ", empName='" + empName + '\'' +
+                ", empId='" + empId + '\'' +
+                ", result='" + result + '\'' +
+                ", note='" + note + '\'' +
+                '}';
     }
 }

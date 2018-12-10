@@ -8,7 +8,9 @@
     <mvc:annotation-driven conversion-service="service" validator="validator"/>
 
 
-    <mvc:annotation-driven conversion-service="service"  validator="validator"/>
+   <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+       <property name="providerClass" value="org.hibernate.validator.HibernateValidator"></property>
+   </bean>
 
 
     <bean id="viewResolver"	class="org.springframework.web.servlet.view.UrlBasedViewResolver">
@@ -39,13 +41,9 @@
 
     <bean id="datasource" class="com.alibaba.druid.pool.DruidDataSource">
         <property name="username" value="root"/>
-        <property name="password" value="a5850246"/>
-        <property name="url" value="jdbc:mysql://localhost:3306/erp-ssm?serverTimezone=GMT%2B8"/>
-
-    </bean>
-
-    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
-        <property name="providerClass" value="org.hibernate.validator.HibernateValidator"></property>
+        <property name="password" value="1234"/>
+        <property name="url" value="jdbc:mysql://192.168.4.21:3306/erp-ssm?serverTimezone=GMT%2B8"/>
+        <property name="filters" value="stat,wall"></property>
     </bean>
 
     <tx:annotation-driven transaction-manager="transactionManager"/>

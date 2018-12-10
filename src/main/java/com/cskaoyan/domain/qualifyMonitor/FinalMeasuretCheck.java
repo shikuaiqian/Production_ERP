@@ -11,13 +11,14 @@ public class FinalMeasuretCheck {
 
     private String checkItem;
 
-    @DateTimeFormat(pattern = "yyyy-MM-yy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date cdate;
 
     private String measureData;
 
     private String empId;
 
+    private String empName;
     private String result;
 
     private String note;
@@ -28,6 +29,14 @@ public class FinalMeasuretCheck {
 
     public void setfMeasureCheckId(String fMeasureCheckId) {
         this.fMeasureCheckId = fMeasureCheckId == null ? null : fMeasureCheckId.trim();
+    }
+
+    public String getEmpName() {
+        return empName;
+    }
+
+    public void setEmpName(String empName) {
+        this.empName = empName;
     }
 
     public String getOrderId() {

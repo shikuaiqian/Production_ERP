@@ -1,11 +1,11 @@
 package com.cskaoyan.service.qualifyMonitor.Impl;
 
-import com.cskaoyan.dao.qualifyMonitor.ProcessCountCheckMapper;
-
-import com.cskaoyan.domain.qualifyMonitor.ProcessCountCheck;
-import com.cskaoyan.service.qualifyMonitor.ProcessCountCheckService;
+import com.cskaoyan.dao.qualifyMonitor.UnqualifyApplyMapper;
+import com.cskaoyan.domain.qualifyMonitor.UnqualifyApply;
+import com.cskaoyan.service.qualifyMonitor.UnqualifyService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.github.pagehelper.page.PageMethod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,16 +18,19 @@ import java.util.Map;
  * Created by LZH on 2018/12/6
  */
 @Service
-public class ProcessCountCheckServiceImpl implements ProcessCountCheckService {
+public class UnqualifyServiceImpl implements UnqualifyService {
+
+
     @Autowired
-    ProcessCountCheckMapper processCountCheckMapper;
+    UnqualifyApplyMapper unqualifyApplyMapper;
+
     @Transactional(readOnly = true)
     @Override
-    public PageInfo<ProcessCountCheck> findPage(int page, int rows) {
+    public PageInfo<UnqualifyApply> findPage(int page, int rows) {
 
         PageHelper.startPage(page, rows);
-        List<ProcessCountCheck> processMeasureChecks = processCountCheckMapper.selectByPageAndSelections();
-        PageInfo<ProcessCountCheck> pageInfo = new PageInfo<>(processMeasureChecks);
+        List<UnqualifyApply> unqualifyApplies = unqualifyApplyMapper.selectByPageAndSelections();
+        PageInfo<UnqualifyApply> pageInfo = new PageInfo<>(unqualifyApplies);
         return pageInfo;
     }
     @Override
@@ -39,34 +42,38 @@ public class ProcessCountCheckServiceImpl implements ProcessCountCheckService {
         map.put("limit",limit);
         map.put("offset",offset);
         map.put(red,searchValue);
-        int count = processCountCheckMapper.count(map);
-        List<ProcessCountCheck> processCountChecks = processCountCheckMapper.selectByPage(map);
+        int count = unqualifyApplyMapper.count(map);
+        List<UnqualifyApply> unqualifyApplies = unqualifyApplyMapper.selectByPage(map);
         map2.put("total",count);
-        map2.put("rows",processCountChecks);
+        map2.put("rows",unqualifyApplies);
         return map2;
     }
     @Override
-    public void add(ProcessCountCheck processCountCheck) throws Exception{
-        if (processCountCheckMapper.insert(processCountCheck)!=1)
+    public void add(UnqualifyApply unqualifyApply) throws Exception {
+        if(unqualifyApplyMapper.insert(unqualifyApply)!=1){
             throw new Exception("添加失败");
+        }
     }
 
     @Override
-    public void edit(ProcessCountCheck processCountCheck) throws Exception {
-        if (processCountCheckMapper.updateByPrimaryKeySelective(processCountCheck)!=1)
+    public void edit(UnqualifyApply unqualifyApply) throws Exception {
+        if (unqualifyApplyMapper.updateByPrimaryKeySelective(unqualifyApply)!=1)
             throw new Exception("修改失败");
     }
     @Override
     @Transactional
     public void delete(String[] id) throws Exception {
         for (String i : id) {
-            if (processCountCheckMapper.deleteByPrimaryKey(i)!=1)
+            if (unqualifyApplyMapper.deleteByPrimaryKey(i)!=1)
                 throw new Exception("删除失败");
         }
     }
+
     @Override
     public void updateNote(String id, String note) throws Exception {
-        if (processCountCheckMapper.updateNote(id,note)!=1)
-            throw new Exception("更新备注失败");
+        if (unqualifyApplyMapper.updateNote(id,note)!=1)
+            throw new Exception("修改备注失败");
     }
+
+
 }
