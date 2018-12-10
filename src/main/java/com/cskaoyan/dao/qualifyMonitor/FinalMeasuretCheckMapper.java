@@ -19,5 +19,8 @@ public interface FinalMeasuretCheckMapper {
 
     int updateByPrimaryKey(FinalMeasuretCheck record);
     List<FinalMeasuretCheck> selectByPage(@Param("params") Map<Object,Object> map);
-    int count();
+    int count(@Param("params") Map<Object,Object> map);
+    int updateNote(@Param("id") String fMeasureCheckId,@Param("note") String note);
+
+    List<FinalMeasuretCheck> selectByPageAndSelections();
 }

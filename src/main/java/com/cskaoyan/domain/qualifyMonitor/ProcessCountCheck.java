@@ -20,13 +20,13 @@ public class ProcessCountCheck {
 
     private BigDecimal qualify;
 
-    @DateTimeFormat(pattern = "yyyy-MM-yy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date cdate;
 
     private String measureData;
 
     private String empId;
-
+    private String empName;
     private String result;
 
     private String note;
@@ -37,6 +37,14 @@ public class ProcessCountCheck {
 
     public void setpCountCheckId(String pCountCheckId) {
         this.pCountCheckId = pCountCheckId == null ? null : pCountCheckId.trim();
+    }
+
+    public String getEmpName() {
+        return empName;
+    }
+
+    public void setEmpName(String empName) {
+        this.empName = empName;
     }
 
     public String getProcessId() {
@@ -125,5 +133,24 @@ public class ProcessCountCheck {
 
     public void setNote(String note) {
         this.note = note == null ? null : note.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "ProcessCountCheck{" +
+                "pCountCheckId='" + pCountCheckId + '\'' +
+                ", processId='" + processId + '\'' +
+                ", checkItem='" + checkItem + '\'' +
+                ", sample=" + sample +
+                ", checkNumber=" + checkNumber +
+                ", unqualify=" + unqualify +
+                ", qualify=" + qualify +
+                ", cdate=" + cdate +
+                ", measureData='" + measureData + '\'' +
+                ", empId='" + empId + '\'' +
+                ", empName='" + empName + '\'' +
+                ", result='" + result + '\'' +
+                ", note='" + note + '\'' +
+                '}';
     }
 }

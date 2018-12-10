@@ -530,7 +530,7 @@ function doSearch_fCountCheck(value,name){ //用户输入用户名,点击搜素,
 //////////////////////////////////////////////////////////////////////////
 
 function fCountCheck_add(){
-	$.get("f_count_check/add_judge",'',function(data){
+	$.get("fCountCheck/add_judge",'',function(data){
    		if(data.msg != null){
    			$.messager.alert('提示', data.msg);
    		}else{
@@ -540,7 +540,7 @@ function fCountCheck_add(){
 }
 
 function fCountCheck_edit(){
-	$.get("f_count_check/edit_judge",'',function(data){
+	$.get("fCountCheck/edit_judge",'',function(data){
    		if(data.msg != null){
    			$.messager.alert('提示', data.msg);
    		}else{

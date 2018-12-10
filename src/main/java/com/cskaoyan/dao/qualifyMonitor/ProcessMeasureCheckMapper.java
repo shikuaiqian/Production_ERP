@@ -21,5 +21,8 @@ public interface ProcessMeasureCheckMapper {
 
     int updateByPrimaryKey(ProcessMeasureCheck record);
     List<ProcessMeasureCheck> selectByPage(@Param("params") Map<Object,Object> map);
-    int count();
+    int count(@Param("params") Map<Object,Object> map);
+    int updateNote(@Param("id") String pMeasureCheckId,@Param("note") String note);
+
+    List<ProcessMeasureCheck> selectByPageAndSelections();
 }

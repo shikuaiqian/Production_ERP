@@ -20,6 +20,8 @@ public interface FinalCountCheckMapper {
 
     int updateByPrimaryKey(FinalCountCheck record);
     List<FinalCountCheck> selectByPage(@Param("params") Map<Object,Object> map);
-    int count();
+    int count(@Param("params") Map<Object,Object> map);
+    int updateNote(@Param("id") String fCountCheckId,@Param("note") String note);
 
+    List<FinalCountCheck> selectByPageAndSelections();
 }
