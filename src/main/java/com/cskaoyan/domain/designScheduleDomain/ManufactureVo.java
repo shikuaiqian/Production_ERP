@@ -1,5 +1,7 @@
 package com.cskaoyan.domain.designScheduleDomain;
-import com.cskaoyan.domain.*;
+
+import com.cskaoyan.domain.technologyMonitor.Technology;
+
 public class ManufactureVo extends Manufacture {
     Order cOrder;
 
