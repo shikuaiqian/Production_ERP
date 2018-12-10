@@ -20,4 +20,5 @@ public interface EmployeeService {
     Map selectBySearchValue(HashMap<Object, Object> map, String page, String rows);
 
     List<EmployeeVo> select();
+    EmployeeVo show(String id);
 }

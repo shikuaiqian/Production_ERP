@@ -7,10 +7,12 @@ import com.cskaoyan.domain.deviceManagement.vo.DeviceVo;
 import com.cskaoyan.service.deviceManagement.interfaces.DeviceListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 
@@ -20,6 +22,73 @@ public class DeviceListController {
 
     @Autowired
     DeviceListService deviceListService;
+
+    @RequestMapping("/list")
+    @ResponseBody
+    public HashMap<String, Object> getList(@RequestParam("page") String page, @RequestParam("rows") String rows) {
+        List list = deviceListService.tableInfo(page, rows);
+        String tableSize = deviceListService.tableSize();
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("rows", list);
+        hashMap.put("total", tableSize);
+        return hashMap;
+    }
+
+    @RequestMapping("/add_judge")
+    @ResponseBody
+    public HashMap<String, Object> addJudge(HttpServletRequest httpServletRequest){
+        String userId=null;
+        String addJudgeMsg=deviceListService.addJudge(userId);
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("addJudgeMsg",addJudgeMsg);
+        return hashMap;
+    }
+
+    @RequestMapping("/edit_judge")
+    @ResponseBody
+    public HashMap<String, Object> editJudge(HttpServletRequest httpServletRequest){
+        String userId=null;
+        String editJudgeMsg=deviceListService.editJudge(userId);
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("editJudgeMsg",editJudgeMsg);
+        return hashMap;
+    }
+
+    @RequestMapping("/delete_judge")
+    @ResponseBody
+    public HashMap<String, Object> deleteJudge(HttpServletRequest httpServletRequest){
+        String userId=null;
+        String deleteJudgeMsg =deviceListService.deleteJudge(userId);
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("deleteJudgeMsg",deleteJudgeMsg);
+        return hashMap;
+    }
+
+    @RequestMapping("get/{primaryKey}")
+    @ResponseBody
+    public Object getData(@PathVariable("primaryKey") String primaryKey) {
+        Device objectByPrimaryKey = deviceListService.getObjectByPrimaryKey(primaryKey);
+        return objectByPrimaryKey;
+    }
+
+    @RequestMapping("/get_data")
+    @ResponseBody
+    public List getMappingData() {
+        List list = deviceListService.getIdMappingName();
+        return list;
+    }
+
+    @RequestMapping("/add")
+    public String getAddPage(@RequestParam("_") String param) {
+        String pagePath = "deviceManagement/deviceList_add";
+        return pagePath;
+    }
+
+    @RequestMapping("/edit")
+    public String getEditPage(@RequestParam("_") String param) {
+        String pagePath = "deviceManagement/deviceList_edit";
+        return pagePath;
+    }
 
     @RequestMapping("/insert")
     @ResponseBody
@@ -48,10 +117,6 @@ public class DeviceListController {
         ChangeResult changeResult = deviceListService.updateNote(deviceId,note);
         return changeResult;
     }
-
-
-
-
 
 
     @RequestMapping("/delete_batch")
