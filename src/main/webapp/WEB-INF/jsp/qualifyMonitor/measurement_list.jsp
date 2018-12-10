@@ -323,15 +323,15 @@ function doSearch_fMeasureCheck(value,name){ //用户输入用户名,点击搜�
     			$.get("order/get/"+row.orderId,'',function(data){
     				fMeasureCheckOrderEditor = TAOTAO.createEditor("#fMeasureOrderEditForm [name=note]");	
  		    		//回显数据
- 	        		data.customId = data.custom.customId; 
- 	        		data.productId = data.product.productId; 
+ 	        		data.customId = data.customId;
+ 	        		data.productId = data.productId;
  	        		data.orderDate = TAOTAO.formatDateTime(data.orderDate);
  	        		data.requestDate = TAOTAO.formatDateTime(data.requestDate);
  	        		$("#fMeasureOrderEditForm").form("load", data);
  	        		fMeasureCheckOrderEditor.html(data.note);
  	        			
  	        		initFMeasurementPic({
- 	        			"pics" : data.image,
+ 	        			"pics" : data.image
  	        		});
  	        			
  	        		//加载上传过的文件

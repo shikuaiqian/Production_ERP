@@ -329,8 +329,8 @@ function doSearch_fCountCheck(value,name){ //用户输入用户名,点击搜素,
     			$.get("order/get/"+row.orderId,'',function(data){
     				fCountCheckOrderEditor = TAOTAO.createEditor("#fCountOrderEditForm [name=note]");	
  		    		//回显数据
- 	        		data.customId = data.custom.customId; 
- 	        		data.productId = data.product.productId; 
+ 	        		data.customId = data.customId;
+ 	        		data.productId = data.productId;
  	        		data.orderDate = TAOTAO.formatDateTime(data.orderDate);
  	        		data.requestDate = TAOTAO.formatDateTime(data.requestDate);
  	        		$("#fCountOrderEditForm").form("load", data);
