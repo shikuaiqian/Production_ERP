@@ -33,7 +33,7 @@
       <result column="file" jdbcType="VARCHAR" property="file" />
       <result column="status" jdbcType="INTEGER" property="status" />
     </association>
-    <association property="technology" javaType="com.cskaoyan.domain.designScheduleDomain.Technology">
+    <association property="technology" javaType="com.cskaoyan.domain.technologyMonitor.Technology">
       <result column="technology_id" jdbcType="VARCHAR" property="technologyId" />
       <result column="technology_name" jdbcType="VARCHAR" property="technologyName" />
       <result column="price" jdbcType="DECIMAL" property="price" />
