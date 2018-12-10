@@ -20,4 +20,6 @@ public interface TechnologyPlanService {
     boolean updateTechnologyPlanById(TechnologyPlan technology);
 
     List selectTechnologyPlanAll();
+
+    TechnologyPlan selectTechnologyPlanByTechnologyPlanId(String id);
 }

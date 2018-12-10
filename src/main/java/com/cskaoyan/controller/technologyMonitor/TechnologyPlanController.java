@@ -129,4 +129,11 @@ public class TechnologyPlanController {
         List list = technologyPlanService.selectTechnologyPlanAll();
         return list;
     }
+
+    @RequestMapping("/get/{id}")
+    @ResponseBody
+    public TechnologyPlan getProcessById(@PathVariable String id){
+        TechnologyPlan technologyPlan = technologyPlanService.selectTechnologyPlanByTechnologyPlanId(id);
+        return technologyPlan;
+    }
 }
