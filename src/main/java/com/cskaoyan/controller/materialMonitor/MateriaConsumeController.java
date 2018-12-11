@@ -1,9 +1,8 @@
 package com.cskaoyan.controller.materialMonitor;
 
-
-import com.cskaoyan.domain.materialMonitor.Material;
-import com.cskaoyan.domain.materialMonitor.MaterialReceive;
-import com.cskaoyan.service.materiaMonitor.MaterialReceiveService;
+import com.cskaoyan.domain.materialMonitor.MaterialConsume;
+import com.cskaoyan.service.materiaMonitor.MateriaConsumeService;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -19,68 +18,62 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@RequestMapping("/materialReceive")
+@RequestMapping("/materialConsume")
 @Controller
-public class MaterialReceiveController {
+public class MateriaConsumeController {
 
     @Autowired
-    MaterialReceiveService receiveService;
-
-    //三个按钮
+    MateriaConsumeService materiaConsumeService;
     @RequestMapping("/find")
     public String find(HttpSession session) {
         ArrayList<String> func = new ArrayList();
-        func.add("materialReceive:add");
-        func.add("materialReceive:edit");
-        func.add("materialReceive:delete");
+        func.add("materialConsume:add");
+        func.add("materialConsume:edit");
+        func.add("materialConsume:delete");
 
         session.setAttribute("sysPermissionList", func);
-        return "materialMonitor/materialReceive_list";
+        return "materialMonitor/materialConsume_list";
     }
 
-    //显示所有的MaterialReceive
+
+    //显示所有MaterialConsume
     @ResponseBody
     @RequestMapping("/list")
-    public Map<String, Object> list() {
-        //需要往materialReceives中插入material
-
-        List<MaterialReceive> materialReceives = receiveService.findAllMaterialReceive();
-
-        for (MaterialReceive mr : materialReceives) {
-            Material material = receiveService.getMaterialById(mr.getMaterialId());
-            mr.setMaterial(material);
-        }
+    public Map<String, Object> list(Integer page,Integer rows) {
+        //连表查询得到work表和material表的信息
+        PageInfo<MaterialConsume> pageInfo = materiaConsumeService.findAllMaterialConsume(page,rows);
 
         Map<String, Object> info = new HashMap<>();
-        info.put("total", materialReceives.size());
-        info.put("rows", materialReceives);
+        info.put("total", pageInfo.getTotal());
+        info.put("rows", pageInfo.getList());
 
         return info;
+
     }
 
     @ResponseBody
     @RequestMapping("/add_judge")
-    public HashMap<String, Object> add() {
-        HashMap<String, Object> ret = new HashMap<>();
-        ret.put("msg", null);
+    public HashMap<String,Object> add() {
+        HashMap<String,Object> ret = new HashMap<>();
+        ret.put("msg",null);
         return null;
     }
 
     @RequestMapping("/add")
     public String addWindow() {
-        return "materialMonitor/materialReceive_add";
+        return "materialMonitor/materialConsume_add";
     }
 
     //新增
     @ResponseBody
     @RequestMapping("/insert")
-    public Map<String, Object> insert(@Valid MaterialReceive materialReceive, BindingResult result) {
+    public Map<String, Object> insert(@Valid MaterialConsume materialConsume, BindingResult result) {
 
         Map<String, Object> info = new HashMap<>();
         if (result.hasFieldErrors()) {
             //验证错误
             List<ObjectError> allErrors = result.getAllErrors();
-            info.put("status", 100);
+            info.put("status", 101);
 
             for (ObjectError error : allErrors) {
                 String defaultMessage = error.getDefaultMessage();
@@ -88,7 +81,7 @@ public class MaterialReceiveController {
             }
             return info;
         } else {
-            boolean ret = receiveService.insert(materialReceive);
+            boolean ret = materiaConsumeService.insert(materialConsume);
             if (ret) {
                 info.put("status", 200);
             }
@@ -98,25 +91,25 @@ public class MaterialReceiveController {
 
     @ResponseBody
     @RequestMapping("/edit_judge")
-    public HashMap<String, Object> edit() {
-        HashMap<String, Object> ret = new HashMap<>();
-        ret.put("msg", null);
+    public HashMap<String,Object> edit() {
+        HashMap<String,Object> ret = new HashMap<>();
+        ret.put("msg",null);
         return null;
     }
 
     @RequestMapping("/edit")
     public String editWindow() {
-        return "materialMonitor/materialReceive_edit";
+        return "materialMonitor/materialConsume_edit";
     }
 
     //修改备注
     @ResponseBody
     @RequestMapping("/update_note")
-    public Map<String, Object> update(String receiveId, String note) {
+    public Map<String, Object> update(String consumeId, String note) {
 
         Map<String, Object> info = new HashMap<>();
 
-        boolean ret = receiveService.updateNote(receiveId, note);
+        boolean ret = materiaConsumeService.updateNote(consumeId, note);
 
         if (ret) {
             info.put("status", 200);
@@ -129,13 +122,13 @@ public class MaterialReceiveController {
     //修改
     @ResponseBody
     @RequestMapping("/update_all")
-    public Map<String, Object> update(@Valid MaterialReceive materialReceive, BindingResult result) {
+    public Map<String, Object> update(@Valid MaterialConsume materialConsume, BindingResult result) {
 
         Map<String, Object> info = new HashMap<>();
         if (result.hasFieldErrors()) {
             //验证错误
             List<ObjectError> allErrors = result.getAllErrors();
-            info.put("status", 100);
+            info.put("status", 101);
 
             for (ObjectError error : allErrors) {
                 String defaultMessage = error.getDefaultMessage();
@@ -143,8 +136,7 @@ public class MaterialReceiveController {
             }
             return info;
         } else {
-            //对剩余数量进行修改
-            boolean ret = receiveService.update(materialReceive);
+            boolean ret = materiaConsumeService.update(materialConsume);
             if (ret) {
                 info.put("status", 200);
             }
@@ -169,7 +161,7 @@ public class MaterialReceiveController {
         int times = 0;
 
         for (String id : ids) {
-            boolean b = receiveService.delectById(id);
+            boolean b = materiaConsumeService.delectById(id);
             if (b) {
                 times++;
             }
@@ -177,7 +169,7 @@ public class MaterialReceiveController {
         if (length == times) {
             Map<String, Object> info = new HashMap<>();
             info.put("status", 200);
-            info.put("msg", "OK");
+            info.put("msg","OK");
             return info;
         }
         return null;
@@ -185,38 +177,46 @@ public class MaterialReceiveController {
 
     //搜索
     @ResponseBody
-    @RequestMapping(value = "/{formName}")
-    public Map<String, Object> search(@PathVariable String formName, String searchValue) {
+    @RequestMapping(value="/{formName}")
+    public Map<String, Object> search(@PathVariable String formName, String searchValue, Integer page, Integer rows) {
         Map<String, Object> info = new HashMap<>();
 
-        //物料收入编号
-        if (formName.contains("receiveId")) {
-            List<MaterialReceive> receives = receiveService.searchByReceiveId(searchValue);
-            //需要往materialReceives中插入material
-            //修改为连接查询
-            for (MaterialReceive receive : receives) {
-                Material material = receiveService.getMaterialById(receive.getMaterialId());
-                receive.setMaterial(material);
-            }
-            info.put("total", receives.size());
-            info.put("rows", receives);
+        //物料消耗编号
+        if (formName.contains("consumeId")){
+            PageInfo<MaterialConsume> pageInfo= materiaConsumeService.searchConsumeId(searchValue, page, rows);
+
+            info.put("total", pageInfo.getTotal());
+            info.put("rows", pageInfo.getList());
             return info;
 
         }
 
+        //作业编号
+        if (formName.contains("workId")){
+            PageInfo<MaterialConsume> pageInfo = materiaConsumeService.serachByWorkId(searchValue, page, rows);
+
+            info.put("total", pageInfo.getTotal());
+            info.put("rows", pageInfo.getList());
+            return info;
+        }
+
         //物料编号
-        if (formName.contains("materialId")) {
-            List<MaterialReceive> receives = receiveService.serachByMaterialId(searchValue);
-            //需要往materialReceives中插入material
-            //修改为连接查询
-            for (MaterialReceive receive : receives) {
-                Material material = receiveService.getMaterialById(receive.getMaterialId());
-                receive.setMaterial(material);
-            }
-            info.put("total", receives.size());
-            info.put("rows", receives);
+        if (formName.contains("materialId")){
+            PageInfo<MaterialConsume> pageInfo = materiaConsumeService.serachByMaterialId(searchValue, page, rows);
+
+            info.put("total", pageInfo.getTotal());
+            info.put("rows", pageInfo.getList());
             return info;
         }
         return null;
     }
+
+
+
+
+
+
+
+
+
 }

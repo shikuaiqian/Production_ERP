@@ -133,5 +133,41 @@
   <select id="findAllMaterial" resultMap="BaseResultMap">
     SELECT <include refid="Base_Column_List"/> FROM material
   </select>
+  <update id="updateNote">
+        update material set note=#{param2} where material_id =#{param1}
+    </update>
 
+  <delete id="deleteById" parameterType="java.lang.String">
+    delete from material
+    where material_id = #{materialId,jdbcType=VARCHAR}
+  </delete>
+
+
+  <update id="increaseRemanining">
+        UPDATE material SET remaining=remaining+#{param2} WHERE material_id =#{param1}
+    </update>
+
+  <update id="decreaseRemanining">
+        UPDATE material SET remaining=remaining-#{param2} WHERE material_id =#{param1}
+    </update>
+
+  <update id="updateRemaining">
+        UPDATE material SET remaining=remaining+#{param2} WHERE material_id =#{param1}
+    </update>
+
+  <update id="updateRemaining2">
+        UPDATE material SET remaining=remaining-#{param2} WHERE material_id =#{param1}
+    </update>
+
+  <select id="selectByMaterialId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from material
+    where material_id LIKE #{materialId,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectByType" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List"/> FROM material
+    WHERE material_type LIKE #{materialType,jdbcType=VARCHAR}
+  </select>
 </mapper>
