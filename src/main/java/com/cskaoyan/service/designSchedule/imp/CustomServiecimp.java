@@ -74,4 +74,12 @@ public class CustomServiecimp  implements CustomService{
     public Custom getCustomById(String customId) {
         return customMapper.selectByPrimaryKey(customId);
     }
+
+    @Override
+    public void updateNote(String customId, String note) {
+        Custom custom = new Custom();
+        custom.setCustomId(customId);
+        custom.setNote(note);
+        customMapper.updateByPrimaryKeySelective(custom);
+    }
 }

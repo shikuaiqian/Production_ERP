@@ -149,4 +149,24 @@ public class OrderController {
     public Order getCustomById(@PathVariable String orderId){
         return  orderService.getOrderById(orderId);
     }
+    @ResponseBody
+    @RequestMapping("update_note")
+    public Map updateNote(String orderId,String note)
+    {
+        HashMap<String ,Object> map=new HashMap<>();
+        map.put("msg","ok");
+        map.put("status",200);
+        try {
+            orderService.updateNote(orderId,note);
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+
+            map.put("msg","修改失败请重试");
+            map.put("status",0);
+        }
+        return map;
+    }
+
+
 }

@@ -63,6 +63,14 @@ public class ProductServiceimp implements ProductService {
     }
 
     @Override
+    public void updateNote(String productId, String note) {
+        Product product = new Product();
+        product.setProductId(productId);
+        product.setNote(note);
+        productMapper.updateByPrimaryKeySelective(product);
+    }
+
+    @Override
     public Product getProductById(String productId) {
         return productMapper.selectByPrimaryKey(productId);
     }

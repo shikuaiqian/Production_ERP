@@ -145,4 +145,26 @@ public class CustomController {
     public Custom getCustomById(@PathVariable String customId){
      return  customService.getCustomById(customId);
     }
+
+    @ResponseBody
+    @RequestMapping("update_note")
+    public Map updateNote(String customId,String note)
+    {
+        HashMap<String ,Object> map=new HashMap<>();
+        map.put("msg","ok");
+        map.put("status",200);
+          try {
+              customService.updateNote(customId,note);
+          }catch (Exception e)
+          {
+              e.printStackTrace();
+
+              map.put("msg","修改失败请重试");
+              map.put("status",0);
+          }
+          return map;
+    }
+
+
+
 }

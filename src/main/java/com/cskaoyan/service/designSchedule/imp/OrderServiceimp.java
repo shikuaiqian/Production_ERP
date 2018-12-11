@@ -66,6 +66,14 @@ public class OrderServiceimp  implements OrderService{
     }
 
     @Override
+    public void updateNote(String orderId, String note) {
+        Order order = new Order();
+        order.setOrderId(orderId);
+        order.setNote(note);
+        orderMapper.updateByPrimaryKeySelective(order);
+    }
+
+    @Override
     public Order getOrderById(String orderId) {
         return orderMapper.selectByPrimaryKey(orderId);
     }

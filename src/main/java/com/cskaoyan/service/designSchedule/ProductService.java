@@ -19,4 +19,6 @@ public interface ProductService {
     List<Product> findAll();
 
     Product getProductById(String productId);
+
+    void updateNote(String productId, String note);
 }
