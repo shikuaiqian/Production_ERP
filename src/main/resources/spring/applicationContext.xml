@@ -41,10 +41,11 @@
 
     <bean id="datasource" class="com.alibaba.druid.pool.DruidDataSource">
         <property name="username" value="root"/>
-        <property name="password" value="1234"/>
-        <property name="url" value="jdbc:mysql://192.168.4.21:3306/erp-ssm?serverTimezone=GMT%2B8"/>
-        <property name="filters" value="stat,wall"></property>
+        <property name="password" value="285264"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/erp-ssm?serverTimezone=GMT%2B8"/>
+
     </bean>
+
 
     <tx:annotation-driven transaction-manager="transactionManager"/>
     <bean class="org.springframework.jdbc.datasource.DataSourceTransactionManager" id="transactionManager">

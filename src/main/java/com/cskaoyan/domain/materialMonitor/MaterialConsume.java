@@ -1,23 +1,49 @@
 package com.cskaoyan.domain.materialMonitor;
 
+import com.cskaoyan.domain.designScheduleDomain.Work;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 public class MaterialConsume {
+    @Size(min = 8,max = 20,message = "编号要在8-20位之间")
     private String consumeId;
 
     private String workId;
 
     private String materialId;
-
+    @Max(value = 999999999,message = "数量不合法")
     private Integer consumeAmount;
-
+    @DateTimeFormat( pattern = "yyyy-MM-dd")
     private Date consumeDate;
-
+    @Size(min = 2,max = 20,message = "名字要在2-20位之间")
     private String sender;
-
+    @Size(min = 2,max = 20,message = "名字要在2-20位之间")
     private String receiver;
-
+    @Size(max = 200,message = "描述信息要在200字以内")
     private String note;
+
+    private Work work;
+
+    private Material material;
+
+    public Work getWork() {
+        return work;
+    }
+
+    public void setWork(Work work) {
+        this.work = work;
+    }
+
+    public Material getMaterial() {
+        return material;
+    }
+
+    public void setMaterial(Material material) {
+        this.material = material;
+    }
 
     public String getConsumeId() {
         return consumeId;

@@ -25,6 +25,20 @@
     consume_id, work_id, material_id, consume_amount, consume_date, sender, receiver, 
     note
   </sql>
+  <resultMap id="Map1" type="com.cskaoyan.domain.materialMonitor.MaterialConsume" extends="BaseResultMap">
+    <id column="consume_id" jdbcType="VARCHAR" property="consumeId"/>
+    <result column="consume_amount" jdbcType="INTEGER" property="consumeAmount"/>
+    <result column="consume_date" jdbcType="TIMESTAMP" property="consumeDate"/>
+    <result column="sender" jdbcType="VARCHAR" property="sender"/>
+    <result column="receiver" jdbcType="VARCHAR" property="receiver"/>
+    <result column="note" jdbcType="VARCHAR" property="note"/>
+    <association property="work" javaType="com.cskaoyan.domain.designScheduleDomain.Work">
+      <result column="work_id" property="workId"/>
+    </association>
+    <association property="material" javaType="com.cskaoyan.domain.materialMonitor.Material">
+      <result column="material_id" property="materialId"></result>
+    </association>
+  </resultMap>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     <!--
       WARNING - @mbg.generated
@@ -36,6 +50,30 @@
     from material_consume
     where consume_id = #{consumeId,jdbcType=VARCHAR}
   </select>
+  <select id="selectByConsumeId" parameterType="java.lang.String" resultMap="Map1">
+    SELECT consume.consume_id, consume.consume_amount, consume.consume_date, consume.sender, consume.receiver, consume.note,
+    `work`.work_id,material.material_id
+    FROM material_consume consume
+    LEFT JOIN `work` ON consume.work_id= `work`.work_id
+    LEFT JOIN material ON consume.material_id=material.material_id
+    WHERE consume.consume_id LIKE #{consumeId,jdbcType=VARCHAR}
+    </select>
+  <select id="selectByWorkId" parameterType="java.lang.String" resultMap="Map1">
+    SELECT consume.consume_id, consume.consume_amount, consume.consume_date, consume.sender, consume.receiver, consume.note,
+    `work`.work_id,material.material_id
+    FROM material_consume consume
+    LEFT JOIN `work` ON consume.work_id= `work`.work_id
+    LEFT JOIN material ON consume.material_id=material.material_id
+    WHERE consume.work_id LIKE #{workId,jdbcType=VARCHAR}
+    </select>
+  <select id="selectByMaterialId" parameterType="java.lang.String" resultMap="Map1">
+    SELECT consume.consume_id, consume.consume_amount, consume.consume_date, consume.sender, consume.receiver, consume.note,
+    `work`.work_id,material.material_id
+    FROM material_consume consume
+    LEFT JOIN `work` ON consume.work_id= `work`.work_id
+    LEFT JOIN material ON consume.material_id=material.material_id
+    WHERE consume.material_id LIKE #{materialId,jdbcType=VARCHAR}
+    </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     <!--
       WARNING - @mbg.generated
@@ -166,4 +204,15 @@
       note = #{note,jdbcType=VARCHAR}
     where consume_id = #{consumeId,jdbcType=VARCHAR}
   </update>
+  <update id="updateNote">
+        update material_consume set note=#{param2} where consume_id =#{param1}
+    </update>
+  <select id="findAllMaterialConsume" parameterType="java.lang.String" resultMap="Map1">
+    SELECT consume.consume_id, consume.consume_amount, consume.consume_date, consume.sender, consume.receiver, consume.note,
+    `work`.work_id,material.material_id
+    FROM material_consume consume
+    LEFT JOIN `work` ON consume.work_id= `work`.work_id
+    LEFT JOIN material ON consume.material_id=material.material_id
+    </select>
+
 </mapper>
