@@ -11,7 +11,7 @@ public class Convert implements Converter<String,Date> {
 
     @Override
     public Date convert(String s) {
-        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-mm-dd");
+        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date parse=null;
         try {
             parse = simpleDateFormat.parse(s);
