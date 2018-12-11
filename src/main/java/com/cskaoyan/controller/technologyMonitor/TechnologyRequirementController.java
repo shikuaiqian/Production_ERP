@@ -130,4 +130,17 @@ public class TechnologyRequirementController {
         List list = technologyRequirementService.selectTechnologyAll();
         return list;
     }
+
+    @RequestMapping("/update_requirement")
+    @ResponseBody
+    public Map updateRequirement(String technologyRequirementId,String requirement) {
+        Map hashMap = new HashMap<>();
+        boolean b = technologyRequirementService.updateRequirement(technologyRequirementId,requirement);
+        if (b){
+            hashMap.put("status","200");
+        }else {
+            hashMap.put("msg","更新要求异常");
+        }
+        return hashMap;
+    }
 }

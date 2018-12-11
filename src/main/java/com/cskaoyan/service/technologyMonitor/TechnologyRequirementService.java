@@ -20,4 +20,6 @@ public interface TechnologyRequirementService {
     boolean updateTechnologyRequirementById(TechnologyRequirement technologyRequirement);
 
     List selectTechnologyAll();
+
+    boolean updateRequirement(String technologyRequirementId, String requirement);
 }

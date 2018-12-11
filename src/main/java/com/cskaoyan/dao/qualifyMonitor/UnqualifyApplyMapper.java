@@ -19,5 +19,7 @@ public interface UnqualifyApplyMapper {
 
     int updateByPrimaryKey(UnqualifyApply record);
     List<UnqualifyApply> selectByPage(@Param("params") Map<Object,Object> map);
-    int count();
+    int count(@Param("params") Map<Object,Object> map);
+    int updateNote(@Param("id") String unqualifyApplyId,@Param("note") String note);
+    List<UnqualifyApply> selectByPageAndSelections();
 }

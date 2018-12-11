@@ -73,9 +73,6 @@
   <sql id="Base_Column_List">
     technology_plan_id, technology_plan.technology_id, batch_amount, start_plan, end_plan, commit_plan,
     technology_plan_start, technology_plan_end
-    <if test="multiTable != null">
-      ,${multiParamName}
-    </if>
   </sql>
   <select id="selectByTechnologyName" parameterType="com.cskaoyan.domain.technologyMonitor.TechnologyPlanExample" resultMap="BaseResultMap">
     select * from technology_plan tp left join technology t on tp.technology_id = t.technology_id where technology_name like #{technologyName} limit #{startRow},#{rows}
@@ -86,9 +83,12 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
+    <if test="multiTable != null">
+      ,technology_name
+    </if>
     from technology_plan
     <if test="multiTable != null">
-      left join ${multiTable} on technology_plan.technology_id = ${multiTable}.technology_id
+      left join technology on technology_plan.technology_id = technology.technology_id
     </if>
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />

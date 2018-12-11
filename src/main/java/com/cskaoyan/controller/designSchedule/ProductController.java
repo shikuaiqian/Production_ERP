@@ -155,4 +155,24 @@ public class ProductController {
     public Product getCustomById(@PathVariable String productId){
         return  productService.getProductById(productId);
     }
+
+    @ResponseBody
+    @RequestMapping("update_note")
+    public Map updateNote(String productId,String note)
+    {
+        HashMap<String ,Object> map=new HashMap<>();
+        map.put("msg","ok");
+        map.put("status",200);
+        try {
+            productService.updateNote(productId,note);
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+
+            map.put("msg","修改失败请重试");
+            map.put("status",0);
+        }
+        return map;
+    }
+
 }

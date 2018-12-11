@@ -8,7 +8,9 @@
     <mvc:annotation-driven conversion-service="service" validator="validator"/>
 
 
-    <mvc:annotation-driven conversion-service="service"  validator="validator"/>
+   <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+       <property name="providerClass" value="org.hibernate.validator.HibernateValidator"></property>
+   </bean>
 
 
     <bean id="viewResolver"	class="org.springframework.web.servlet.view.UrlBasedViewResolver">
@@ -44,9 +46,6 @@
 
     </bean>
 
-    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
-        <property name="providerClass" value="org.hibernate.validator.HibernateValidator"></property>
-    </bean>
 
     <tx:annotation-driven transaction-manager="transactionManager"/>
     <bean class="org.springframework.jdbc.datasource.DataSourceTransactionManager" id="transactionManager">

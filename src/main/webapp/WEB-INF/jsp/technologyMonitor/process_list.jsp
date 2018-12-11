@@ -110,11 +110,11 @@
 	        </tr>
 	        <tr>
 	            <td>工艺计划开始时间:</td>
-	            <td><input class="easyui-datetimebox" name="technologyStartPlan"/></td>
+	            <td><input class="easyui-datetimebox" name="technologyPlanStart"/></td>
 	        </tr>
 	        <tr>
 	            <td>工艺计划结束时间:</td>
-	            <td><input class="easyui-datetimebox" name="technologyEndPlan"/></td>
+	            <td><input class="easyui-datetimebox" name="technologyPlanEnd"/></td>
 	        </tr>
 	    </table>
 	</form>
@@ -184,8 +184,8 @@ function doSearch_process(value,name){ //用户输入用户名,点击搜素,触�
 		    		data.startPlan = TAOTAO.formatDateTime(data.startPlan);
            			data.endPlan = TAOTAO.formatDateTime(data.endPlan);
            			data.commitPlan = TAOTAO.formatDateTime(data.commitPlan);
-           			data.technologyStartPlan = TAOTAO.formatDateTime(data.technologyStartPlan);
-           			data.technologyEndPlan = TAOTAO.formatDateTime(data.technologyEndPlan);
+           			data.technologyPlanStart = TAOTAO.formatDateTime(data.technologyPlanStart);
+           			data.technologyPlanEnd = TAOTAO.formatDateTime(data.technologyPlanEnd);
 		    		$("#technologyPlanEditForm_process").form("load", data);
     	    	});
     		}

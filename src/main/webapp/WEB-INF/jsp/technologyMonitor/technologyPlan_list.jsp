@@ -285,8 +285,8 @@ function doSearch_technologyPlan(value,name){ //用户输入用户名,点击搜�
                			data.startPlan = TAOTAO.formatDateTime(data.startPlan);
                			data.endPlan = TAOTAO.formatDateTime(data.endPlan);
                			data.commitPlan = TAOTAO.formatDateTime(data.commitPlan);
-               			data.technologyStartPlan = TAOTAO.formatDateTime(data.technologyStartPlan);
-               			data.technologyEndPlan = TAOTAO.formatDateTime(data.technologyEndPlan);
+               			data.technologyPlanStart = TAOTAO.formatDateTime(data.technologyPlanStart);
+               			data.technologyPlanEnd = TAOTAO.formatDateTime(data.technologyPlanEnd);
                			$("#technologyPlanEditForm").form("load", data);
        	    		}
        	    	}).window("open");

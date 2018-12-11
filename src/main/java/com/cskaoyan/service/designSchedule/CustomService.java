@@ -25,4 +25,6 @@ public   interface CustomService {
     Map<String,Object> selectBySearchValueandPage(HashMap<String, String> ret, String page, String rows);
 
     Custom getCustomById(String customId);
+
+    void updateNote(String customId, String note);
 }

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 
@@ -20,6 +21,59 @@ public class DeviceCheckController {
 
     @Autowired
     DeviceCheckService deviceCheckService;
+
+    @RequestMapping("/list")
+    @ResponseBody
+    public HashMap<String, Object> getList(@RequestParam("page") String page, @RequestParam("rows") String rows) {
+        List list = deviceCheckService.tableInfo(page, rows);
+        String tableSize = deviceCheckService.tableSize();
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("rows", list);
+        hashMap.put("total", tableSize);
+        return hashMap;
+    }
+
+    @RequestMapping("/add_judge")
+    @ResponseBody
+    public HashMap<String, Object> addJudge(HttpServletRequest httpServletRequest){
+        String userId=null;
+        String addJudgeMsg=deviceCheckService.addJudge(userId);
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("addJudgeMsg",addJudgeMsg);
+        return hashMap;
+    }
+
+    @RequestMapping("/edit_judge")
+    @ResponseBody
+    public HashMap<String, Object> editJudge(HttpServletRequest httpServletRequest){
+        String userId=null;
+        String editJudgeMsg=deviceCheckService.editJudge(userId);
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("editJudgeMsg",editJudgeMsg);
+        return hashMap;
+    }
+
+    @RequestMapping("/delete_judge")
+    @ResponseBody
+    public HashMap<String, Object> deleteJudge(HttpServletRequest httpServletRequest){
+        String userId=null;
+        String deleteJudgeMsg =deviceCheckService.deleteJudge(userId);
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("deleteJudgeMsg",deleteJudgeMsg);
+        return hashMap;
+    }
+
+    @RequestMapping("/add")
+    public String getAddPage(@RequestParam("_") String param) {
+        String pagePath = "deviceManagement/deviceCheck_add";
+        return pagePath;
+    }
+
+    @RequestMapping("/edit")
+    public String getEditPage(@RequestParam("_") String param) {
+        String pagePath = "deviceManagement/deviceCheck_edit";
+        return pagePath;
+    }
 
     @RequestMapping("/insert")
     @ResponseBody
