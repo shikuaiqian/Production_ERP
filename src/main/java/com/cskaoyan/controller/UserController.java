@@ -136,6 +136,7 @@ public class UserController {
     }
     @ResponseBody
     @RequestMapping("update_all")
+    @RequiresPermissions(value="user:edit",logical = Logical.AND)
     public Map updateAll(User user)
     {
         HashMap<String ,Object> map=new HashMap<>();

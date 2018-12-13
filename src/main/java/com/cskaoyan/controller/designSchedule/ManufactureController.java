@@ -26,11 +26,11 @@ import java.util.Map;
 public class ManufactureController {
   @Autowired
     ManufactureService manufactureService;
+    @Autowired
+    SecurityManager securityManager;
     @RequestMapping("find")
     public String  find(HttpSession session){
         String[]  manufactureop=new String[]{"manufacture:add","manufacture:edit","manufacture:delete"};
-        Factory<SecurityManager> factory =new IniSecurityManagerFactory("classpath:spring/shiro-realm.ini");
-        SecurityManager securityManager = factory.getInstance();
         SecurityUtils.setSecurityManager(securityManager);
         Subject subject = SecurityUtils.getSubject();
         ArrayList<String> perssions = new ArrayList<>();
@@ -92,6 +92,7 @@ public class ManufactureController {
     }
     @ResponseBody
     @RequestMapping("insert")
+    @RequiresPermissions(value="manufacture:add",logical = Logical.AND)
     public Map insert(  Manufacture manufacture){
         HashMap<String, Object> map = getStringObjectHashMap();
         try {
@@ -112,6 +113,7 @@ public class ManufactureController {
     }
     @ResponseBody
     @RequestMapping("delete_batch")
+    @RequiresPermissions(value="manufacture:delete",logical = Logical.AND)
     public Map delete(String[] ids)
     {
         HashMap<String, Object> map = getStringObjectHashMap();
@@ -139,6 +141,7 @@ public class ManufactureController {
     }
     @ResponseBody
     @RequestMapping("update_all")
+    @RequiresPermissions(value="manufacture:edit",logical = Logical.AND)
     public Map updateAll( Manufacture manufacture)
     {
         HashMap<String, Object> map = getStringObjectHashMap();

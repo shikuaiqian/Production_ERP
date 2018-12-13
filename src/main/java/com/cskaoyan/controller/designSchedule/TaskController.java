@@ -26,11 +26,12 @@ public class TaskController {
     
     @Autowired
     TaskService taskService;
+    @Autowired
+    SecurityManager securityManager;
     @RequestMapping("find")
     public String  find(HttpSession session){
         String[]  taskop=new String[]{"task:add","task:edit","task:delete"};
-        Factory<SecurityManager> factory =new IniSecurityManagerFactory("classpath:spring/shiro-realm.ini");
-        SecurityManager securityManager = factory.getInstance();
+
         SecurityUtils.setSecurityManager(securityManager);
         Subject subject = SecurityUtils.getSubject();
         ArrayList<String> perssions = new ArrayList<>();
@@ -142,6 +143,7 @@ public class TaskController {
     }
     @ResponseBody
     @RequestMapping("update_all")
+    @RequiresPermissions(value="task:edit",logical = Logical.AND)
     public Map updateAll( Task task)
     {
         HashMap<String ,Object> map=new HashMap<>();

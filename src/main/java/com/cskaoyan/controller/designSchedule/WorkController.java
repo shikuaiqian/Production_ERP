@@ -25,11 +25,11 @@ import java.util.Map;
 public class WorkController {
     @Autowired
     WorkService workService;
+    @Autowired
+    SecurityManager securityManager;
     @RequestMapping("find")
     public String  find(HttpSession session){
         String[]  workerop=new String[]{"work:add","work:edit","work:delete"};
-        Factory<SecurityManager> factory =new IniSecurityManagerFactory("classpath:spring/shiro-realm.ini");
-        SecurityManager securityManager = factory.getInstance();
         SecurityUtils.setSecurityManager(securityManager);
         Subject subject = SecurityUtils.getSubject();
         ArrayList<String> perssions = new ArrayList<>();
@@ -151,6 +151,7 @@ public class WorkController {
     }
     @ResponseBody
     @RequestMapping("update_all ")
+    @RequiresPermissions(value="work:edit",logical = Logical.AND)
     public Map updateAll(Work work)
     {
         HashMap<String ,Object> map=new HashMap<>();

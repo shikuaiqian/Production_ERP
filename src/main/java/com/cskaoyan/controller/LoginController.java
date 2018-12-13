@@ -23,23 +23,22 @@ public class LoginController {
 
     @Autowired
     UserService userService;
-
+@Autowired
+SecurityManager securityManager;
     @ResponseBody
     @RequestMapping("ajaxLogin")
     public Map login(User user, HttpSession session,String randomcode){
-        Factory<SecurityManager> factory =new IniSecurityManagerFactory("classpath:spring/shiro-realm.ini");
-        SecurityManager securityManager = factory.getInstance();
         SecurityUtils.setSecurityManager(securityManager);
         Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(), user.getPassword());
         HashMap<String ,String > ret=new HashMap<>();
-       /*if(randomcode!=null) {
+       if(randomcode!=null) {
            String validateCode = (String) session.getAttribute("validateCode");
            if (validateCode.equals(randomcode)) {
                ret.put("msg", "randomcode_error");
                return ret;
            }
-       }*/try {
+       }try {
             subject.login(token);
             SimplePrincipalCollection attribute = (SimplePrincipalCollection) session.getAttribute("org.apache.shiro.subject.support.DefaultSubjectContext_PRINCIPALS_SESSION_KEY");
             User primaryPrincipal = (User) attribute.getPrimaryPrincipal();

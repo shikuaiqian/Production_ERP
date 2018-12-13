@@ -27,11 +27,12 @@ import java.util.Map;
 public class ProductController {
     @Autowired
     ProductService productService;
+    @Autowired
+    SecurityManager securityManager;
     @RequestMapping("find")
     public String  find(HttpSession session){
         String[]  producterop=new String[]{"product:add","product:edit","product:delete"};
-        Factory<SecurityManager> factory =new IniSecurityManagerFactory("classpath:spring/shiro-realm.ini");
-        SecurityManager securityManager = factory.getInstance();
+
         SecurityUtils.setSecurityManager(securityManager);
         Subject subject = SecurityUtils.getSubject();
         ArrayList<String> perssions = new ArrayList<>();
@@ -149,6 +150,7 @@ public class ProductController {
     }
     @ResponseBody
     @RequestMapping("update_all")
+    @RequiresPermissions(value="product:edit",logical = Logical.AND)
     public Map updateAll(Product product)
     {
         HashMap<String ,Object> map=new HashMap<>();
@@ -181,6 +183,7 @@ public class ProductController {
 
     @ResponseBody
     @RequestMapping("update_note")
+    @RequiresPermissions(value="product:edit",logical = Logical.AND)
     public Map updateNote(String productId,String note)
     {
         HashMap<String ,Object> map=new HashMap<>();

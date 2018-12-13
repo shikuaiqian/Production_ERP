@@ -26,11 +26,11 @@ import java.util.Map;
 public class CustomController {
     @Autowired
     CustomService   customService;
+    @Autowired
+    SecurityManager securityManager;
     @RequestMapping("find")
     public String  find(HttpSession session){
         String[]  customerop=new String[]{"custom:add","custom:edit","custom:delete"};
-        Factory<SecurityManager> factory =new IniSecurityManagerFactory("classpath:spring/shiro-realm.ini");
-        SecurityManager securityManager = factory.getInstance();
         SecurityUtils.setSecurityManager(securityManager);
         Subject subject = SecurityUtils.getSubject();
         ArrayList<String> perssions = new ArrayList<>();
@@ -84,6 +84,7 @@ public class CustomController {
     }
     @ResponseBody
     @RequestMapping("insert")
+    @RequiresPermissions(value="custom:add",logical = Logical.AND)
     public Map insert(Custom custom){
         HashMap<String ,Object> map=new HashMap<>();
         map.put("msg","ok");
@@ -110,6 +111,7 @@ public class CustomController {
 
     @ResponseBody
     @RequestMapping("delete_batch")
+    @RequiresPermissions(value="custom:delete",logical = Logical.AND)
     public Map delete(String[] ids)
     {
         HashMap<String ,Object> map=new HashMap<>();
@@ -139,6 +141,7 @@ public class CustomController {
     }
     @ResponseBody
     @RequestMapping("update_all")
+    @RequiresPermissions(value="custom:edit",logical = Logical.AND)
     public Map updateAll(Custom custom)
     {
         HashMap<String ,Object> map=new HashMap<>();

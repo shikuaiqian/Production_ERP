@@ -27,11 +27,11 @@ import java.util.Map;
 public class OrderController {
     @Autowired
     OrderService orderService;
+    @Autowired
+    SecurityManager securityManager;
     @RequestMapping("find")
     public String  find(HttpSession session){
         String[]  orderop=new String[]{"order:add","order:edit","order:delete"};
-        Factory<SecurityManager> factory =new IniSecurityManagerFactory("classpath:spring/shiro-realm.ini");
-        SecurityManager securityManager = factory.getInstance();
         SecurityUtils.setSecurityManager(securityManager);
         Subject subject = SecurityUtils.getSubject();
         ArrayList<String> perssions = new ArrayList<>();
@@ -87,6 +87,7 @@ public class OrderController {
         return "";
     }
     @RequestMapping("add")
+    @RequiresPermissions(value="order:add",logical = Logical.AND)
     public String add(){
         return "/designSchedule/order/order_add";
     }
@@ -143,6 +144,7 @@ public class OrderController {
     }
     @ResponseBody
     @RequestMapping("update_all")
+    @RequiresPermissions(value="order:edit",logical = Logical.AND)
     public Map updateAll( Order Order)
     {
         HashMap<String ,Object> map=new HashMap<>();
@@ -174,6 +176,7 @@ public class OrderController {
     }
     @ResponseBody
     @RequestMapping("update_note")
+
     public Map updateNote(String orderId,String note)
     {
         HashMap<String ,Object> map=new HashMap<>();

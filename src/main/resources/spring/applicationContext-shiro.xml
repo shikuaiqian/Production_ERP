@@ -21,6 +21,7 @@ http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframew
                 /js/** = anon
                 /image/** = anon
                 /favicon.ico = anon
+                /validatecode.jsp=anon
                 /logout = logout
                 /ajaxLogin=anon
                 /** = authc
