@@ -3,6 +3,9 @@ package com.cskaoyan.controller.technologyMonitor;
 import com.cskaoyan.domain.technologyMonitor.TechnologyRequirement;
 import com.cskaoyan.service.technologyMonitor.TechnologyRequirementService;
 import com.cskaoyan.service.technologyMonitor.TechnologyService;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.mgt.SecurityManager;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,10 +25,22 @@ public class TechnologyRequirementController {
     @Autowired
     TechnologyRequirementService technologyRequirementService;
 
+    @Autowired
+    SecurityManager securityManager;
     @RequestMapping("/find")
     public String findTechnologyRequirementJSP(HttpSession session){
         String [] s = new String[]{"technologyRequirement:add","technologyRequirement:edit","technologyRequirement:delete"};
-        session.setAttribute("sysPermissionList",s);
+        SecurityUtils.setSecurityManager(securityManager);
+        Subject subject = SecurityUtils.getSubject();
+        ArrayList<String> perssions = new ArrayList<>();
+        boolean[] permitted = subject.isPermitted(s);
+        for (int i = 0; i <permitted.length ; i++) {
+            if(permitted[i]==true)
+            {
+                perssions.add(s[i]);
+            }
+        }
+        session.setAttribute("sysPermissionList",perssions);
         return "technologyMonitor/technologyRequirement_list";
     }
 
