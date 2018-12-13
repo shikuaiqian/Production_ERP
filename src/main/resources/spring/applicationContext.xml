@@ -41,8 +41,8 @@
 
     <bean id="datasource" class="com.alibaba.druid.pool.DruidDataSource">
         <property name="username" value="root"/>
-        <property name="password" value="285264"/>
-        <property name="url" value="jdbc:mysql://localhost:3306/erp-ssm?serverTimezone=GMT%2B8"/>
+        <property name="password" value="a5850246"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/production_ssm?serverTimezone=GMT%2B8"/>
 
     </bean>
 
@@ -60,5 +60,21 @@
             </set>
         </property>
     </bean>
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"></bean>
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+          depends-on="lifecycleBeanPostProcessor" />
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
 
+    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="exceptionMappings">
+            <props>
+                <prop key="org.apache.shiro.authz.UnauthorizedException">
+                    <!-- 没有权限时跳转的页面 -->
+                    /refuse
+                </prop>
+            </props>
+        </property>
+    </bean>
 </beans>

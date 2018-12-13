@@ -2,6 +2,13 @@ package com.cskaoyan.controller.designSchedule;
 
 import com.cskaoyan.domain.designScheduleDomain.Product;
 import com.cskaoyan.service.designSchedule.ProductService;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.annotation.Logical;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.config.IniSecurityManagerFactory;
+import org.apache.shiro.mgt.SecurityManager;
+import org.apache.shiro.subject.Subject;
+import org.apache.shiro.util.Factory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -11,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,7 +30,19 @@ public class ProductController {
     @RequestMapping("find")
     public String  find(HttpSession session){
         String[]  producterop=new String[]{"product:add","product:edit","product:delete"};
-        session.setAttribute("sysPermissionList",producterop);
+        Factory<SecurityManager> factory =new IniSecurityManagerFactory("classpath:spring/shiro-realm.ini");
+        SecurityManager securityManager = factory.getInstance();
+        SecurityUtils.setSecurityManager(securityManager);
+        Subject subject = SecurityUtils.getSubject();
+        ArrayList<String> perssions = new ArrayList<>();
+        boolean[] permitted = subject.isPermitted(producterop);
+        for (int i = 0; i <permitted.length ; i++) {
+            if(permitted[i]==true)
+            {
+                perssions.add(producterop[i]);
+            }
+        }
+        session.setAttribute("sysPermissionList",perssions);
         return   "/designSchedule/product/product_list";
     }
 
@@ -63,6 +83,7 @@ public class ProductController {
     }
     @ResponseBody
     @RequestMapping("add_judge")
+    @RequiresPermissions(value="product:add",logical = Logical.AND)
     public String addJudge(){
         return "";
     }
@@ -93,6 +114,7 @@ public class ProductController {
     }
     @ResponseBody
     @RequestMapping("delete_judge")
+    @RequiresPermissions(value="product:delete",logical = Logical.AND)
     public  String deleteJudge (){
         return null;
     }
@@ -116,6 +138,7 @@ public class ProductController {
     }
     @ResponseBody
     @RequestMapping("edit_judge")
+    @RequiresPermissions(value="product:edit",logical = Logical.AND)
     public  String editJudge (){
         return null;
     }

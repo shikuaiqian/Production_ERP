@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cskaoyan.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="com.cskaoyan.domain.User">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="locked" jdbcType="CHAR" property="locked" />
+  </resultMap>
+  <resultMap id="BaseResultMap2" type="com.cskaoyan.domain.UserSeesion">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="locked" jdbcType="CHAR" property="locked" />
+    <result column="role_name" property="rolename"/>
+    <result  column="role_id" property="roleId"/>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id , username, password, lockedid  username, password, locked
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_user
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from sys_user
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.cskaoyan.domain.User">
+    insert into sys_user (id, username, password, 
+      locked)
+    values (#{id,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{locked,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cskaoyan.domain.User">
+    insert into sys_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="locked != null">
+        locked,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="locked != null">
+        #{locked,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cskaoyan.domain.User">
+    update sys_user
+    <set>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="locked != null">
+        locked = #{locked,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cskaoyan.domain.User">
+    update sys_user
+    set username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      locked = #{locked,jdbcType=CHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <select id="getByUsername" resultMap="BaseResultMap2">
+    select su.id  ,username, password, locked , role_name from sys_user  su left join  sys_user_role sur  on su.id=sur.sys_user_id
+    left join  sys_role sr  on sur.sys_role_id=sr.role_id  where username=#{username}
+  </select>
+
+  <select id="getRoleByusername" resultType="string">
+    select sr.role_id from sys_user  su left join  sys_user_role sur  on su.id=sur.sys_user_id
+    left join  sys_role sr  on sur.sys_role_id=sr.role_id  where username=#{username}
+  </select>
+  <select id="getPerssionByrole" resultType="string">
+    select   sys_permission_id  from sys_role sr
+    left join sys_role_permission  srp on  sr.role_id = srp.sys_role_id
+    where role_id=#{roleName}
+  </select>
+  <select id="getPerssionByid" resultType="string">
+  select percode  from sys_permission where id=#{id}
+  </select>
+
+  <select id="selectByPage"  resultMap="BaseResultMap2">
+  select su.id,  username, password, locked,role_name ,role_id  from sys_user  su
+  left join  sys_user_role sur  on su.id=sur.sys_user_id
+  left join  sys_role sr  on sur.sys_role_id=sr.role_id
+
+    <if test="param3!=null">
+      <if test="param3.userId!=null">
+        where su.id=#{param3.userId}
+      </if>
+      <if test="param3.userName!=null">
+        where   username like "%"#{param3.userName}"%"
+      </if>
+
+      <if test="param3.roleName!=null">
+        where   role_name like "%"#{param3.roleName}"%"
+      </if>
+    </if>
+  limit
+    #{param2} offset  #{param1}
+  </select>
+  <select id="count" resultType="_int">
+     select COUNT(*)  from sys_user  su
+
+    left join  sys_user_role sur  on su.id=sur.sys_user_id
+    left join  sys_role sr  on sur.sys_role_id=sr.role_id
+    <if test="param3!=null">
+      <if test="param3.userId!=null">
+        where su.id=#{param3.userId}
+      </if>
+      <if test="param3.userName!=null">
+        where   username like "%"#{param3.userName}"%"
+      </if>
+
+      <if test="param3.roleName!=null">
+        where   role_name like "%"#{param3.roleName}"%"
+      </if>
+    </if>
+
+  </select>
+  <insert id="insertSUR">
+     INSERT  into sys_user_role(id,sys_user_id,sr.role_id) VALUES (#{uuid},#{user.id},#{user.roleId})
+  </insert>
+  <delete id="deleteSURByUserId">
+    DELETE FROM sys_user_role   where sys_user_role.sys_user_id=#{id}
+  </delete>
+</mapper>

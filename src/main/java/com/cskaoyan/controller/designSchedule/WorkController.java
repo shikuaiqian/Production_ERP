@@ -2,6 +2,13 @@ package com.cskaoyan.controller.designSchedule;
 
 import com.cskaoyan.domain.designScheduleDomain.Work;
 import com.cskaoyan.service.designSchedule.WorkService;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.annotation.Logical;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.config.IniSecurityManagerFactory;
+import org.apache.shiro.mgt.SecurityManager;
+import org.apache.shiro.subject.Subject;
+import org.apache.shiro.util.Factory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,7 +28,19 @@ public class WorkController {
     @RequestMapping("find")
     public String  find(HttpSession session){
         String[]  workerop=new String[]{"work:add","work:edit","work:delete"};
-        session.setAttribute("sysPermissionList",workerop);
+        Factory<SecurityManager> factory =new IniSecurityManagerFactory("classpath:spring/shiro-realm.ini");
+        SecurityManager securityManager = factory.getInstance();
+        SecurityUtils.setSecurityManager(securityManager);
+        Subject subject = SecurityUtils.getSubject();
+        ArrayList<String> perssions = new ArrayList<>();
+        boolean[] permitted = subject.isPermitted(workerop);
+        for (int i = 0; i <permitted.length ; i++) {
+            if(permitted[i]==true)
+            {
+                perssions.add(workerop[i]);
+            }
+        }
+        session.setAttribute("sysPermissionList",perssions);
         return   "/designSchedule/work/work_list";
     }
 
@@ -70,6 +90,7 @@ public class WorkController {
 
     @ResponseBody
     @RequestMapping("add_judge")
+    @RequiresPermissions(value="work:add",logical = Logical.AND)
     public String addJudge(){
         return "";
     }
@@ -95,6 +116,7 @@ public class WorkController {
     }
     @ResponseBody
     @RequestMapping("delete_judge")
+    @RequiresPermissions(value = "work;delete",logical = Logical.AND)
     public  String deleteJudge (){
         return null;
     }
@@ -118,6 +140,7 @@ public class WorkController {
     }
     @ResponseBody
     @RequestMapping("edit_judge")
+    @RequiresPermissions(value="work:edit",logical = Logical.AND)
     public  String editJudge (){
         return null;
     }
